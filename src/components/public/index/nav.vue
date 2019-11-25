@@ -17,7 +17,9 @@
           <v-btn class="ma-2" text>支持</v-btn>
           <v-btn class="ma-2" text>登录</v-btn>
           <v-btn class="ma-2" outlined>
-            <v-icon style="margin-right: 5px">mdi-account-plus</v-icon>注册
+            <v-icon style="margin-right: 5px"
+              >mdi-account-multiple-plus-outline</v-icon
+            >注册
           </v-btn>
         </v-col>
       </v-app-bar>
@@ -41,7 +43,8 @@ div {
   color: white;
 }
 .ma-2 {
-  font-family: 微软雅黑;
+  font-family: "Arial", "SimHei", "Microsoft YaHei", "黑体",
+    "Apple LiGothic Medium", sans-serif;
   padding: 20px;
   font-weight: 400;
 }

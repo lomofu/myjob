@@ -1,9 +1,9 @@
 <template>
-  <v-app transition="slide-y-transition">
-      <div id="loading" v-if="show">
-        <load id="loading-animate" />
-      </div>
-      <router-view />
+  <v-app>
+    <div id="loading" v-if="show">
+      <load id="loading-animate" />
+    </div>
+    <router-view />
   </v-app>
 </template>
 
@@ -21,11 +21,18 @@ export default {
     let me = this;
     setTimeout(function() {
       me.show = !me.show;
-    }, 800);
+    }, 1000);
   }
 };
 </script>
 <style>
+.v-application {
+  background: white !important;
+}
+div {
+  margin: 0 0 0 0;
+  padding: 0;
+}
 #loading {
   z-index: 999;
   position: absolute;
@@ -35,10 +42,12 @@ export default {
 }
 #loading-animate {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -80px;
 }
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 </style>

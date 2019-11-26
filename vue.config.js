@@ -3,7 +3,7 @@ module.exports = {
   outputDir: "dist",
   lintOnSave: true,
   runtimeCompiler: true,
-  productionSourceMap: true,
+  productionSourceMap: false,
   parallel: true,
   pwa: {},
   devServer: {

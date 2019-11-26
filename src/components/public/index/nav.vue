@@ -1,17 +1,12 @@
 <template>
   <div>
     <v-row>
-      <v-app-bar
-        :dark="dark"
-        color="cyan darken-1"
-        elevate-on-scroll="true"
-        hide-on-scroll="true"
-      >
-        <v-col class="md-2">
-          <v-icon left="true" light="true" size="40">mdi-chart-line</v-icon>
-          <span class="headline font-weight-black my-title">My Job</span>
+      <v-app-bar :dark="light" :elevate-on-scroll="true" color="cyan darken-1">
+        <v-col cols="12" xs="2" sm="2" md="2" lg="2" xl="2">
+          <v-icon :left="true" size="42">mdi-grain</v-icon>
+          <span class="headline font-weight-black my-title">Ben</span>
         </v-col>
-        <v-col class="md-10" style="text-align: end">
+        <v-col cols="12" md="10" sm="10" xl="10" style="text-align: end">
           <v-btn class="ma-2" text>首页</v-btn>
           <v-btn class="ma-2" text>价格</v-btn>
           <v-btn class="ma-2" text>支持</v-btn>
@@ -32,7 +27,7 @@ export default {
   name: "Nav",
   data() {
     return {
-      dark: true
+      light: true
     };
   }
 };
@@ -52,5 +47,6 @@ div {
   position: relative;
   top: 4px;
   left: 10px;
+  clear: both;
 }
 </style>

@@ -33,11 +33,14 @@ div {
   margin: 0 0 0 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
 #loading {
   z-index: 999;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
 }
 #loading-animate {

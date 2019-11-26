@@ -9,7 +9,7 @@
         <v-col cols="12" md="10" sm="10" xl="10" style="text-align: end">
           <v-btn class="ma-2" text>首页</v-btn>
           <v-btn class="ma-2" text>价格</v-btn>
-          <v-btn class="ma-2" text>支持</v-btn>
+          <router-link to="/about"><v-btn class="ma-2" text>支持</v-btn></router-link>
           <v-btn class="ma-2" text>登录</v-btn>
           <v-btn class="ma-2" outlined>
             <v-icon style="margin-right: 5px"

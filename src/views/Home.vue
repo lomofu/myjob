@@ -1,12 +1,11 @@
 <template>
   <div>
     <index-nav></index-nav>
-
     <v-row>
-      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+      <v-col>
         <div class="content c1">
           <div class="type-box">
-            <v-row justify="center" style="height: 300px;">
+            <v-row justify="center" style="height: 250px;">
               <vue-typed-js
                 :typeSpeed="60"
                 :startDelay="550"
@@ -27,7 +26,7 @@
             <form>
               <transition name="slide-fade" :duration="3000">
                 <v-row justify="center">
-                  <v-col cols="12" md="4" sm="6" xl="4" xs="6">
+                  <v-col cols="12" md="4" sm="4" xl="4" xs="4" lg="4">
                     <transition name="slide-fade">
                       <v-text-field
                         solo
@@ -50,11 +49,11 @@
               </transition>
               <transition name="slide-fade">
                 <v-row justify="center">
-                  <v-col cols="12" md="4" sm="6" xl="4" xs="6">
+                  <v-col cols="12" md="4" sm="4" xl="4" xs="4" lg="4">
                     <v-btn
                       block
                       dark
-                      color="#FB8C00"
+                      color="amber darken-1"
                       v-show="showInput"
                       height="50"
                       class="btn-word"
@@ -70,30 +69,41 @@
       </v-col>
     </v-row>
 
-    <v-row align="center" style="height: 700px">
-      <v-col cols="12" sm="12" md="12" xl="12">
+    <v-row align="center" style="min-height: 700px;max-height: 800px">
+      <v-col cols="12">
         <div class="content c2">
           <v-row align="center">
             <v-col
               cols="12"
-              xs="6"
-              sm="6"
+              xs="12"
+              sm="12"
               md="6"
               lg="6"
+              xl="6"
               class="wow fadeInUp"
               data-wow-duration="0.5s"
-              data-wow-offset="300"
+              data-wow-offset="250"
             >
-              <p class="text-center display-2 c2-title">
+              <p class="text-center display-2 c2-title text-center">
                 什么是Ben?
               </p>
               <br />
-              <p class="font-weight-light c2-content">
-                Ben
-                是个Sass多租户的公司排班平台,你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
+              <p class="font-weight-light c2-content text-center">
+                Ben 是个Sass多租户的公司排班平台,
+                你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
               </p>
+              <br />
             </v-col>
-            <v-col cols="12" md="6" class="text-right">
+            <v-col
+              cols="12"
+              xs="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="5"
+              class="text-center"
+              style="overflow: hidden"
+            >
               <img
                 src="../../public/index/home-content.png"
                 alt="home-content"
@@ -105,28 +115,22 @@
     </v-row>
 
     <v-lazy transition="fade-transition">
-      <v-row align="center" style="background: #f3f3f3;height: 700px">
-        <v-col cols="12" sm="12" md="12" xl="12">
+      <v-row
+        align="center"
+        style="background: #f3f3f3;min-height: 700px;max-height: 800px"
+      >
+        <v-col cols="12">
           <div>
             <v-row align="center">
-              <v-col cols="12" md="6" class="text-left">
+              <v-col cols="12" xs="12" sm="12" md="6" lg="6" class="text-left">
                 <speed></speed>
               </v-col>
-              <v-col
-                class="wow fadeInUp"
-                data-wow-duration="0.5s"
-                data-wow-offset="300"
-                cols="12"
-                xs="6"
-                sm="6"
-                md="6"
-                lg="6"
-              >
-                <p class="text-center display-2 c2-title">
+              <v-col cols="12" xs="12" sm="12" md="6" lg="6">
+                <p class="text-center display-2 c2-title text-center">
                   为什么选择Ben?
                 </p>
                 <br />
-                <p class="font-weight-light c2-content">
+                <p class="font-weight-light c2-content text-center">
                   Ben
                   可以在你排班同时精确推送给员工,这样极大的提升了工作安排效率
                 </p>
@@ -138,21 +142,29 @@
     </v-lazy>
 
     <v-lazy transition="fade-transition">
-      <v-row align="center" style="height: 700px">
-        <v-col cols="12" sm="12" md="12" xl="12">
+      <v-row align="center" style="min-height: 700px;max-height: 800px">
+        <v-col cols="12">
           <div class="content c2">
             <v-row align="center">
-              <v-col cols="12" xs="6" sm="6" md="6" lg="6">
-                <p class="text-center display-2 c2-title">
+              <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
+                <p class="text-center display-2 c2-title text-center">
                   怎么使用？
                 </p>
                 <br />
-                <p class="font-weight-light c2-content">
+                <p class="font-weight-light c2-content text-center">
                   Ben
                   的易用性会让你的公司人员排班安排变得十分容易，只需要轻轻点击鼠标就可以实现全公司人员调动
                 </p>
               </v-col>
-              <v-col cols="12" md="6" class="text-left">
+              <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="6"
+                lg="6"
+                xl="6"
+                class="text-right"
+              >
                 <chart />
               </v-col>
             </v-row>
@@ -160,9 +172,8 @@
         </v-col>
       </v-row>
     </v-lazy>
-    <br />
-    <br />
-    <bfooter style="position: absolute;bottom: 0;"></bfooter>
+
+    <bfooter />
   </div>
 </template>
 
@@ -227,12 +238,17 @@ div {
   margin: 0;
   padding: 0;
 }
+p {
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+}
 .content {
   width: 100%;
 }
 
 .type-box {
-  background: #00acc1;
+  background: #26c6da;
   width: auto;
   height: 600px;
 }
@@ -276,8 +292,21 @@ img {
 .c2-content {
   font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
     "Apple LiGothic Medium", sans-serif;
-  width: 400px;
+  width: 350px;
   margin: 0 auto;
   color: #696969;
+}
+@media screen and (min-width: 300px) and (max-width: 600px) {
+  .typing {
+    font-size: 20px;
+  }
+  .typing-title {
+    color: white;
+    font-size: 20px;
+  }
+
+  .col-12 {
+    flex: 0 0 90% !important;
+  }
 }
 </style>

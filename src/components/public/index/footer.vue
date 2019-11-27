@@ -1,29 +1,31 @@
 <template>
-  <div class="bfooter text-center" style="background: #00acc1;color: white">
-    <v-icon size="80" color="white">mdi-grain</v-icon>
-    <p class="display-1 font-weight-black">Ben.</p>
-    <p class="text-center">
-      ©2019, Ben. Web Services,
-    </p>
-  </div>
-</template>
+  <v-card>
+    <v-footer padless>
+      <v-card
+        flat
+        tile
+        class="indigo lighten-1 white--text text-center"
+        width="100%"
+      >
+        <v-card-text>
+          <v-icon size="80" color="white">mdi-grain</v-icon>
+          <v-card-text class="headline font-weight-black" style="color: white"
+            >Ben.</v-card-text
+          >
+        </v-card-text>
 
-<script>
-export default {
-  name: "Nav",
-  data() {
-    return {
-      light: true
-    };
-  }
-};
-</script>
-<style scoped>
-div {
-  margin: 0;
-  padding: 0;
-}
-.text-center {
-  width: 100vw;
-}
-</style>
+        <v-card-text class="white--text pt-0">
+          Support By:<br />
+          Lomo Fu <br />QH
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-text class="white--text">
+          <strong>
+            © {{ new Date().getFullYear() }} , Ben. Web Services,</strong
+          >
+        </v-card-text>
+      </v-card>
+    </v-footer>
+  </v-card>
+</template>
+<style scoped></style>

@@ -65,6 +65,7 @@ div {
 }
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 #loading {
   z-index: 999;
@@ -83,7 +84,7 @@ a {
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }
-.v-application p{
-  margin-bottom: 0!important;
+.v-application p {
+  margin-bottom: 0 !important;
 }
 </style>

@@ -1,28 +1,33 @@
 <template>
   <v-row justify="center">
-    <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+    <v-form
+      ref="form"
+      v-model="valid"
+      :lazy-validation="lazy"
+      style="min-width: 350px;max-width: 500px"
+    >
       <v-text-field
-        v-model="name"
-        :counter="10"
-        :rules="nameRules"
-        label="Name"
+        :email="user.email"
+        :rules="emailRules"
+        label="邮箱"
         outlined
         required
+        clearable
+        clear-icon="mdi-close"
       ></v-text-field>
-
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
+        :password="user.password"
+        label="密码"
+        outlined
+        clearable
+        clear-icon="mdi-close"
         required
       ></v-text-field>
-
-      <v-btn color="error" class="mr-4" @click="reset">
-        Reset Form
+      <v-btn color="success" class="mr-4" @click="handleLogin" width="100px">
+        登陆
       </v-btn>
-
-      <v-btn color="warning" @click="resetValidation">
-        Reset Validation
+      <v-btn color="error" @click="handleReset" width="100px">
+        重置
       </v-btn>
     </v-form>
   </v-row>
@@ -31,20 +36,15 @@
 export default {
   data: () => ({
     valid: true,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
-    email: "",
+    user: {
+      email: "",
+      password: ""
+    },
     emailRules: [
       v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      v => /.+@.+\..+/.test(v) || "请输入正确的邮箱格式"
     ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
-    lazy: false
+    lazy: true
   }),
 
   methods: {
@@ -53,11 +53,10 @@ export default {
         this.snackbar = true;
       }
     },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
+    handleLogin() {},
+    handleReset() {
       this.$refs.form.resetValidation();
+      this.$refs.form.reset();
     }
   }
 };

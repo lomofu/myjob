@@ -3,7 +3,21 @@
     <div id="loading" v-if="show">
       <load id="loading-animate" />
     </div>
-    <router-view />
+    <v-fab-transition>
+      <v-btn
+        v-show="btn"
+        color="pink"
+        dark
+        fixed
+        bottom
+        right
+        fab
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
+    <router-view v-if="content" />
   </v-app>
 </template>
 
@@ -15,13 +29,29 @@ export default {
     load
   },
   data: () => ({
-    show: true
+    show: true,
+    content: false,
+    btn: false
   }),
+  methods: {
+    handleScroll() {
+      let me = this;
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      me.btn = scrollTop > 100;
+    }
+  },
   created() {
     let me = this;
     setTimeout(function() {
       me.show = !me.show;
+      me.content = !me.content;
     }, 1000);
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
   }
 };
 </script>
@@ -30,7 +60,7 @@ export default {
   background: white !important;
 }
 div {
-  margin: 0 0 0 0;
+  margin: 0;
   padding: 0;
 }
 a {
@@ -52,5 +82,8 @@ a {
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease;
+}
+.v-application p{
+  margin-bottom: 0!important;
 }
 </style>

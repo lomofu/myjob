@@ -25,7 +25,7 @@
               </vue-typed-js>
             </v-row>
             <form>
-              <transition name="slide-fade">
+              <transition name="slide-fade" :duration="3000">
                 <v-row justify="center">
                   <v-col cols="12" md="4" sm="6" xl="4" xs="6">
                     <transition name="slide-fade">
@@ -54,7 +54,7 @@
                     <v-btn
                       block
                       dark
-                      color="lime lime darken-1"
+                      color="#FB8C00"
                       v-show="showInput"
                       height="50"
                       class="btn-word"
@@ -70,50 +70,58 @@
       </v-col>
     </v-row>
 
-    <transition name="slide-fade">
-      <v-row align="center">
-        <v-col cols="12" sm="12" md="12" xl="12">
-          <br />
-          <br />
-          <div class="content c2">
-            <v-row align="center">
-              <v-col cols="12" xs="6" sm="6" md="6" lg="6">
-                <p class="text-center display-2 c2-title">
-                  什么是Ben?
-                </p>
-                <br />
-                <p class="font-weight-light c2-content">
-                  Ben
-                  是个Sass多租户的公司排班平台,你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
-                </p>
-              </v-col>
-              <v-col cols="12" md="6" class="text-right">
-                <img
-                  src="../../public/index/home-content.png"
-                  alt="home-content"
-                />
-              </v-col>
-            </v-row>
-          </div>
-        </v-col>
-      </v-row>
-    </transition>
+    <v-row align="center" style="height: 700px">
+      <v-col cols="12" sm="12" md="12" xl="12">
+        <div class="content c2">
+          <v-row align="center">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              class="wow fadeInUp"
+              data-wow-duration="0.5s"
+              data-wow-offset="300"
+            >
+              <p class="text-center display-2 c2-title">
+                什么是Ben?
+              </p>
+              <br />
+              <p class="font-weight-light c2-content">
+                Ben
+                是个Sass多租户的公司排班平台,你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
+              </p>
+            </v-col>
+            <v-col cols="12" md="6" class="text-right">
+              <img
+                src="../../public/index/home-content.png"
+                alt="home-content"
+              />
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+    </v-row>
 
-    <br />
-    <br />
-    <br />
-
-    <transition name="slide-fade">
-      <v-row align="center" style="background: #f3f3f3" v-if="content2">
+    <v-lazy transition="fade-transition">
+      <v-row align="center" style="background: #f3f3f3;height: 700px">
         <v-col cols="12" sm="12" md="12" xl="12">
-          <br />
-          <br />
-          <div class="content c2">
+          <div>
             <v-row align="center">
               <v-col cols="12" md="6" class="text-left">
                 <speed></speed>
               </v-col>
-              <v-col cols="12" xs="6" sm="6" md="6" lg="6">
+              <v-col
+                class="wow fadeInUp"
+                data-wow-duration="0.5s"
+                data-wow-offset="300"
+                cols="12"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+              >
                 <p class="text-center display-2 c2-title">
                   为什么选择Ben?
                 </p>
@@ -127,16 +135,11 @@
           </div>
         </v-col>
       </v-row>
-    </transition>
+    </v-lazy>
 
-    <br />
-    <br />
-
-    <transition name="slide-fade">
-      <v-row align="center" v-if="content3">
+    <v-lazy transition="fade-transition">
+      <v-row align="center" style="height: 700px">
         <v-col cols="12" sm="12" md="12" xl="12">
-          <br />
-          <br />
           <div class="content c2">
             <v-row align="center">
               <v-col cols="12" xs="6" sm="6" md="6" lg="6">
@@ -150,32 +153,28 @@
                 </p>
               </v-col>
               <v-col cols="12" md="6" class="text-left">
-                <chart1></chart1>
+                <chart />
               </v-col>
             </v-row>
           </div>
         </v-col>
       </v-row>
-    </transition>
-
+    </v-lazy>
     <br />
     <br />
-
-    <v-row v-show="content3">
-      <bfooter></bfooter>
-    </v-row>
+    <bfooter style="position: absolute;bottom: 0;"></bfooter>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
-
+import { WOW } from "wowjs";
 export default {
   name: "home",
   components: {
     indexNav: () => import("../components/public/index/nav.vue"),
-    chart1: () => import("../components/public/home/chart1.vue"),
+    chart: () => import("../components/public/home/chart.vue"),
     speed: () => import("../components/public/home/speed.vue"),
     bfooter: () => import("../components/public/index/footer.vue")
   },
@@ -201,19 +200,6 @@ export default {
       } else {
         alert(this.email);
       }
-    },
-    handleScroll() {
-      let me = this;
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      if (scrollTop > 550) {
-        me.content2 = true;
-      }
-      if (scrollTop > 600) {
-        me.content3 = true;
-      }
     }
   },
   computed: {
@@ -226,13 +212,19 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll);
+    var wow = new WOW({
+      boxClass: "wow",
+      animateClass: "animated",
+      offset: 0,
+      mobile: true
+    });
+    wow.init();
   }
 };
 </script>
 <style scoped>
 div {
-  margin: 0 0 0 0;
+  margin: 0;
   padding: 0;
 }
 .content {
@@ -267,7 +259,7 @@ div {
 
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateY(10px);
+  transform: translateY(30px);
   transition: 0.3s;
   opacity: 0;
 }
@@ -277,7 +269,8 @@ img {
   height: 90%;
 }
 .c2-title {
-  font-family: "黑体";
+  font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
+    "Apple LiGothic Medium", sans-serif;
   font-weight: lighter;
 }
 .c2-content {

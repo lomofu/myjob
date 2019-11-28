@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-app-bar :dark="light" :elevate-on-scroll="true" fixed color="#26C6DA">
-        <v-col cols="12" sm="2" md="2" lg="2" xl="2" class="d-flex">
+        <v-col cols="12" xs="2" sm="2" md="2" lg="2" xl="2" class="d-flex">
           <v-icon :left="true" size="42">mdi-grain</v-icon>
           <span class="headline font-weight-black my-title">Ben.</span>
         </v-col>
@@ -21,7 +21,7 @@
           lg="10"
           xl="10"
           style="text-align: end"
-          class="d-none d-sm-table-cell"
+          class="d-none d-sm-table"
         >
           <v-btn class="ma-2" text>首页</v-btn>
           <v-btn class="ma-2" text>价格</v-btn>

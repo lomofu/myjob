@@ -4,13 +4,12 @@
       ref="form"
       v-model="valid"
       :lazy-validation="lazy"
-      style="min-width: 350px;max-width: 500px"
+      style="min-width: 350px;max-width: 500px;"
     >
       <v-text-field
         :email="user.email"
         :rules="emailRules"
         label="邮箱"
-        outlined
         required
         clearable
         clear-icon="mdi-close"
@@ -18,17 +17,15 @@
       <v-text-field
         :password="user.password"
         label="密码"
-        outlined
         clearable
         clear-icon="mdi-close"
         required
       ></v-text-field>
-      <v-btn color="success" class="mr-4" @click="handleLogin" width="100px">
-        登陆
+      <div class="btn-login">
+      <v-btn block color="deep-purple lighten-1" dark height="50px" @click="handleLogin" style="font-weight: bold;font-size: 20px">
+        登  陆
       </v-btn>
-      <v-btn color="error" @click="handleReset" width="100px">
-        重置
-      </v-btn>
+      </div>
     </v-form>
   </v-row>
 </template>
@@ -53,11 +50,16 @@ export default {
         this.snackbar = true;
       }
     },
-    handleLogin() {},
-    handleReset() {
-      this.$refs.form.resetValidation();
-      this.$refs.form.reset();
-    }
+    handleLogin() {}
   }
 };
 </script>
+<style scoped>
+.btn-login::before {
+  clear: both;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 30px;
+}
+</style>

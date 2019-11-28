@@ -7,11 +7,11 @@
           <div class="type-box">
             <v-row justify="center" style="height: 250px;">
               <vue-typed-js
-                :typeSpeed="60"
-                :startDelay="550"
-                :backSpeed="20"
                 :autoInsertCss="true"
+                :backSpeed="20"
+                :startDelay="550"
                 :strings="['欢迎来到 Ben  ', '花费很少的时间分享日程安排  ']"
+                :typeSpeed="60"
                 @onComplete="handleComplete"
                 class="font-weight-thin typing-title"
               >
@@ -24,24 +24,24 @@
               </vue-typed-js>
             </v-row>
             <form>
-              <transition name="slide-fade" :duration="3000">
+              <transition :duration="3000" name="slide-fade">
                 <v-row justify="center">
-                  <v-col cols="12" md="4" sm="4" xl="4" xs="4" lg="4">
+                  <v-col cols="12" lg="4" md="4" sm="4" xl="4" xs="4">
                     <transition name="slide-fade">
                       <v-text-field
-                        solo
-                        clearable
-                        placeholder="请输入你的邮箱"
-                        v-model="email"
-                        transition="scroll-y-reverse-transition"
-                        v-show="showInput"
-                        height="70"
-                        clear-icon="mdi-close"
-                        prepend-inner-icon="mdi-at"
-                        @input="$v.email.$touch()"
-                        @blur="$v.email.$touch()"
                         :error-messages="emailErrors"
+                        @blur="$v.email.$touch()"
+                        @input="$v.email.$touch()"
+                        clear-icon="mdi-close"
+                        clearable
+                        height="70"
+                        placeholder="请输入你的邮箱"
+                        prepend-inner-icon="mdi-at"
                         required
+                        solo
+                        transition="scroll-y-reverse-transition"
+                        v-model="email"
+                        v-show="showInput"
                       ></v-text-field>
                     </transition>
                   </v-col>
@@ -49,17 +49,17 @@
               </transition>
               <transition name="slide-fade">
                 <v-row justify="center">
-                  <v-col cols="12" md="4" sm="4" xl="4" xs="4" lg="4">
+                  <v-col cols="12" lg="4" md="4" sm="4" xl="4" xs="4">
                     <v-btn
-                      block
-                      dark
-                      color="amber darken-1"
-                      v-show="showInput"
-                      height="50"
-                      class="btn-word"
                       @click="handleSubmit"
-                      >免&nbsp;费&nbsp;注&nbsp;册</v-btn
-                    >
+                      block
+                      class="btn-word"
+                      color="amber darken-1"
+                      dark
+                      height="50"
+                      v-show="showInput"
+                      >免&nbsp;费&nbsp;注&nbsp;册
+                    </v-btn>
                   </v-col>
                 </v-row>
               </transition>
@@ -69,44 +69,46 @@
       </v-col>
     </v-row>
 
-    <v-row align="center" style="min-height: 700px;max-height: 800px">
+    <v-row
+      align="center"
+      justify="center"
+      style="min-height: 700px;max-height: 800px"
+    >
       <v-col cols="12">
         <div class="content c2">
           <v-row align="center">
             <v-col
               cols="12"
-              xs="12"
-              sm="12"
-              md="6"
-              lg="6"
-              xl="6"
               class="wow fadeInUp"
               data-wow-duration="0.5s"
               data-wow-offset="250"
+              lg="6"
+              md="6"
+              sm="12"
+              xl="6"
+              xs="12"
             >
               <p class="text-center display-2 c2-title text-center">
                 什么是Ben?
               </p>
-              <br />
               <p class="font-weight-light c2-content text-center">
                 Ben 是个Sass多租户的公司排班平台,
                 你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
               </p>
-              <br />
             </v-col>
             <v-col
-              cols="12"
-              xs="12"
-              sm="12"
-              md="6"
-              lg="6"
-              xl="5"
               class="text-center"
+              cols="12"
+              lg="6"
+              md="6"
+              sm="12"
               style="overflow: hidden"
+              xl="5"
+              xs="12"
             >
               <img
-                src="../../public/index/home-content.png"
                 alt="home-content"
+                src="../../public/index/home-content.png"
               />
             </v-col>
           </v-row>
@@ -117,19 +119,19 @@
     <v-lazy transition="fade-transition">
       <v-row
         align="center"
+        justify="center"
         style="background: #f3f3f3;min-height: 700px;max-height: 800px"
       >
         <v-col cols="12">
           <div>
-            <v-row align="center">
-              <v-col cols="12" xs="12" sm="12" md="6" lg="6" class="text-left">
+            <v-row>
+              <v-col class="text-left" cols="12" lg="6" md="6" sm="12" xs="12">
                 <speed></speed>
               </v-col>
-              <v-col cols="12" xs="12" sm="12" md="6" lg="6">
+              <v-col cols="12" lg="6" md="6" sm="12" xs="12">
                 <p class="text-center display-2 c2-title text-center">
                   为什么选择Ben?
                 </p>
-                <br />
                 <p class="font-weight-light c2-content text-center">
                   Ben
                   可以在你排班同时精确推送给员工,这样极大的提升了工作安排效率
@@ -142,28 +144,31 @@
     </v-lazy>
 
     <v-lazy transition="fade-transition">
-      <v-row align="center" style="min-height: 700px;max-height: 800px">
+      <v-row
+        align="center"
+        justify="center"
+        style="min-height: 700px;max-height: 800px"
+      >
         <v-col cols="12">
           <div class="content c2">
-            <v-row align="center">
-              <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
+            <v-row>
+              <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
                 <p class="text-center display-2 c2-title text-center">
                   怎么使用？
                 </p>
-                <br />
                 <p class="font-weight-light c2-content text-center">
                   Ben
                   的易用性会让你的公司人员排班安排变得十分容易，只需要轻轻点击鼠标就可以实现全公司人员调动
                 </p>
               </v-col>
               <v-col
-                cols="12"
-                xs="12"
-                sm="12"
-                md="6"
-                lg="6"
-                xl="6"
                 class="text-right"
+                cols="12"
+                lg="6"
+                md="6"
+                sm="12"
+                xl="6"
+                xs="12"
               >
                 <chart />
               </v-col>
@@ -172,15 +177,15 @@
         </v-col>
       </v-row>
     </v-lazy>
-
-    <bfooter />
+    <bfooter></bfooter>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
+import { email, required } from "vuelidate/lib/validators";
 import { WOW } from "wowjs";
+
 export default {
   name: "home",
   components: {
@@ -238,11 +243,13 @@ div {
   margin: 0;
   padding: 0;
 }
+
 p {
   word-wrap: break-word;
   word-break: break-all;
   overflow: hidden;
 }
+
 .content {
   width: 100%;
 }
@@ -266,6 +273,7 @@ p {
   color: white;
   font-size: 22px;
 }
+
 .btn-word {
   font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
     "Apple LiGothic Medium", sans-serif;
@@ -284,11 +292,27 @@ img {
   width: 80%;
   height: 90%;
 }
+
+.c2-title::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
 .c2-title {
   font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
     "Apple LiGothic Medium", sans-serif;
   font-weight: lighter;
 }
+
+.c2-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 30px;
+}
+
 .c2-content {
   font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
     "Apple LiGothic Medium", sans-serif;
@@ -296,10 +320,12 @@ img {
   margin: 0 auto;
   color: #696969;
 }
-@media screen and (min-width: 300px) and (max-width: 600px) {
+
+@media screen and (min-width: 300px) and (max-width: 755px) {
   .typing {
     font-size: 20px;
   }
+
   .typing-title {
     color: white;
     font-size: 20px;

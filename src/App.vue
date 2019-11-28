@@ -55,6 +55,7 @@ export default {
   }
 };
 </script>
+<style src="../public/font/font.css"></style>
 <style>
 .v-application {
   background: white !important;
@@ -86,5 +87,12 @@ a {
 }
 .v-application p {
   margin-bottom: 0 !important;
+}
+
+.animated {
+  -webkit-animation-duration: 0.6s!important;
+  animation-duration: 0.6s!important;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 </style>

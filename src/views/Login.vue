@@ -1,9 +1,9 @@
 <template>
-  <v-row>
-    <v-col cols="12" xs="12" sm="12" md="2" lg="1" xl="5" class="left-parent">
+  <v-row class="animated zoomIn">
+    <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="left-parent">
       <div class="left  d-none d-sm-flex"></div>
     </v-col>
-    <v-col cols="12" xs="12" sm="12" md="10" lg="7" xl="7">
+    <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
       <div class="btn-back">
         <router-link to="/">
           <v-btn class="ma-2" outlined color="deep-purple lighten-1">
@@ -14,7 +14,6 @@
           >
         </router-link>
       </div>
-
       <v-row>
         <v-col
           cols="12"
@@ -25,26 +24,14 @@
           xl="12"
           class="text-center"
         >
-          <v-row>
-            <v-col
-              cols="12"
-              xs="12"
-              sm="12"
-              md="12"
-              lg="12"
-              xl="12"
-              class="text-center"
-            >
+          <v-row justify="center">
+            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
               <img
                 src="../../public/index/icon-color.png"
                 alt="icon"
                 style="width: 70px;height: 70px"
               />
-              <span
-                class="display-1 font-weight-black"
-                style="margin: auto auto 10px 10px "
-                >Ben.</span
-              >
+              <div class="login-ben">Ben.</div>
             </v-col>
           </v-row>
           <p class="text-center headline font-weight-thin content-subtitle ">
@@ -53,7 +40,6 @@
           <v-row justify="center">
             <panel />
           </v-row>
-          <v-spacer></v-spacer>
         </v-col>
       </v-row>
     </v-col>
@@ -74,7 +60,6 @@ body {
 div {
   margin: 0;
   padding: 0;
-  background: #f8f8f8;
 }
 p {
   word-wrap: break-word;
@@ -90,8 +75,7 @@ p {
   pointer-events: none;
 }
 .content-subtitle {
-  font-family: "黑体", "STHeiti", "STXihei", "SimHei", "Microsoft YaHei",
-    "Apple LiGothic Medium", sans-serif;
+  font-family: PingFangLight, Microsoft YaHei, 黑体, sans-serif;
 }
 
 .content-subtitle::after {
@@ -102,15 +86,21 @@ p {
   pointer-events: none;
 }
 .left {
-  background-image: url("../../public/index/login-ben.png");
+  background: #ffd89b;
+  background: -webkit-linear-gradient(to right, #198bb3, #fff395);
+  background: linear-gradient(to right, #1e73a8, #ffd89b);
   width: 95%;
   height: 100vh;
-  background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  background-size: 80vw;
-  background-position-y: -100px;
-  opacity: 0.7;
+  opacity: 0.9;
+}
+.login-ben {
+  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+
+  margin: auto auto 10px 15px;
 }
 .btn-back::before {
   content: "";
@@ -122,7 +112,7 @@ p {
   content: "";
   display: block;
   width: 100%;
-  height: 120px;
+  height: 20px;
 }
 
 @media screen and (max-width: 960px) {

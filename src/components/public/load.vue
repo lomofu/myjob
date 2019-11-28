@@ -1,16 +1,17 @@
 <template>
-  <div class="text-center">
-    <v-icon :light="true" size="35" :color="showColor">mdi-grain</v-icon>
-    <span
-      class="headline font-weight-black my-title"
-      :style="{ color: showColor, marginLeft: '10px' }"
-      >Ben</span
-    >
-    <v-progress-circular
-      indeterminate
-      :color="showColor"
-      class="circular"
-    ></v-progress-circular>
+  <div class="text-center" style="display: inline-flex">
+    <img
+      class="load-img"
+      src="../../../public/index/icon-color.png"
+      alt="icon"
+    />
+    <span class="headline font-weight-black load-word">Ben.</span>
+    <div class="circular">
+      <v-progress-circular
+        indeterminate
+        :color="showColor"
+      ></v-progress-circular>
+    </div>
   </div>
 </template>
 
@@ -36,7 +37,23 @@ export default {
 </script>
 
 <style scoped>
+.load-word {
+  margin-top: 10px;
+  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
+}
+.load-img {
+  height: 50px;
+  width: 50px;
+  margin-right: 9px;
+}
+
 .circular {
   margin-left: 20px;
+}
+.circular::before {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 10px;
 }
 </style>

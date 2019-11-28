@@ -1,16 +1,48 @@
 <template>
   <div>
     <v-row>
-      <v-app-bar :dark="light" :elevate-on-scroll="true" fixed color="#26C6DA">
+      <v-app-bar
+        :dark="light"
+        :elevate-on-scroll="true"
+        fixed
+        color="#26C6DA"
+        class="nav-bg"
+      >
         <v-col cols="12" xs="2" sm="2" md="2" lg="2" xl="2" class="d-flex">
-          <v-icon :left="true" size="42">mdi-grain</v-icon>
-          <span class="headline font-weight-black my-title">Ben.</span>
+          <v-icon
+            :left="true"
+            size="42"
+            style="text-shadow: 0px 0px 16px #00000029"
+            >mdi-grain</v-icon
+          >
+          <span class="my-title" style="text-shadow: 0px 0px 16px #00000029"
+            >Ben.</span
+          >
         </v-col>
 
-        <v-col style="text-align: end" class="d-flex d-sm-none">
-          <v-btn fab dark small color="teal">
+        <v-col style="text-align: end" class="d-flex d-sm-none phone-btn">
+          <v-btn dark small color="teal" @click="showMenu = !showMenu">
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
           </v-btn>
+          <v-expand-transition>
+            <v-list
+              light
+              v-show="showMenu"
+              class="showMeun text-center"
+              @mouseleave="handleLeave"
+            >
+              <v-list-item class="ma-2" text>价格</v-list-item>
+
+              <router-link to="/about"
+                ><v-list-item>支持 </v-list-item></router-link
+              >
+
+              <v-list-item>
+                <router-link to="/login">登录</router-link>
+              </v-list-item>
+              <v-list-item>注册</v-list-item>
+            </v-list>
+          </v-expand-transition>
         </v-col>
 
         <v-col
@@ -23,7 +55,6 @@
           style="text-align: end"
           class="d-none d-sm-table"
         >
-          <v-btn class="ma-2" text>首页</v-btn>
           <v-btn class="ma-2" text>价格</v-btn>
           <router-link to="/about"
             ><v-btn class="ma-2" text>支持</v-btn></router-link
@@ -47,8 +78,17 @@ export default {
   name: "Nav",
   data() {
     return {
-      light: true
+      light: true,
+      showMenu: false
     };
+  },
+  methods: {
+    handleLeave() {
+      let me = this;
+      setTimeout(() => {
+        me.showMenu = !me.showMenu;
+      }, 2000);
+    }
   }
 };
 </script>
@@ -59,9 +99,21 @@ div {
   margin: 0;
   padding: 0;
 }
+.nav-bg {
+  background: #26c6da; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fbe594,
+    #26c6da
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fbe594,
+    #26c6da
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .ma-2 {
-  font-family: "Arial", "SimHei", "Microsoft YaHei", "黑体",
-    "Apple LiGothic Medium", sans-serif;
+  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
   padding: 20px;
   font-weight: 400;
 }
@@ -69,8 +121,28 @@ div {
   position: relative;
   top: 4px;
   left: 10px;
+  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
+  font-size: 35px;
+  font-weight: bolder;
   clear: both;
 }
+.my-title::after {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 10px;
+}
+
+.phone-btn {
+  margin-bottom: 5px;
+}
+
+.showMeun {
+  position: absolute;
+  right: 1%;
+  top: 88%;
+}
+
 @media screen and (min-width: 300px) and (max-width: 600px) {
   .col-12 {
     flex: 0 0 90% !important;

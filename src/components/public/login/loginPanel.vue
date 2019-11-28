@@ -21,10 +21,22 @@
         clear-icon="mdi-close"
         required
       ></v-text-field>
+      <v-switch
+        v-model="user.isRember"
+        :label="user.isRember ? '记住我' : '不要记住我'"
+      ></v-switch>
       <div class="btn-login">
-      <v-btn block color="deep-purple lighten-1" dark height="50px" @click="handleLogin" style="font-weight: bold;font-size: 20px">
-        登  陆
-      </v-btn>
+        <v-btn
+          block
+          color="deep-purple lighten-1"
+          dark
+          height="50px"
+          @click="handleLogin"
+          style="font-weight: bold;font-size: 20px"
+        >
+          登 陆
+        </v-btn>
+        <div>忘记密码？</div>
       </div>
     </v-form>
   </v-row>
@@ -35,10 +47,11 @@ export default {
     valid: true,
     user: {
       email: "",
-      password: ""
+      password: "",
+      isRember: false
     },
     emailRules: [
-      v => !!v || "E-mail is required",
+      v => !!v || "邮箱不能为空哦",
       v => /.+@.+\..+/.test(v) || "请输入正确的邮箱格式"
     ],
     lazy: true

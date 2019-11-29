@@ -85,10 +85,10 @@
               xl="6"
               xs="12"
             >
-              <p class="text-center display-2 c2-title text-center">
+              <p class="text-center c2-title">
                 什么是Ben?
               </p>
-              <p class="font-weight-light c2-content">
+              <p class="c2-content">
                 Ben 是个Sass多租户的公司排班平台,
                 你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
               </p>
@@ -126,7 +126,7 @@
                 <speed></speed>
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xs="12">
-                <p class="text-center display-2 c2-title text-center">
+                <p class="text-center c2-title">
                   为什么选择Ben?
                 </p>
                 <p class="font-weight-light c2-content">
@@ -150,10 +150,10 @@
           <div class="content c2">
             <v-row>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
-                <p class="text-center display-2 c2-title text-center">
+                <p class="text-center c2-title">
                   怎么使用？
                 </p>
-                <p class="font-weight-light c2-content">
+                <p class="c2-content">
                   Ben
                   的易用性会让你的公司人员排班安排变得十分容易，只需要轻轻点击鼠标就可以实现全公司人员调动
                 </p>
@@ -315,6 +315,7 @@ img {
 .c2-title {
   font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
   font-weight: lighter;
+  font-size: 45px;
 }
 
 .c2-title::after {

@@ -9,12 +9,12 @@
             style="text-shadow: 0px 0px 16px #00000029"
             >mdi-grain</v-icon
           >
-          <span class="my-title" style="text-shadow: 0px 0px 16px #00000029"
+          <span class="my-title" style="text-shadow: 0 0 16px #00000029"
             >Ben.</span
           >
         </v-col>
 
-        <v-col style="text-align: end" class="d-flex d-sm-none phone-btn">
+        <v-col class="d-flex d-sm-none phone-btn">
           <v-btn dark small color="teal" @click="showMenu = !showMenu">
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
           </v-btn>
@@ -139,7 +139,7 @@ div {
 
 @media screen and (min-width: 300px) and (max-width: 600px) {
   .col-12 {
-    flex: 0 0 90% !important;
+    flex: 0 1 90% !important;
   }
 }
 </style>

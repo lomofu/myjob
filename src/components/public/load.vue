@@ -5,7 +5,7 @@
       src="../../../public/index/icon-color.png"
       alt="icon"
     />
-    <span class="headline font-weight-black load-word">Ben.</span>
+    <span class="load-word">Ben.</span>
     <div class="circular">
       <v-progress-circular
         indeterminate
@@ -38,8 +38,9 @@ export default {
 
 <style scoped>
 .load-word {
-  margin-top: 10px;
   font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
+  font-weight: bolder;
+  font-size: 35px;
 }
 .load-img {
   height: 50px;

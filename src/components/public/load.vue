@@ -2,7 +2,7 @@
   <div class="text-center" style="display: inline-flex">
     <img
       class="load-img"
-      src="../../../public/index/icon-color.png"
+      src="../../../public/img/icon/icon-color.png"
       alt="icon"
     />
     <span class="load-word">Ben.</span>
@@ -57,4 +57,5 @@ export default {
   height: 10px;
   width: 10px;
 }
+
 </style>

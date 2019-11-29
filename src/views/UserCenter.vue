@@ -4,7 +4,7 @@
       <v-row style="padding: 20px">
         <img
           class="app-img"
-          src="../../public/index/icon-color.png"
+          src="../../public/img/icon/icon-color.png"
           height="50"
           width="50"
           alt="icon"

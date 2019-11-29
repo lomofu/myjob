@@ -1,0 +1,108 @@
+@mixin btn-color {
+  background: #f46b45;
+  background: -webkit-linear-gradient(to right, #eea849, #f46b45);
+  background: linear-gradient(to right, #eea849, #f46b45);
+}
+
+@mixin light($color, $size) {
+  @include font-light;
+  color: $color;
+  font-size: $size;
+}
+
+@mixin rowsize {
+  min-height: 700px;
+  max-height: 800px;
+}
+
+@mixin lighter($size) {
+  @include font-lighter;
+  font-size: $size;
+}
+
+div {
+  @include div;
+}
+
+p {
+  word: {
+    wrap: break-word;
+    break: break-all;
+  }
+  overflow: hidden;
+}
+
+img {
+  width: 90%;
+  height: 90%;
+}
+
+.home {
+  &-type {
+    @include color;
+    height: 550px;
+    &-content {
+      width: 100%;
+      height: 250px;
+      &::before {
+        @include before-after(10px);
+      }
+    }
+  }
+  &-btn-word {
+    @include btn-color;
+    @include font-bold;
+    font-size: 22px;
+  }
+  &-row {
+    @include rowsize;
+    &-title {
+      @include light(black,40px);
+      &::before {
+        @include before-after(50px);
+      }
+      &::after {
+        @include before-after(30px);
+      }
+    }
+    &-content {
+      @include light(#474747, 19px);
+      min-width: 350px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    &-img1 {
+      &::before {
+        @include before-after(20px);
+      }
+    }
+  }
+}
+
+.typing {
+  @include light(white,50px);
+  font-weight: normal;
+}
+
+.typing-title {
+  @include lighter(22px);
+  color: white;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateY(30px);
+  transition: 0.3s;
+  opacity: 0;
+}
+
+@media screen and (min-width: 300px) and (max-width: 755px) {
+  .home-type-content-box-typing {
+    font-size: 20px;
+  }
+
+  .home-type-content-box {
+    color: white;
+    font-size: 20px;
+  }
+}

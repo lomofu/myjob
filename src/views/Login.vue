@@ -42,7 +42,7 @@
           <v-row justify="center">
             <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
               <img
-                src="../../public/index/icon-color.png"
+                src="../../public/img/icon/icon-color.png"
                 alt="icon"
                 style="width: 70px;height: 70px"
               />
@@ -65,7 +65,7 @@
 export default {
   name: "login",
   components: {
-    panel: () => import("../components/public/login/loginPanel.vue")
+    panel: () => import("../components/login/loginPanel.vue")
   }
 };
 </script>

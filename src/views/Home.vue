@@ -3,8 +3,8 @@
     <index-nav></index-nav>
     <v-row>
       <v-col>
-        <div class="type-box">
-          <v-row justify="center" class="type-content">
+        <div class="home-type">
+          <v-row justify="center" class="home-type-content">
             <vue-typed-js
               :autoInsertCss="true"
               :backSpeed="20"
@@ -52,7 +52,7 @@
                   <v-btn
                     @click="handleSubmit"
                     block
-                    class="btn-word"
+                    class="home-btn-word"
                     dark
                     height="50"
                     v-show="showInput"
@@ -66,13 +66,9 @@
       </v-col>
     </v-row>
 
-    <v-row
-      align="center"
-      justify="center"
-      style="min-height: 700px;max-height: 800px"
-    >
+    <v-row align="center" justify="center" class="home-row">
       <v-col cols="12">
-        <div class="content c2">
+        <div>
           <v-row align="center">
             <v-col
               cols="12"
@@ -85,16 +81,16 @@
               xl="6"
               xs="12"
             >
-              <p class="text-center c2-title">
+              <p class="text-center home-row-title">
                 什么是Ben?
               </p>
-              <p class="c2-content">
-                Ben 是个Sass多租户的公司排班平台,
-                你只需要快速注册自己的公司账号就可以轻松安排公司雇员之间的排班流程
+              <p class="home-row-content">
+                Ben 是个Sass多租户的项目管理平台,
+                你只需要快速注册自己的管理员账号就可以轻松安排Team人员之间的任务排班流程
               </p>
             </v-col>
             <v-col
-              class="text-center img-1"
+              class="text-center home-row-img1"
               cols="12"
               lg="6"
               md="6"
@@ -105,7 +101,7 @@
             >
               <img
                 alt="home-content"
-                src="../../public/index/home-content.png"
+                src="../../public/img/home/home-content.png"
               />
             </v-col>
           </v-row>
@@ -117,7 +113,8 @@
       <v-row
         align="center"
         justify="center"
-        style="background: #f3f3f3;min-height: 700px;max-height: 800px"
+        class="home-row"
+        style="background: #f2f2f2"
       >
         <v-col cols="12">
           <div>
@@ -126,12 +123,12 @@
                 <speed></speed>
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xs="12">
-                <p class="text-center c2-title">
+                <p class="text-center home-row-title">
                   为什么选择Ben?
                 </p>
-                <p class="font-weight-light c2-content">
+                <p class="home-row-content">
                   Ben
-                  可以在你排班同时精确推送给员工,这样极大的提升了工作安排效率
+                  可以在你发布任务,排班的同时一键精确推送给员工,这样极大的提升了工作安排效率
                 </p>
               </v-col>
             </v-row>
@@ -141,21 +138,17 @@
     </v-lazy>
 
     <v-lazy transition="fade-transition">
-      <v-row
-        align="center"
-        justify="center"
-        style="min-height: 700px;max-height: 800px"
-      >
+      <v-row align="center" justify="center" class="home-row">
         <v-col cols="12">
-          <div class="content c2">
+          <div>
             <v-row>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
-                <p class="text-center c2-title">
+                <p class="text-center home-row-title">
                   怎么使用？
                 </p>
-                <p class="c2-content">
+                <p class="home-row-content">
                   Ben
-                  的易用性会让你的公司人员排班安排变得十分容易，只需要轻轻点击鼠标就可以实现全公司人员调动
+                  的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度
                 </p>
               </v-col>
               <v-col
@@ -174,6 +167,32 @@
         </v-col>
       </v-row>
     </v-lazy>
+    <v-divider></v-divider>
+    <v-lazy transition="fade-transition">
+      <v-row align="center" justify="center" class="home-row">
+        <v-col cols="12">
+          <div>
+            <v-row>
+              <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12" class="text-center">
+                <img src="../../public/img/home/devices.png" alt="device" style="padding: 20px" />
+              </v-col>
+              <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
+                <p class="text-center home-row-title">
+                  多平台支持
+                </p>
+                <p class="home-row-content">
+                  Ben 几乎覆盖了你日常使用的所有设备,包含电脑,平板,手机
+                </p>
+                <p class="text-center">
+                  <img src="../../public/img/home/app.png" alt="web" style="height: 80px;width: 80px;padding: 10px">
+                  <img src="../../public/img/home/andriod.jpg" alt="" style="height: auto;width: 80px;padding:10px">
+                </p>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+      </v-row>
+    </v-lazy>
     <bfooter></bfooter>
   </div>
 </template>
@@ -186,10 +205,10 @@ import { WOW } from "wowjs";
 export default {
   name: "home",
   components: {
-    indexNav: () => import("../components/public/index/nav.vue"),
-    chart: () => import("../components/public/home/chart.vue"),
-    speed: () => import("../components/public/home/speed.vue"),
-    bfooter: () => import("../components/public/index/footer.vue")
+    indexNav: () => import("../components/public/nav.vue"),
+    chart: () => import("../components/home/chart.vue"),
+    speed: () => import("../components/home/speed.vue"),
+    bfooter: () => import("../components/public/footer.vue")
   },
   mixins: [validationMixin],
   validations: {
@@ -198,8 +217,6 @@ export default {
   data: () => ({
     show: true,
     showInput: false,
-    content2: false,
-    content3: false,
     email: ""
   }),
   methods: {
@@ -235,124 +252,6 @@ export default {
   }
 };
 </script>
-<style scoped>
-div {
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  word-wrap: break-word;
-  word-break: break-all;
-  overflow: hidden;
-}
-
-img {
-  width: 90%;
-  height: 90%;
-}
-
-.type-box {
-  background: #26c6da; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #fbe594,
-    #26c6da
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #fbe594,
-    #26c6da
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  height: 550px;
-}
-
-.type-content {
-  width: 100%;
-  height: 250px;
-}
-.type-content::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 10px;
-}
-
-.typing {
-  font-family: PingFangLight, Microsoft YaHei, 黑体, sans-serif;
-  color: white;
-  font-size: 50px;
-}
-
-.typing-title {
-  color: white;
-  font-size: 22px;
-  font-family: PingFangLighter, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: lighter;
-}
-
-.btn-word {
-  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
-  font-size: 18px;
-  background: #f46b45;
-  background: -webkit-linear-gradient(to right, #eea849, #f46b45);
-  background: linear-gradient(to right, #eea849, #f46b45);
-}
-.img-1::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 20px;
-}
-.c2-title::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 50px;
-}
-
-.c2-title {
-  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: lighter;
-  font-size: 45px;
-}
-
-.c2-title::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 30px;
-}
-
-.c2-content {
-  font-family: PingFangLight, Microsoft YaHei, 黑体, sans-serif;
-  min-width: 350px;
-  max-width: 500px;
-  font-size: 18px;
-  margin: 0 auto;
-  color: #474747;
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateY(30px);
-  transition: 0.3s;
-  opacity: 0;
-}
-
-@media screen and (min-width: 300px) and (max-width: 755px) {
-  .typing {
-    font-size: 20px;
-  }
-
-  .typing-title {
-    color: white;
-    font-size: 20px;
-  }
-
-  .col-12 {
-    flex: 0 0 90% !important;
-  }
-}
+<style lang="scss" scoped>
+@import "@/assets/css/home/home.scss";
 </style>

@@ -14,6 +14,13 @@ module.exports = {
     hotOnly: false,
     proxy: null
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "~@/assets/css/global/global.scss";`
+      }
+    }
+  },
   pluginOptions: {},
   transpileDependencies: ["vuetify"]
 };

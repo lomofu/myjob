@@ -24,17 +24,23 @@
               v-show="showMenu"
               class="showMeun text-center"
               @mouseleave="handleLeave"
+              elevation="5"
             >
-              <v-list-item class="ma-2" text>价格</v-list-item>
-
-              <router-link to="/about"
-                ><v-list-item>支持 </v-list-item></router-link
-              >
-
-              <v-list-item>
+              <v-list-item v-ripple class="list-item">
+                <router-link to="/">首页</router-link>
+              </v-list-item>
+              <v-list-item v-ripple class="list-item">
+                <router-link to="/">价格 </router-link>
+              </v-list-item>
+              <v-list-item v-ripple class="list-item">
+                <router-link to="/about">支持 </router-link>
+              </v-list-item>
+              <v-list-item v-ripple class="list-item">
                 <router-link to="/login">登录</router-link>
               </v-list-item>
-              <v-list-item>注册</v-list-item>
+              <v-list-item v-ripple class="list-item">
+                <router-link to="/login">注册</router-link>
+              </v-list-item>
             </v-list>
           </v-expand-transition>
         </v-col>
@@ -49,6 +55,9 @@
           style="text-align: end"
           class="d-none d-sm-table"
         >
+          <router-link to="/">
+            <v-btn class="ma-2" text>首页</v-btn>
+          </router-link>
           <v-btn class="ma-2" text>价格</v-btn>
           <router-link to="/about"
             ><v-btn class="ma-2" text>支持</v-btn></router-link
@@ -93,6 +102,7 @@ div {
   margin: 0;
   padding: 0;
 }
+
 .nav-bg {
   background: #26c6da; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -132,14 +142,18 @@ div {
 }
 
 .showMeun {
-  position: absolute;
+  z-index: 999;
   right: 1%;
+  position: absolute;
   top: 88%;
 }
 
 @media screen and (min-width: 300px) and (max-width: 600px) {
   .col-12 {
     flex: 0 1 90% !important;
+  }
+  .list-item {
+    padding: 0 30px 0 30px;
   }
 }
 </style>

@@ -63,6 +63,7 @@ export default {
 div {
   margin: 0;
   padding: 0;
+  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
 }
 a {
   text-decoration: none;
@@ -90,8 +91,8 @@ a {
 }
 
 .animated {
-  -webkit-animation-duration: 0.6s!important;
-  animation-duration: 0.6s!important;
+  -webkit-animation-duration: 0.6s !important;
+  animation-duration: 0.6s !important;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

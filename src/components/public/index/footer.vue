@@ -4,9 +4,7 @@
       <v-card flat tile class="indigo lighten-1 text-center" width="100%">
         <v-card-text>
           <v-icon size="80" color="white">mdi-grain</v-icon>
-          <v-card-text class="footer-ben"
-            >Ben.</v-card-text
-          >
+          <v-card-text class="footer-ben">Ben.</v-card-text>
         </v-card-text>
 
         <v-card-text class="white--text fooeter-support">

@@ -1,7 +1,14 @@
 <template>
   <v-row class="animated zoomIn">
-    <v-col cols="12" xs="12" sm="12" md="4" lg="4" xl="4" class="left-parent">
-      <div class="left  d-none d-sm-flex"></div>
+    <v-col
+      cols="12"
+      xs="12"
+      sm="12"
+      md="4"
+      lg="4"
+      xl="4"
+      class="left d-none d-sm-flex "
+    >
     </v-col>
     <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
       <div class="btn-back">
@@ -34,7 +41,7 @@
               <div class="login-ben">Ben.</div>
             </v-col>
           </v-row>
-          <p class="text-center headline font-weight-thin content-subtitle ">
+          <p class="text-center content-subtitle ">
             花费很少的时间分享日程安排
           </p>
           <v-row justify="center">
@@ -76,12 +83,15 @@ p {
 }
 .content-subtitle {
   font-family: PingFangLight, Microsoft YaHei, 黑体, sans-serif;
+  font-weight: lighter;
+  font-size: 25px;
+  letter-spacing: 1px;
 }
 
 .content-subtitle::after {
   content: "";
   width: 100%;
-  height: 50px;
+  height: 20px;
   display: block;
   pointer-events: none;
 }
@@ -90,7 +100,6 @@ p {
   background: -webkit-linear-gradient(to right, #198bb3, #fff395);
   background: linear-gradient(to right, #1e73a8, #ffd89b);
   width: 95%;
-  height: 100vh;
   margin: 0;
   padding: 0;
   opacity: 0.9;
@@ -115,8 +124,8 @@ p {
   height: 20px;
 }
 
-@media screen and (max-width: 960px) {
-  .left-parent {
+@media screen and (max-width: 980px) {
+  .left {
     display: none;
   }
 }

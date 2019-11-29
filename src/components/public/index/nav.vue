@@ -1,13 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-app-bar
-        :dark="light"
-        :elevate-on-scroll="true"
-        fixed
-        color="#26C6DA"
-        class="nav-bg"
-      >
+      <v-app-bar :dark="light" :elevate-on-scroll="true" fixed class="nav-bg">
         <v-col cols="12" xs="2" sm="2" md="2" lg="2" xl="2" class="d-flex">
           <v-icon
             :left="true"

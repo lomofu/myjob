@@ -25,7 +25,7 @@
         v-model="user.isRember"
         :label="user.isRember ? '记住我' : '不要记住我'"
       ></v-switch>
-      <div class="btn-login">
+      <span class="btn-login">
         <v-btn
           block
           color="deep-purple lighten-1"
@@ -36,8 +36,17 @@
         >
           登 陆
         </v-btn>
-        <div>忘记密码？</div>
-      </div>
+      </span>
+      <p class="word" v-ripple>
+        <router-link to="/">忘记密码?</router-link>
+      </p>
+      <p class="word" v-ripple>
+        没有账号? <router-link to="/">创建一个新账号</router-link>
+      </p>
+      <p class="s-word" v-ripple>
+        <router-link to="/">产品价格</router-link> |
+        <router-link to="/">技术支持</router-link>
+      </p>
     </v-form>
   </v-row>
 </template>
@@ -68,11 +77,28 @@ export default {
 };
 </script>
 <style scoped>
+a {
+  color: #289fb4;
+}
 .btn-login::before {
   clear: both;
   content: "";
   display: block;
   width: 100%;
   height: 30px;
+}
+.btn-login::after {
+  content: "";
+  height: 20px;
+  width: 100%;
+}
+.word {
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.s-word {
+  padding: 25px;
+  letter-spacing: 2px;
 }
 </style>

@@ -253,10 +253,17 @@ img {
 }
 
 .type-box {
-  background: #26c6da;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FBE594, #26c6da);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #FBE594, #26c6da); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #26c6da; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fbe594,
+    #26c6da
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fbe594,
+    #26c6da
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   height: 550px;
 }
@@ -291,9 +298,8 @@ img {
   background: #f46b45;
   background: -webkit-linear-gradient(to right, #eea849, #f46b45);
   background: linear-gradient(to right, #eea849, #f46b45);
-
 }
-.img-1::before{
+.img-1::before {
   content: "";
   display: block;
   width: 100%;

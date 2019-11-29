@@ -1,5 +1,5 @@
 <template>
-  <v-row class="animated zoomIn">
+  <v-row class="animated fadeIn">
     <v-col
       cols="12"
       xs="12"
@@ -7,10 +7,18 @@
       md="4"
       lg="4"
       xl="4"
-      class="left d-none d-sm-flex "
+      class="left d-none d-sm-flex animated fadeInLeft "
     >
     </v-col>
-    <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8">
+    <v-col
+      cols="12"
+      xs="12"
+      sm="12"
+      md="8"
+      lg="8"
+      xl="8"
+      class="animated fadeInRight"
+    >
       <div class="btn-back">
         <router-link to="/">
           <v-btn class="ma-2" outlined color="deep-purple lighten-1">

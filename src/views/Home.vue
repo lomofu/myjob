@@ -8,15 +8,15 @@
             <vue-typed-js
               :autoInsertCss="true"
               :backSpeed="20"
-              :startDelay="550"
-              :strings="['欢迎来到 Ben  ', '花费很少的时间分享日程安排  ']"
-              :typeSpeed="60"
+              :startDelay="300"
+              :strings="typecontent"
+              :typeSpeed="40"
               @onComplete="handleComplete"
               class="typing-title"
             >
               <h1>
-                <v-icon color="white" size="60px" style="margin-right: 15px"
-                  >mdi-check-all
+                <v-icon color="white" size="55px" style="margin-right: 14px"
+                  >{{ icon }}
                 </v-icon>
                 <span class="typing"></span>
               </h1>
@@ -33,9 +33,9 @@
                       @input="$v.email.$touch()"
                       clear-icon="mdi-close"
                       clearable
-                      height="70"
-                      placeholder="请输入你的邮箱"
-                      prepend-inner-icon="mdi-at"
+                      :height="btn.height"
+                      :placeholder="btn.placeholder"
+                      :prepend-inner-icon="btn.icon"
                       required
                       solo
                       transition="scroll-y-reverse-transition"
@@ -46,21 +46,19 @@
                 </v-col>
               </v-row>
             </transition>
-            <transition name="slide-fade">
-              <v-row justify="center">
-                <v-col cols="12" lg="4" md="4" sm="4" xl="4" xs="4">
-                  <v-btn
-                    @click="handleSubmit"
-                    block
-                    class="home-btn-word"
-                    dark
-                    height="50"
-                    v-show="showInput"
-                    >免&nbsp;费&nbsp;注&nbsp;册
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </transition>
+            <v-row justify="center">
+              <v-col cols="12" lg="4" md="4" sm="4" xl="4" xs="4">
+                <v-btn
+                  @click="handleSubmit"
+                  block
+                  class="home-btn-word"
+                  dark
+                  height="50"
+                  v-show="showInput"
+                  >{{ btn.word }}
+                </v-btn>
+              </v-col>
+            </v-row>
           </form>
         </div>
       </v-col>
@@ -82,11 +80,10 @@
               xs="12"
             >
               <p class="text-center home-row-title">
-                什么是Ben?
+                {{ content.p1[0] }}
               </p>
               <p class="home-row-content">
-                Ben 是个Sass多租户的项目管理平台,
-                你只需要快速注册自己的管理员账号就可以轻松安排Team人员之间的任务排班流程
+                {{ content.p1[1] }}
               </p>
             </v-col>
             <v-col
@@ -124,11 +121,10 @@
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xs="12">
                 <p class="text-center home-row-title">
-                  为什么选择Ben?
+                  {{ content.p2[0] }}
                 </p>
                 <p class="home-row-content">
-                  Ben
-                  可以在你发布任务,排班的同时一键精确推送给员工,这样极大的提升了工作安排效率
+                  {{ content.p2[1] }}
                 </p>
               </v-col>
             </v-row>
@@ -144,12 +140,9 @@
             <v-row>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
                 <p class="text-center home-row-title">
-                  怎么使用？
+                  {{ content.p3[0] }}
                 </p>
-                <p class="home-row-content">
-                  Ben
-                  的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度
-                </p>
+                <p class="home-row-content">{{ content.p3[1] }}</p>
               </v-col>
               <v-col
                 class="text-right"
@@ -173,19 +166,29 @@
         <v-col cols="12">
           <div>
             <v-row>
-              <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12" class="text-center">
-                <img src="../../public/img/home/devices.png" alt="device" style="padding: 20px" />
+              <v-col
+                cols="12"
+                lg="6"
+                md="6"
+                sm="12"
+                xl="6"
+                xs="12"
+                class="text-center"
+              >
+                <img
+                  class="home-row-img3"
+                  src="../../public/img/home/devices.png"
+                  alt="device"
+                />
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
                 <p class="text-center home-row-title">
-                  多平台支持
+                  {{ content.p4[0] }}
                 </p>
-                <p class="home-row-content">
-                  Ben 几乎覆盖了你日常使用的所有设备,包含电脑,平板,手机
-                </p>
-                <p class="text-center">
-                  <img src="../../public/img/home/app.png" alt="web" style="height: 80px;width: 80px;padding: 10px">
-                  <img src="../../public/img/home/andriod.jpg" alt="" style="height: auto;width: 80px;padding:10px">
+                <p class="home-row-content">{{ content.p4[1] }}</p>
+                <p class="text-center home-row-content-content3">
+                  <img src="../../public/img/home/app.png" alt="web" /> &nbsp;
+                  <img src="../../public/img/home/andriod.jpg" alt="phone" />
                 </p>
               </v-col>
             </v-row>
@@ -215,9 +218,32 @@ export default {
     email: { required, email }
   },
   data: () => ({
+    typecontent: ["欢迎来到 Ben  ", "花费很少的时间分享日程安排  "],
+    btn: {
+      icon: "mdi-at",
+      word: "免 费 注 册",
+      height: "70",
+      placeholder: "请输入你的邮箱"
+    },
+    content: {
+      p1: [
+        "什么是Ben?",
+        "Ben 是个Sass多租户的项目管理平台, 你只需要快速注册自己的管理员账号就可以轻松安排Team人员之间的任务排班流程"
+      ],
+      p2: [
+        "为什么选择Ben?",
+        "Ben 可以在你发布任务,排班的同时一键精确推送给员工,这样极大的提升了工作安排效率"
+      ],
+      p3: [
+        "怎么使用？",
+        "Ben 的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度"
+      ],
+      p4: ["多平台支持", "Ben 支持跨设备使用,包含浏览器,安卓平板,安卓手机"]
+    },
     show: true,
     showInput: false,
-    email: ""
+    email: "",
+    icon: "mdi-check-all"
   }),
   methods: {
     handleComplete() {

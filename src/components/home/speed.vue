@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <div
-      class="text-center display-1 font-italic font-weight-light"
-      style="font-family: 微软雅黑,sans-serif;color: #858585"
+      class="text-center font-italic"
+      style="font-family: PingFangLight,sans-serif;font-size: 30px;"
     >
       效率
     </div>
@@ -38,10 +38,10 @@ export default {
     padding: 8,
     lineCap: "round",
     gradient: gradients[5],
-    value: [0, 2, 5, 8, 10],
+    value: [0, 2, 40, 100, 200],
     gradientDirection: "top",
     gradients,
-    fill: true,
+    fill: false,
     type: "trend",
     autoLineWidth: true,
     autodraw: true

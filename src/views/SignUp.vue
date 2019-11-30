@@ -1,0 +1,72 @@
+<template>
+  <div class="register animated fadeIn">
+    <v-btn class="btn ma-2" outlined color="#424242" @click="$router.back(-1)">
+      <v-icon> {{ content.btn.icon }}</v-icon>
+      {{ content.btn.word }}</v-btn
+    >
+    <v-row class="text-center register-title animated fadeInDown">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+        <v-icon class="register-title-icon" color="white">mdi-grain</v-icon>
+        <span class="register-title-word">Ben.</span>
+      </v-col>
+    </v-row>
+
+    <v-row class="text-center animated fadeInDown" v-show="signup">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+        <p class="register-subtitle">{{ content.subtitle }}</p>
+      </v-col>
+    </v-row>
+
+    <v-row class="text-center animated fadeInUp">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
+        <signup
+          height="70"
+          btnHeight="50"
+          class="signup"
+          @fuc="handleClick"
+        ></signup>
+      </v-col>
+    </v-row>
+
+    <v-row class="text-center fadeInUp" v-show="signup">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
+        <p class="content1 text-center">
+          {{ content.word1 }} <router-link to="/login"> 点击登陆</router-link>
+        </p>
+      </v-col>
+    </v-row>
+    <p class="text-center fadeInUp subinfo">
+      <router-link to="/">产品价格</router-link> |
+      <router-link to="/">技术支持</router-link>
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SignUp",
+  components: {
+    signup: () => import("../components/signup/signup.vue")
+  },
+  data: () => ({
+    signup: true,
+    content: {
+      subtitle: "创建你的线上账号来分享你的时间安排给你的团队",
+      word1: "已经有账号了? ",
+      btn: {
+        icon: "mdi-arrow-left",
+        word: "返 回"
+      }
+    }
+  }),
+  methods: {
+    handleClick(data) {
+      this.signup = data;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/css/signup/signup.scss";
+</style>

@@ -57,7 +57,7 @@ img {
   &-row {
     @include rowsize;
     &-title {
-      @include light(black,40px);
+      @include light(black, 50px);
       &::before {
         @include before-after(50px);
       }
@@ -66,21 +66,35 @@ img {
       }
     }
     &-content {
-      @include light(#474747, 19px);
+      @include light(#474747, 18.5px);
       min-width: 350px;
       max-width: 500px;
       margin: 0 auto;
+
+      &-content3 {
+        img {
+          height: 80px;
+          width: 80px;
+          padding: 10px;
+        }
+        &::before {
+          @include before-after(20px);
+        }
+      }
     }
     &-img1 {
       &::before {
         @include before-after(20px);
       }
     }
+    &-img3 {
+      padding: 20px;
+    }
   }
 }
 
 .typing {
-  @include light(white,50px);
+  @include light(white, 50px);
   font-weight: normal;
 }
 
@@ -96,13 +110,30 @@ img {
   opacity: 0;
 }
 
-@media screen and (min-width: 300px) and (max-width: 755px) {
-  .home-type-content-box-typing {
-    font-size: 20px;
+@media screen and (max-width: 755px) {
+
+  .home-type{
+    height: 500px;
   }
 
-  .home-type-content-box {
+  .typing {
+    font-size: 22px;
+    @include font;
+  }
+
+  .typing-title {
     color: white;
-    font-size: 20px;
+    font-size: 14px;
+  }
+
+  .col-12 {
+    flex: 0 0 90% !important;
+  }
+
+  .home-row-title {
+    font-size: 26px;
+  }
+  .home-row-content {
+    font-size: 18px;
   }
 }

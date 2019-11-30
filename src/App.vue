@@ -3,6 +3,7 @@
     <div id="loading" v-if="show">
       <load id="loading-animate" />
     </div>
+    <router-view v-if="content" />
     <v-fab-transition>
       <v-btn
         v-show="btn"
@@ -14,24 +15,23 @@
         fab
         @click="$vuetify.goTo(0)"
       >
-        <v-icon>mdi-chevron-up</v-icon>
+        <v-icon>{{icon}}</v-icon>
       </v-btn>
     </v-fab-transition>
-    <router-view v-if="content" />
   </v-app>
 </template>
 
 <script>
-import load from "@/components/public/load.vue";
 export default {
   name: "App",
   components: {
-    load
+    load: () => import("@/components/public/load.vue")
   },
   data: () => ({
     show: true,
     content: false,
-    btn: false
+    btn: false,
+    icon: "mdi-chevron-up"
   }),
   methods: {
     handleScroll() {
@@ -48,7 +48,7 @@ export default {
     setTimeout(function() {
       me.show = !me.show;
       me.content = !me.content;
-    }, 1000);
+    }, 800);
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -56,44 +56,6 @@ export default {
 };
 </script>
 <style src="../public/font/font.css"></style>
-<style>
-.v-application {
-  background: white !important;
-}
-div {
-  margin: 0;
-  padding: 0;
-  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
-}
-a {
-  text-decoration: none;
-  cursor: pointer;
-}
-#loading {
-  z-index: 999;
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: white;
-}
-#loading-animate {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -80px;
-}
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.v-application p {
-  margin-bottom: 0 !important;
-}
-
-.animated {
-  -webkit-animation-duration: 0.6s !important;
-  animation-duration: 0.6s !important;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
+<style lang="scss">
+@import "@/assets/css/global/app.scss";
 </style>

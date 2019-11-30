@@ -12,33 +12,13 @@
           Lomo Fu <br />QH
         </v-card-text>
         <v-divider></v-divider>
-        <v-card-text class="white--text fooeter">
+        <v-card-text class="white--text footer">
           <strong> © {{ new Date().getFullYear() }} , Ben. Web Services</strong>
         </v-card-text>
       </v-card>
     </v-footer>
   </v-card>
 </template>
-<style scoped>
-.footer-ben {
-  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: bolder;
-  font-size: 30px;
-  color: white;
-}
-
-.pt-0 {
-  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: lighter;
-}
-
-.fooeter-support {
-  font-family: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: bolder;
-}
-
-.fooeter {
-  font-family: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
-  font-weight: bolder;
-}
+<style lang="scss" scoped>
+  @import "@/assets/css/public/footer.scss";
 </style>

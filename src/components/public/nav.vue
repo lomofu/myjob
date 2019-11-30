@@ -3,12 +3,14 @@
     <v-row>
       <v-app-bar :dark="light" :elevate-on-scroll="true" fixed class="nav-bar">
         <v-col cols="12" xs="2" sm="2" md="2" lg="2" xl="2" class="d-flex">
-          <v-icon :left="true" size="45" class="nav-icon">mdi-grain</v-icon>
-          <span class="nav-title">Ben.</span>
+          <router-link to="/">
+            <v-icon :left="true" size="45" class="nav-icon">mdi-grain</v-icon>
+            <span class="nav-title">Ben.</span>
+          </router-link>
         </v-col>
 
         <v-col class="d-flex d-sm-none nav-phone-btn">
-          <v-btn dark small color="teal" @click="showMenu = !showMenu">
+          <v-btn small outlined @click="showMenu = !showMenu">
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
           </v-btn>
           <v-expand-transition>
@@ -19,11 +21,11 @@
               @mouseleave="handleLeave"
               elevation="5"
             >
-              <v-list-item v-ripple class="list-item">
+              <v-list-item v-ripple class="list-item" v-show="showHomeBtn">
                 <router-link to="/">首页</router-link>
               </v-list-item>
               <v-list-item v-ripple class="list-item">
-                <router-link to="/">价格 </router-link>
+                <router-link to="/price">价格</router-link>
               </v-list-item>
               <v-list-item v-ripple class="list-item">
                 <router-link to="/about">支持 </router-link>
@@ -32,7 +34,7 @@
                 <router-link to="/login">登录</router-link>
               </v-list-item>
               <v-list-item v-ripple class="list-item">
-                <router-link to="/login">注册</router-link>
+                <router-link to="/signup">注册</router-link>
               </v-list-item>
             </v-list>
           </v-expand-transition>
@@ -48,21 +50,25 @@
           style="text-align: end"
           class="d-none d-sm-table"
         >
-          <router-link to="/">
+          <router-link to="/" v-show="showHomeBtn">
             <v-btn class="nav-btn-select" text>首页</v-btn>
           </router-link>
-          <v-btn class="nav-btn-select" text>价格</v-btn>
+          <router-link to="/price">
+            <v-btn class="nav-btn-select" text>价格</v-btn>
+          </router-link>
           <router-link to="/about"
             ><v-btn class="nav-btn-select" text>支持</v-btn></router-link
           >
           <router-link to="/login"
             ><v-btn class="btn-select" text>登录</v-btn></router-link
           >
-          <v-btn class="nav-btn-select" outlined>
-            <v-icon style="margin-right: 5px"
-              >mdi-account-multiple-plus-outline</v-icon
-            >注册
-          </v-btn>
+          <router-link to="/signup">
+            <v-btn class="nav-btn-select" outlined>
+              <v-icon style="margin-right: 5px"
+                >mdi-account-multiple-plus-outline</v-icon
+              >注册
+            </v-btn>
+          </router-link>
         </v-col>
       </v-app-bar>
     </v-row>
@@ -72,12 +78,11 @@
 <script>
 export default {
   name: "Nav",
-  data() {
-    return {
-      light: true,
-      showMenu: false
-    };
-  },
+  data: () => ({
+    light: true,
+    showMenu: false,
+    showHomeBtn: false
+  }),
   methods: {
     handleLeave() {
       let me = this;
@@ -85,6 +90,13 @@ export default {
         me.showMenu = !me.showMenu;
       }, 2000);
     }
+  },
+  mounted() {
+    let path = this.$route.path;
+    if ("/" === path || "/home" === path) {
+      return false;
+    }
+    this.showHomeBtn = !this.showHomeBtn;
   }
 };
 </script>

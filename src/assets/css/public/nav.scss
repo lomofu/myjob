@@ -1,9 +1,14 @@
-$text-shadow: 0 0 16px #00000029;
-
 div {
-  color: white;
   margin: 0;
-  padding: 0;
+}
+
+a {
+  min-width: 141px;
+  @include font;
+  :hover {
+    color: black;
+    cursor: pointer;
+  }
 }
 
 .nav {
@@ -13,17 +18,25 @@ div {
 
   &-icon {
     text-shadow: $text-shadow;
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
   }
 
   &-title {
     text-shadow: $text-shadow;
     position: relative;
-    top: 4px;
-    left: 10px;
+    top: 6px;
+    left: 8px;
+    color: white;
     @include font-bold;
     clear: both;
     font-size: 30px;
-
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
     &::after {
       display: block;
       content: "";
@@ -33,7 +46,10 @@ div {
   }
 
   &-phone-btn {
-    margin-bottom: 5px;
+    text-shadow: $text-shadow;
+    margin: {
+      bottom: 5px;
+    }
     .phone-showMeun {
       z-index: 999;
       right: 1%;
@@ -51,11 +67,14 @@ div {
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .col-12 {
     flex: 0 1 90% !important;
   }
   .list-item {
     padding: 0 30px 0 30px;
+  }
+  .v-toolbar__content{
+    padding: -1px 16px !important;
   }
 }

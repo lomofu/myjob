@@ -34,7 +34,7 @@
         @click="handleLogin"
         style="font-weight: bold;font-size: 20px"
       >
-        登 陆
+        登 录
       </v-btn>
     </span>
     <p class="word" v-ripple>
@@ -44,8 +44,8 @@
       没有账号? <router-link to="/signup">创建一个新账号</router-link>
     </p>
     <p class="s-word" v-ripple>
-      <router-link to="/">产品价格</router-link> |
-      <router-link to="/">技术支持</router-link>
+      <router-link to="/price">产品价格</router-link> |
+      <router-link to="support">技术支持</router-link>
     </p>
   </v-form>
 </template>

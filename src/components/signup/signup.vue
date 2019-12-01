@@ -26,8 +26,10 @@
       </v-btn>
     </form>
     <div v-if="!signup" class="animated fadeIn">
-      <p class="has-clicked">邮件已发送至您的邮箱, 请前往你的邮箱验证!</p>
-      <v-icon>mdi-mail-outline</v-icon>
+      <p class="has-clicked">{{ hasClicked.msg }}</p>
+      <p class="set-email">
+        <v-icon size="80" color="white"> {{ hasClicked.icon2 }} </v-icon>
+      </p>
       <router-link to="/">
         <v-btn block class="btn-word" dark height="50">{{ btn.word2 }} </v-btn>
       </router-link>
@@ -60,6 +62,10 @@ export default {
       word2: "返 回 主 页",
       placeholder: "请输入你的邮箱"
     },
+    hasClicked: {
+      icon2: "mdi-email-check",
+      msg: "邮件已发送至您的邮箱, 请前往你的邮箱验证!"
+    },
     email: ""
   }),
   computed: {
@@ -75,12 +81,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin btn-color {
-  background: #f46b45;
-  background: -webkit-linear-gradient(to right, #eea849, #f46b45);
-  background: linear-gradient(to right, #eea849, #f46b45);
-}
 .signup {
+  .set-email {
+    &::after {
+      @include before-after(30px);
+    }
+  }
   .btn-word {
     @include btn-color;
     @include font-bold;

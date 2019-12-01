@@ -6,7 +6,7 @@
       sm="12"
       md="4"
       lg="4"
-      xl="4"
+      xl="3"
       class="login-left d-sm-none d-md-table-row animated fadeInLeft"
       align="center"
     >
@@ -17,7 +17,7 @@
       sm="12"
       md="8"
       lg="8"
-      xl="8"
+      xl="9"
       class="animated fadeInRight"
     >
       <div class="login-btn-back">
@@ -51,7 +51,15 @@
             {{ content.subtitle }}
           </p>
           <v-row>
-            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
+            <v-col
+              cols="12"
+              xs="12"
+              sm="12"
+              md="12"
+              lg="12"
+              xl="12"
+              align="center"
+            >
               <panel class="panel" />
             </v-col>
           </v-row>

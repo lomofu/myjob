@@ -1,9 +1,3 @@
-@mixin btn-color {
-  background: #f46b45;
-  background: -webkit-linear-gradient(to right, #eea849, #f46b45);
-  background: linear-gradient(to right, #eea849, #f46b45);
-}
-
 @mixin light($color, $size) {
   @include font-light;
   color: $color;
@@ -38,6 +32,8 @@ img {
 }
 
 .home {
+  width: 100vw;
+  padding: 10px;
   &-type {
     @include color;
     height: 550px;
@@ -111,8 +107,7 @@ img {
 }
 
 @media screen and (max-width: 755px) {
-
-  .home-type{
+  .home-type {
     height: 500px;
   }
 

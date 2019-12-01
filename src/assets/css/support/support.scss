@@ -1,0 +1,101 @@
+.support {
+  div {
+    @include div;
+  }
+  p {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+  }
+
+  .supp-title {
+    @include font-bold;
+    font-size: 30px;
+  }
+  .subtitle {
+    &::before {
+      @include before-after(150px);
+    }
+  }
+
+  height: 100%;
+  &-main {
+    padding: 10px;
+    @include color;
+    height: 550px;
+    &-title {
+      width: 100vw;
+      color: #f2f2f2;
+      font-size: 50px;
+      @include font-light;
+      text-shadow: $text-shadow;
+      &::before {
+        @include before-after(100px);
+      }
+    }
+    &-icon {
+      color: white;
+      &::before {
+        @include before-after(50px);
+      }
+    }
+  }
+  &-content {
+    height: 450px;
+  }
+
+  &-content1 {
+    height: 250px;
+    .img1 {
+      height: 100px;
+      width: 100px;
+    }
+    .title1 {
+      font-size: 25px;
+      @include font-bold;
+      &::after {
+        @include before-after(20px);
+      }
+    }
+  }
+  &-content2 {
+    height: 400px;
+    .content {
+      padding: 5px;
+    }
+    .img2 {
+      width: 80px;
+      height: 80px;
+    }
+    .title2 {
+      font-size: 25px;
+      @include font-bold;
+      &::after {
+        @include before-after(10px);
+      }
+    }
+  }
+  &-content3 {
+    height: 300px;
+    .content {
+      padding: 5px;
+    }
+    .img2 {
+      width: 80px;
+      height: 80px;
+    }
+    .contact {
+      font-size: 25px;
+      @include font-bold;
+      &::after {
+        @include before-after(10px);
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .support-main-title {
+      font-size: 40px;
+    }
+  }
+}

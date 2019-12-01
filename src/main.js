@@ -12,7 +12,10 @@ Vue.config.productionTip = false;
 Vue.use(VCharts);
 Vue.use(Vuex);
 
-// router.beforeEach()
+router.beforeEach((to, from, next) => {
+  document.title = "Ben. " + " | " + to.meta.title;
+  next();
+});
 
 new Vue({
   router,

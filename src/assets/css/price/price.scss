@@ -1,0 +1,57 @@
+div {
+  margin: 0;
+  padding: 0;
+}
+.price {
+  width: 100vw;
+  clear: both;
+
+  &-main {
+    width: 100vw;
+    height: 100vh;
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  &-box {
+    @include color;
+    height: 550px;
+  }
+
+  &-content {
+    &::before {
+      @include before-after(100px);
+    }
+  }
+
+  &-title {
+    width: 100vw;
+    text-align: center;
+    @include font-light;
+    font-size: 50px;
+    color: white;
+    text-shadow: $text-shadow;
+    &::after {
+      @include before-after(30px);
+    }
+  }
+  .sliceCard {
+    &::before {
+      @include before-after(10vh);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .price {
+      width: 100%;
+      clear: both;
+
+      &-title {
+        font-size: 30px;
+      }
+    }
+  }
+}

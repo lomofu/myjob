@@ -1,5 +1,5 @@
 <template>
-  <div class="register animated fadeIn">
+  <div class="register">
     <v-btn class="btn ma-2" outlined color="#424242" @click="$router.back(-1)">
       <v-icon> {{ content.btn.icon }}</v-icon>
       {{ content.btn.word }}</v-btn
@@ -31,13 +31,13 @@
     <v-row class="text-center fadeInUp" v-show="signup">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
         <p class="content1 text-center">
-          {{ content.word1 }} <router-link to="/login"> 点击登陆</router-link>
+          {{ content.word1 }} <router-link to="/login"> 点击登录</router-link>
         </p>
       </v-col>
     </v-row>
     <p class="text-center fadeInUp subinfo">
-      <router-link to="/">产品价格</router-link> |
-      <router-link to="/">技术支持</router-link>
+      <router-link to="/price">产品价格</router-link> |
+      <router-link to="/support">技术支持</router-link>
     </p>
   </div>
 </template>

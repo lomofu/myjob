@@ -187,7 +187,7 @@
                 </p>
                 <p class="home-row-content">{{ content.p4[1] }}</p>
                 <p class="text-center home-row-content-content3">
-                  <img src="../../public/img/home/app.png" alt="web" /> &nbsp;
+                  <img src="../../public/img/home/chrome.png" alt="web" /> &nbsp;
                   <img src="../../public/img/home/andriod.jpg" alt="phone" />
                 </p>
               </v-col>
@@ -196,7 +196,7 @@
         </v-col>
       </v-row>
     </v-lazy>
-    <bfooter></bfooter>
+    <index-footer></index-footer>
   </div>
 </template>
 
@@ -211,7 +211,7 @@ export default {
     indexNav: () => import("../components/public/nav.vue"),
     chart: () => import("../components/home/chart.vue"),
     speed: () => import("../components/home/speed.vue"),
-    bfooter: () => import("../components/public/footer.vue")
+    indexFooter: () => import("../components/public/footer.vue")
   },
   mixins: [validationMixin],
   validations: {
@@ -236,9 +236,9 @@ export default {
       ],
       p3: [
         "怎么使用？",
-        "Ben 的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度"
+        " Ben 的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度"
       ],
-      p4: ["多平台支持", "Ben 支持跨设备使用,包含浏览器,安卓平板,安卓手机"]
+      p4: ["多平台支持", "Ben 支持多设备使用,我们目前支持包括浏览器,安卓手机"]
     },
     show: true,
     showInput: false,

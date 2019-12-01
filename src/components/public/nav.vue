@@ -22,19 +22,44 @@
               elevation="5"
             >
               <v-list-item v-ripple class="list-item" v-show="showHomeBtn">
-                <router-link to="/">首页</router-link>
+                <router-link to="/"
+                  ><v-icon color="#1e73a8" size="25">{{
+                    phoneIcon.home[1]
+                  }}</v-icon
+                  ><span class="phone-icon"> 首页</span></router-link
+                >
+              </v-list-item>
+              <v-list-item v-ripple class="list-item" v-show="showPriceBtn">
+                <router-link to="/price"
+                  ><v-icon color="#1e73a8" size="25">{{
+                    phoneIcon.price[1]
+                  }}</v-icon
+                  ><span class="phone-icon"> 价格</span></router-link
+                >
+              </v-list-item>
+              <v-list-item v-ripple class="list-item" v-show="showSuppBtn">
+                <router-link to="/support"
+                  ><v-icon color="#1e73a8" size="25">{{
+                    phoneIcon.support[1]
+                  }}</v-icon
+                  ><span class="phone-icon"> 支持</span></router-link
+                >
               </v-list-item>
               <v-list-item v-ripple class="list-item">
-                <router-link to="/price">价格</router-link>
+                <router-link to="/login"
+                  ><v-icon color="#1e73a8" size="25">{{
+                    phoneIcon.login[1]
+                  }}</v-icon
+                  ><span class="phone-icon"> 登录</span></router-link
+                >
               </v-list-item>
               <v-list-item v-ripple class="list-item">
-                <router-link to="/about">支持 </router-link>
-              </v-list-item>
-              <v-list-item v-ripple class="list-item">
-                <router-link to="/login">登录</router-link>
-              </v-list-item>
-              <v-list-item v-ripple class="list-item">
-                <router-link to="/signup">注册</router-link>
+                <router-link to="/signup"
+                  ><v-icon color="#1e73a8" size="25">{{
+                    phoneIcon.signup[1]
+                  }}</v-icon
+                  ><span class="phone-icon"> 注册</span></router-link
+                >
               </v-list-item>
             </v-list>
           </v-expand-transition>
@@ -53,10 +78,10 @@
           <router-link to="/" v-show="showHomeBtn">
             <v-btn class="nav-btn-select" text>首页</v-btn>
           </router-link>
-          <router-link to="/price">
+          <router-link to="/price" v-show="showPriceBtn">
             <v-btn class="nav-btn-select" text>价格</v-btn>
           </router-link>
-          <router-link to="/about"
+          <router-link to="/support" v-show="showSuppBtn"
             ><v-btn class="nav-btn-select" text>支持</v-btn></router-link
           >
           <router-link to="/login"
@@ -81,7 +106,17 @@ export default {
   data: () => ({
     light: true,
     showMenu: false,
-    showHomeBtn: false
+    showHomeBtn: true,
+    showPriceBtn: true,
+    showSuppBtn: true,
+    phoneIcon: {
+      color: "#1e73a8",
+      home: ["25", "mdi-home"],
+      price: ["25", "mdi-currency-usd"],
+      support: ["25", "mdi-lightbulb-on"],
+      login: ["25", "mdi-account-circle"],
+      signup: ["25", "mdi-account-plus"]
+    }
   }),
   methods: {
     handleLeave() {
@@ -93,10 +128,24 @@ export default {
   },
   mounted() {
     let path = this.$route.path;
-    if ("/" === path || "/home" === path) {
-      return false;
+    switch (path) {
+      case "/": {
+        this.showHomeBtn = !this.showHomeBtn;
+        break;
+      }
+      case "/home": {
+        this.showHomeBtn = !this.showHomeBtn;
+        break;
+      }
+      case "/price": {
+        this.showPriceBtn = !this.showPriceBtn;
+        break;
+      }
+      case "/support": {
+        this.showSuppBtn = !this.showSuppBtn;
+        break;
+      }
     }
-    this.showHomeBtn = !this.showHomeBtn;
   }
 };
 </script>

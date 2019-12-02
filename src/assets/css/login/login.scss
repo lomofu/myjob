@@ -45,7 +45,11 @@ p {
   &-ben {
     @include font-bold;
     font-size: 35px;
+    color: black;
     margin: auto auto 10px 15px;
+    &:hover{
+      color: $base-color;
+    }
   }
   &-content-subtitle {
     @include font-light;

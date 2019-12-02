@@ -7,23 +7,31 @@
         <v-icon :color="main.iconColor" size="50">{{ main.icon }}</v-icon>
       </p>
       <p class="text-center subtitle">
-        <v-icon size="35">{{ main.content }}</v-icon>
+        <v-btn @click="() => this.$vuetify.goTo('#next')" text>
+          <v-icon size="35">{{ main.content }}</v-icon>
+        </v-btn>
       </p>
     </div>
-    <v-row align="center" class="support-content animated fadeInUp">
+    <v-row align="center" class="support-content animated fadeInUp" id="next">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <p class="supp-title">{{ main.contents[0].title }}</p>
+        <p class="supp-title">
+          {{ main.contents[0].title }}
+        </p>
       </v-col>
       <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" align="center">
         <p>
-          <v-icon size="80" color="blue">{{ main.contents[1].icon }}</v-icon>
+          <v-icon size="80" color="blue" class="content1-icon">{{
+            main.contents[1].icon
+          }}</v-icon>
         </p>
         <p>{{ main.contents[1].title }}</p>
         <br />
         <p>{{ main.contents[1].content }}</p>
       </v-col>
       <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" align="center">
-        <v-icon size="80" color="green">{{ main.contents[2].icon }}</v-icon>
+        <v-icon size="80" color="green" class="content1-icon">{{
+          main.contents[2].icon
+        }}</v-icon>
         <br />
         <p>{{ main.contents[2].title }}</p>
         <br />
@@ -34,10 +42,8 @@
     </v-row>
     <v-divider></v-divider>
     <v-row align="center" class="support-content1">
-      <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" align="center">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
         <img class="img1" src="../../public/img/support/lock.png" alt="lock" />
-      </v-col>
-      <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6">
         <p class="text-center title1">
           {{ main.content1[0] }}
         </p>
@@ -50,9 +56,13 @@
     <v-divider></v-divider>
     <v-row align="center" class="support-content2">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <v-icon size="70" color="orange">mdi-firefox</v-icon>
+        <v-icon size="70" color="orange" class="content2-icon"
+          >mdi-firefox</v-icon
+        >
         <img class="img2" src="../../public/img/home/chrome.png" alt="chrome" />
-        <v-icon size="60" color="blue">mdi-edge-legacy</v-icon>
+        <v-icon size="60" color="blue" class="content2-icon"
+          >mdi-edge-legacy</v-icon
+        >
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
         <p class="title2">
@@ -66,13 +76,15 @@
     <v-divider></v-divider>
     <v-row align="center" class="support-content3">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <v-icon size="70" color="green">mdi-chat-processing</v-icon>
+        <v-icon size="70" color="green" class="content3-icon"
+          >mdi-chat-processing</v-icon
+        >
         <img
-          class="img2"
+          class="img3"
           src="../../public/img/icon/icon-color.png"
           alt="icon"
         />
-        <v-icon size="60" color="blue">mdi-email</v-icon>
+        <v-icon size="60" color="blue" class="content3-icon">mdi-email</v-icon>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
         <p class="contact">

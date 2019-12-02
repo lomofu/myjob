@@ -12,6 +12,8 @@ Vue.config.productionTip = false;
 Vue.use(VCharts);
 Vue.use(Vuex);
 
+export const eventBus = new Vue();
+
 router.beforeEach((to, from, next) => {
   document.title = "Ben. " + " | " + to.meta.title;
   next();

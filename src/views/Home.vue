@@ -187,9 +187,14 @@
                 </p>
                 <p class="home-row-content">{{ content.p4[1] }}</p>
                 <p class="text-center home-row-content-content3">
-                  <img src="../../public/img/home/chrome.png" alt="web" /> &nbsp;
+                  <img src="../../public/img/home/chrome.png" alt="web" />
+                  &nbsp;
                   <img src="../../public/img/home/andriod.jpg" alt="phone" />
                 </p>
+                <br />
+                <router-link to="/support">
+                  <p class="text-center" v-ripple>立即前往下载</p>
+                </router-link>
               </v-col>
             </v-row>
           </div>

@@ -26,16 +26,18 @@
       :label="user.isRember ? '记住我' : '不要记住我'"
     ></v-switch>
     <span class="btn-login">
-      <v-btn
-        block
-        color="deep-purple lighten-1"
-        dark
-        height="50px"
-        @click="handleLogin"
-        style="font-weight: bold;font-size: 20px"
-      >
-        登 录
-      </v-btn>
+      <router-link to="/user">
+        <v-btn
+          block
+          color="deep-purple lighten-1"
+          dark
+          height="50px"
+          @click="handleLogin"
+          style="font-weight: bold;font-size: 20px"
+        >
+          登 录
+        </v-btn>
+      </router-link>
     </span>
     <p class="word" v-ripple>
       <router-link to="/">忘记密码?</router-link>

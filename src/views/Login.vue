@@ -43,8 +43,11 @@
         >
           <v-row justify="center">
             <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
-              <img src="../../public/img/icon/icon-color.png" alt="icon" />
-              <div class="login-ben">Ben.</div>
+              <router-link to="/">
+                <img src="../../public/img/icon/icon-color.png" alt="icon" />
+                <div class="login-ben">Ben.</div>
+              </router-link>
+
             </v-col>
           </v-row>
           <p class="text-center login-content-subtitle ">

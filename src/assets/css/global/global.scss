@@ -1,4 +1,4 @@
-$base-color: #26c6da;
+$base-color: #24acc0;
 $font: PingFangNormal, Microsoft YaHei, 黑体, sans-serif;
 $font-light: PingFangLight, Microsoft YaHei, 黑体, sans-serif;
 $font-lighter: PingFangLighter, Microsoft YaHei, 黑体, sans-serif;
@@ -6,8 +6,12 @@ $font-bold: PingFangBold, Microsoft YaHei, 黑体, sans-serif;
 $text-shadow: 0 0 16px #00000029;
 
 @mixin div {
-  margin: 0;
-  padding: 0;
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @mixin before-after($height) {
@@ -28,7 +32,6 @@ $text-shadow: 0 0 16px #00000029;
   background: -webkit-linear-gradient(to right, #eea849, #f46b45);
   background: linear-gradient(to right, #eea849, #f46b45);
 }
-
 
 @mixin font {
   font: {

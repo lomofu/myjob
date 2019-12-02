@@ -1,11 +1,11 @@
 <template>
   <div class="user">
-    <user-nav :user="user" :list="items"></user-nav>
+    <user-nav :user="user" :menu="menu"></user-nav>
     <v-app-bar app></v-app-bar>
     <v-content>
       <v-container fluid> </v-container>
     </v-content>
-    <user-info></user-info>
+    <user-info :user="user"></user-info>
   </div>
 </template>
 
@@ -18,37 +18,79 @@ export default {
   },
   data: () => ({
     user: {
-      name: "MyName"
+      name: "MyName",
+      picture: "https://cdn.vuetifyjs.com/images/john.jpg",
+      isAdmin: true
     },
-    items: [
+    menu: [
       {
-        id: 1,
-        name: "ShangHai",
-        children: [
+        title: "Teams",
+        items: [
           {
-            id: 2,
-            name: "项目",
+            id: 1,
+            name: "ShangHai",
             children: [
-              { id: 3, name: "SSO" },
-              { id: 4, name: "Docker" }
+              {
+                id: 2,
+                name: "项目",
+                children: [
+                  { id: 3, name: "SSO" },
+                  { id: 4, name: "Docker" }
+                ]
+              },
+              { id: 5, name: "团队成员" }
             ]
           },
-          { id: 5, name: "团队成员" }
+          {
+            id: 6,
+            name: "BeiJing",
+            children: [
+              {
+                id: 7,
+                name: "项目",
+                children: [
+                  { id: 8, name: "SSO" },
+                  { id: 9, name: "Docker" }
+                ]
+              },
+              { id: 10, name: "团队成员" }
+            ]
+          }
         ]
       },
       {
-        id: 6,
-        name: "BeiJing",
-        children: [
+        title: "Teams",
+        items: [
           {
-            id: 7,
-            name: "项目",
+            id: 1,
+            name: "ShangHai",
             children: [
-              { id: 8, name: "SSO" },
-              { id: 9, name: "Docker" }
+              {
+                id: 2,
+                name: "项目",
+                children: [
+                  { id: 3, name: "SSO" },
+                  { id: 4, name: "Docker" }
+                ]
+              },
+              { id: 5, name: "团队成员" }
             ]
           },
-          { id: 10, name: "团队成员" }
+          {
+            id: 6,
+            name: "BeiJing",
+            children: [
+              {
+                id: 7,
+                name: "项目",
+                children: [
+                  { id: 8, name: "SSO" },
+                  { id: 9, name: "Docker" }
+                ]
+              },
+              { id: 10, name: "团队成员" }
+            ]
+          }
         ]
       }
     ]

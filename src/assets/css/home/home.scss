@@ -14,10 +14,6 @@
   font-size: $size;
 }
 
-div {
-  @include div;
-}
-
 p {
   word: {
     wrap: break-word;

@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuex from "vuex";
+import "babel-polyfill";
 import vuetify from "./plugins/vuetify";
 import Vuelidate from "vuelidate";
 import VCharts from "v-charts";

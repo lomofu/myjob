@@ -15,7 +15,7 @@
         fab
         @click="$vuetify.goTo(0)"
       >
-        <v-icon>{{icon}}</v-icon>
+        <v-icon>{{ icon }}</v-icon>
       </v-btn>
     </v-fab-transition>
   </v-app>
@@ -58,4 +58,5 @@ export default {
 <style src="../public/font/font.css"></style>
 <style lang="scss">
 @import "@/assets/css/global/app.scss";
+@import "node_modules/hover.css/scss/hover.scss";
 </style>

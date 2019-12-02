@@ -12,6 +12,10 @@ $text-shadow: 0 0 16px #00000029;
     margin: 0;
     padding: 0;
   }
+  div{
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @mixin before-after($height) {
@@ -61,10 +65,4 @@ $text-shadow: 0 0 16px #00000029;
   }
 }
 
-//@mixin font-bold($font-color) {
-//  color: $font-color;
-//  font: {
-//    family: $font-bold;
-//    weight: bold;
-//  }
-//}
+@include div;

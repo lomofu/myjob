@@ -1,40 +1,45 @@
 <template>
-  <v-navigation-drawer v-model="drawer" absolute temporary right width="800">
-    <v-list-item>
-      <v-list-item-avatar>
-        <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-      </v-list-item-avatar>
+  <v-navigation-drawer
+    v-model="drawer"
+    absolute
+    temporary
+    right
+    min-width="30vw"
+    width="40vw"
+    mobile-break-point="1260"
 
-      <v-list-item-content>
-        <v-list-item-title>John Leider</v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-
-    <v-divider></v-divider>
-
-    <v-list dense>
-      <v-list-item v-for="item in items" :key="item.title" link>
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+  >
+    <div class="userinfo-box d-flex align-center justify-center" >
+      <div>
+        <p>
+          <v-avatar :title="user.username" size="90">
+            <img :src="user.picture" />
+          </v-avatar>
+        </p>
+        <br />
+        <p class="text-center userinfo-username">
+          {{ user.name }}
+        </p>
+        <br />
+        <p class="text-center userinfo-subinfo">
+          {{ user.isAdmin ? "管理员" : "团队成员" }}
+        </p>
+      </div>
+    </div>
+    <user-tabs v-if="user.isAdmin"></user-tabs>
   </v-navigation-drawer>
 </template>
 <script>
 import { eventBus } from "../../main";
 export default {
+  name: "userinfo",
+  props: ["user"],
+  components: {
+    userTabs: () => import("../../components/user/usertab.vue")
+  },
   data() {
     return {
-      drawer: null,
-      items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "About", icon: "question_answer" }
-      ]
+      drawer: null
     };
   },
   created() {
@@ -44,3 +49,30 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+@include div;
+.userinfo {
+  &-box {
+    @include color;
+    height: 30vh;
+    width: 40vw;
+    display: flex;
+  }
+
+  &-username {
+    @include font-bold;
+    font-size: 22px;
+    color: white;
+    text-shadow: $text-shadow;
+  }
+  &-subinfo {
+    @include font;
+    font-size: 16px;
+    color: #4d4d4d;
+  }
+
+  p {
+    width: 40vw;
+  }
+}
+</style>

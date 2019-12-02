@@ -54,13 +54,13 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row align="center" class="support-content2">
+    <v-row align="center" justify="center" class="support-content2">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <v-icon size="70" color="orange" class="content2-icon"
+        <v-icon size="60" color="orange" class="content2-icon"
           >mdi-firefox</v-icon
         >
         <img class="img2" src="../../public/img/home/chrome.png" alt="chrome" />
-        <v-icon size="60" color="blue" class="content2-icon"
+        <v-icon size="50" color="blue" class="content2-icon"
           >mdi-edge-legacy</v-icon
         >
       </v-col>
@@ -72,11 +72,50 @@
           {{ main.content2[1] }}
         </p>
       </v-col>
+
+      <v-col
+        class="offset-xs-5"
+        cols="12"
+        xs="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
+        align="center"
+      >
+        <v-card outlined>
+          <v-row>
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="6"
+              v-for="(item, index) in main.supp_list"
+              :key="index"
+            >
+              <template>
+                <p>
+                  <v-icon size="50" :color="item.color">{{ item.icon }}</v-icon>
+                </p>
+                <br />
+                <p>{{ item.supp }}</p>
+                <p>
+                  <v-icon :color="item.color2">{{ item.icon2 }}</v-icon>
+                </p>
+                <br />
+              </template>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
     </v-row>
+    <br />
     <v-divider></v-divider>
     <v-row align="center" class="support-content3">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <v-icon size="70" color="green" class="content3-icon"
+        <v-icon size="50" color="green" class="content3-icon"
           >mdi-chat-processing</v-icon
         >
         <img
@@ -130,11 +169,57 @@ export default {
       content1: ["忘记密码了?", "忘记密码了, 没关系"],
       content2: [
         "为什么页面样式视图混乱? 显示功能无法正常使用?",
-        "我们目前对Chrome,Firefox支持良好,我们也建议您用这些浏览器打开以确保正常使用,如果是IE请确保版本是IE8以上"
+        "我们目前对Chrome,Firefox支持良好,我们也建议您用这些浏览器打开以确保正常使用, 详情请参考下列浏览器支持表"
       ],
       content3: [
         "联系我们",
         "如果有特殊疑问,请发送邮件到example@example.com邮箱,我们会尽快与您取得联系"
+      ],
+      supp_list: [
+        {
+          icon: "mdi-google-chrome",
+          color: "red",
+          icon2: "mdi-check-circle",
+          color2: "green",
+          supp: "Chromium (Chrome, Edge Insider)"
+        },
+        {
+          icon: "mdi-firefox",
+          color: "orange",
+          icon2: "mdi-check-circle",
+          color2: "green",
+          supp: "Firefox"
+        },
+        {
+          icon: "mdi-edge",
+          color: "cyan darken-2",
+          icon2: "mdi-check-circle",
+          color2: "green",
+          supp: "Edge"
+        },
+        {
+          icon: "mdi-apple-safari",
+          color: "blue",
+
+          icon2: "mdi-check-circle",
+          color2: "green",
+          supp: "Safari 10 +"
+        },
+        {
+          icon: " mdi-internet-explorer",
+          color: "blue",
+
+          icon2: "mdi-check-circle",
+          color2: "green",
+          supp: "IE11 +"
+        },
+        {
+          icon: " mdi-internet-explorer",
+          color: "",
+          icon2: "mdi-close-circle",
+          color2: "red",
+          supp: "IE9 / IE10"
+        }
       ]
     }
   })

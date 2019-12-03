@@ -71,6 +71,7 @@
         <p>
           {{ main.content2[1] }}
         </p>
+        <br />
       </v-col>
 
       <v-col
@@ -83,7 +84,9 @@
         xl="6"
         align="center"
       >
+        <br />
         <v-card outlined>
+          <br />
           <v-row>
             <v-col
               cols="12"

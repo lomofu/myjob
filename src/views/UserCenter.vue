@@ -1,9 +1,10 @@
 <template>
   <div class="user">
     <user-nav :user="user" :menu="menu"></user-nav>
-    <v-app-bar app></v-app-bar>
     <v-content>
-      <v-container fluid> </v-container>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
     <user-info :user="user"></user-info>
   </div>
@@ -13,8 +14,8 @@
 export default {
   name: "UserCenter",
   components: {
-    userNav: () => import("../components/user/usernav.vue"),
-    userInfo: () => import("../components/user/userinfo.vue")
+    userNav: () => import("../components/user/slicenav/usernav.vue"),
+    userInfo: () => import("../components/user/slicenav/userinfo.vue")
   },
   data: () => ({
     user: {
@@ -24,72 +25,45 @@ export default {
     },
     menu: [
       {
-        title: "Teams",
-        items: [
+        id: 1,
+        name: "ShangHai",
+        link: null,
+        children: [
           {
-            id: 1,
-            name: "ShangHai",
+            id: 2,
+            name: "项目",
             children: [
-              {
-                id: 2,
-                name: "项目",
-                children: [
-                  { id: 3, name: "SSO" },
-                  { id: 4, name: "Docker" }
-                ]
-              },
-              { id: 5, name: "团队成员" }
+              { id: 3, name: "SSO", link: "/projects" },
+              { id: 4, name: "Docker", link: "/projects" }
             ]
           },
           {
-            id: 6,
-            name: "BeiJing",
-            children: [
-              {
-                id: 7,
-                name: "项目",
-                children: [
-                  { id: 8, name: "SSO" },
-                  { id: 9, name: "Docker" }
-                ]
-              },
-              { id: 10, name: "团队成员" }
-            ]
+            id: 5,
+            name: "团队成员",
+            link: "/employees",
+            member: ["1", "2", "3"]
           }
         ]
       },
       {
-        title: "Teams",
-        items: [
+        id: 6,
+        name: "BeiJing",
+        link: null,
+        children: [
           {
-            id: 1,
-            name: "ShangHai",
+            id: 7,
+            name: "项目",
             children: [
-              {
-                id: 2,
-                name: "项目",
-                children: [
-                  { id: 3, name: "SSO" },
-                  { id: 4, name: "Docker" }
-                ]
-              },
-              { id: 5, name: "团队成员" }
+              { id: 8, name: "SSO", link: "/projects" },
+              { id: 9, name: "Docker", link: "/projects" },
+              { id: 9, name: "Docker", link: "/projects" }
             ]
           },
           {
-            id: 6,
-            name: "BeiJing",
-            children: [
-              {
-                id: 7,
-                name: "项目",
-                children: [
-                  { id: 8, name: "SSO" },
-                  { id: 9, name: "Docker" }
-                ]
-              },
-              { id: 10, name: "团队成员" }
-            ]
+            id: 10,
+            name: "团队成员",
+            link: "/employees",
+            member: ["1", "2", "3"]
           }
         ]
       }

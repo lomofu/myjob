@@ -7,9 +7,11 @@
     min-width="30vw"
     width="40vw"
     mobile-break-point="1260"
-
   >
-    <div class="userinfo-box d-flex align-center justify-center" >
+    <p style="position:absolute;right: 5px;top:5px">
+      <v-icon size="30" class="hvr-grow">mdi-logout</v-icon>
+    </p>
+    <div class="userinfo-box d-flex align-center justify-center">
       <div>
         <p>
           <v-avatar :title="user.username" size="90">
@@ -30,12 +32,12 @@
   </v-navigation-drawer>
 </template>
 <script>
-import { eventBus } from "../../main";
+  import { eventBus } from "../../../main";
 export default {
   name: "userinfo",
   props: ["user"],
   components: {
-    userTabs: () => import("../../components/user/usertab.vue")
+    userTabs: () => import("./usertab.vue")
   },
   data() {
     return {

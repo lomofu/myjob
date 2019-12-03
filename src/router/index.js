@@ -13,14 +13,6 @@ const routes = [
     component: () => import("../views/Home.vue")
   },
   {
-    path: "/home",
-    name: "home",
-    meta: {
-      title: "首页"
-    },
-    component: () => import("../views/Home.vue")
-  },
-  {
     path: "/about",
     name: "about",
     meta: {
@@ -42,7 +34,30 @@ const routes = [
     meta: {
       title: "用户中心"
     },
-    component: () => import("../views/UserCenter.vue")
+    component: () => import("../views/UserCenter.vue"),
+    children: [
+      {
+        meta: {
+          title: "个人看板"
+        },
+        path: "/",
+        component: () => import("../components/user/Dashboard.vue")
+      },
+      {
+        meta: {
+          title: "团队成员"
+        },
+        path: "employees",
+        component: () => import("../components/user/Employees.vue")
+      },
+      {
+        meta: {
+          title: "项目工程"
+        },
+        path: "projects",
+        component: () => import("../components/user/Project.vue")
+      }
+    ]
   },
   {
     path: "/signup",

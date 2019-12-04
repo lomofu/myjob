@@ -1,22 +1,31 @@
 <template>
   <div>
-    <ve-pie :data="transferData" :settings="chartSettings"></ve-pie>
+    <v-btn @click="changeType" text style="color: #1e73a8">切换图表类型</v-btn>
+    <ve-chart :data="transferData" :settings="chartSettings"></ve-chart>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    this.chartSettings = {
-      radius: 120
-    };
+    this.typeArr = ["pie", "histogram", "bar"];
+    this.index = 0;
     return {
-      thisData: "",
       chartData: {
         columns: ["团队", "项目数"],
         rows: []
-      }
+      },
+      chartSettings: { type: this.typeArr[this.index], radius: 120 }
     };
+  },
+  methods: {
+    changeType: function() {
+      this.index++;
+      if (this.index >= this.typeArr.length) {
+        this.index = 0;
+      }
+      this.chartSettings = { type: this.typeArr[this.index], radius: 120 };
+    }
   },
   computed: {
     transferData() {

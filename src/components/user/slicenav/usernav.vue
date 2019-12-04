@@ -1,49 +1,55 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-navigation-drawer
     app
-    max-width="17vw"
     mobile-break-point="1240"
     class="user-slice"
+    permanent
+    :mini-variant.sync="mini"
   >
     <v-row align="center" class="app-nav-header">
-      <v-col cols xs="4" sm="4" md="4" lg="4" xl="4" align="center">
-        <img
-          class="app-img"
-          src="../../../../public/img/icon/icon-color.png"
-          height="40"
-          width="40"
-          alt="icon"
-          style="margin-left: 50px"
-        />
-      </v-col>
-      <v-col cols xs="8" sm="8" md="8" lg="8" xl="8">
-        <p class="app-word" style="margin-left: 30px">Ben.</p>
+      <v-col cols xs="12" sm="12" md="12" lg="12" xl="12" align="center">
+        <v-list-item size="45" class="justify-center">
+          <img
+            class="app-img"
+            src="../../../../public/img/icon/icon-color.png"
+            height="46"
+            width="46"
+            alt="icon"
+          />
+          <p class="app-word " style="margin-left: 10px;margin-top: 10px">
+            Ben.
+          </p>
+        </v-list-item>
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row style="padding: 15px;margin-top: 20px" align="center">
-      <v-col cols xs="5" sm="5" md="5" lg="5" xl="5" align="center">
-        <v-avatar class="app-nav-avatar" size="65" @click="showOpen">
-          <img class="hvr-grow-shadow" :src="user.picture" />
-        </v-avatar>
-      </v-col>
-      <v-col cols xs="7" sm="7" md="7" lg="7" xl="7">
-        <p class="app-nav-name">
-          {{ user.name }}
-        </p>
+    <v-row style="padding: 15px;margin-top: 20px;cursor: pointer">
+      <v-col cols xs="12" sm="12" md="12" lg="12" xl="12">
+        <v-list-item>
+          <v-list-item-avatar size="45" @click="showOpen">
+            <img class="hvr-grow-shadow" :src="user.picture" />
+          </v-list-item-avatar>
+        </v-list-item>
+        <v-list-item link two-line>
+          <v-list-item-content @click="showOpen">
+            <v-list-item-title class="title">{{ user.name }}</v-list-item-title>
+            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-col>
     </v-row>
-    <p
-      class="text-center"
+    <v-list-item
       style="padding: 10px;cursor: pointer"
       @click="$router.push({ path: '/user' })"
-      v-ripple
     >
-      <v-icon>mdi-home-variant</v-icon>
-    </p>
-    <p class="p-team text-center">Teams</p>
+      <v-list-item>
+        <v-icon class="ma-1" size="30">mdi-apple-safari</v-icon>
+        <v-list-item-title class="ma-6">个人面板</v-list-item-title>
+      </v-list-item>
+    </v-list-item>
+    <br />
     <v-list v-for="(item, index) in menu" :key="index">
-      <v-list-group prepend-icon="mdi-view-dashboard">
+      <v-list-group prepend-icon="mdi-account-group">
         <template v-slot:activator>
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </template>
@@ -116,7 +122,8 @@ export default {
     setting: [
       { icon: "mdi-file-document-edit", text: "修改资料" },
       { icon: "mdi-logout", text: "退出" }
-    ]
+    ],
+    mini: false
   }),
   methods: {
     showOpen() {
@@ -128,6 +135,12 @@ export default {
         me.showMenu = !me.showMenu;
       }, 300);
     }
+  },
+  created() {
+    eventBus.$on("miniNav", message => {
+      console.log(message);
+      this.mini = message;
+    });
   }
 };
 </script>

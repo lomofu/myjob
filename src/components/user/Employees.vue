@@ -1,15 +1,6 @@
 <template>
   <div>
-    <v-toolbar color="cyan" dark>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-toolbar-title>Inbox</v-toolbar-title>
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-toolbar>
-
+    <user-nav title="雇员" color="teal"></user-nav>
     <v-list three-line>
       <template v-for="(item, index) in items">
         <v-subheader
@@ -41,6 +32,9 @@
 
 <script>
 export default {
+  components: {
+    userNav: () => import("../public/user/userNav.vue")
+  },
   data: () => ({
     items: [
       { header: "Today" },

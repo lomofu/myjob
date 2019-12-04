@@ -1,10 +1,6 @@
 <template>
   <div class="animated fadeIn">
-    <v-app-bar color="indigo " dark app :elevate-on-scroll="true">
-      <v-app-bar-nav-icon @click="resizeNav"></v-app-bar-nav-icon>
-      <v-toolbar-title>个人面板</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+    <user-nav title="个人看板" color ="indigo" ></user-nav>
     <v-row justify="space-around">
       <v-col cols="12" xs="12" sm="5" md="5" lg="5" xl="5">
         <circleChart></circleChart>
@@ -93,18 +89,19 @@
         </v-row>
       </v-col>
     </v-row>
-
     <v-divider></v-divider>
+    <expan-panel></expan-panel>
   </div>
 </template>
 
 <script>
-import circleChart from "./dashboard/circleChart.vue";
 import { eventBus } from "../../main";
 export default {
   name: "Dashboard",
   components: {
-    circleChart: circleChart
+    userNav: () => import("../public/user/userNav.vue"),
+    circleChart: () => import("./dashboard/circleChart.vue"),
+    expanPanel: () => import("./dashboard/expanPanel.vue")
   },
   data: () => ({
     thisData: "",
@@ -124,7 +121,7 @@ export default {
   mounted() {
     let acount = 0;
     let bcount = 0;
-    this.thisData = JSON.parse(JSON.stringify(this.$store.state.menu)).menu;
+    this.thisData = this.$store.getters.getMenu;
     let data = this.thisData;
     this.account.projectAccount = data.length;
     data.forEach(e => {
@@ -139,21 +136,26 @@ export default {
 
 <style lang="scss" scoped>
 @mixin project {
-  background: #73C8A9;
-  background: -webkit-linear-gradient(to right, #73C8A9, #50555f);
-  background: linear-gradient(to right, #73C8A9, #50555f);
-
+  background: #005c97;
+  background: -webkit-linear-gradient(to right, #005c97, #363795);
+  background: linear-gradient(to right, #005c97, #363795);
 }
 
 @mixin team {
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7797d, #675333, #506f5a);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #ff8008;
+  background: -webkit-linear-gradient(to right, #ffc837, #ff8008);
+  background: linear-gradient(to right, #ffc837, #ff8008);
+}
 
+@mixin member {
+  background: #6a3093;
+  background: -webkit-linear-gradient(to right, #863fde, #6a3093);
+  background: linear-gradient(to right, #863fde, #6a3093);
 }
 
 div {
   margin: 0;
+  padding: 0;
 }
 p {
   color: white;
@@ -171,6 +173,11 @@ p {
 .project-box {
   @include project;
 }
+
+.team-box {
+  @include member;
+}
+
 .member-box {
   @include team;
   text-shadow: $text-shadow;

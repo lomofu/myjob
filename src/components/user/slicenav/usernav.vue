@@ -3,39 +3,46 @@
     app
     mobile-break-point="1240"
     class="user-slice"
-    permanent
     :mini-variant.sync="mini"
   >
     <v-row align="center" class="app-nav-header">
       <v-col cols xs="12" sm="12" md="12" lg="12" xl="12" align="center">
-        <v-list-item size="45" class="justify-center">
-          <img
-            class="app-img"
-            src="../../../../public/img/icon/icon-color.png"
-            height="46"
-            width="46"
-            alt="icon"
-          />
-          <p class="app-word " style="margin-left: 10px;margin-top: 10px">
+        <v-list-item class="justify-center ma-1">
+          <p class="app-word " style="margin-top: 10px">
             Ben.
           </p>
         </v-list-item>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
-    <v-row style="padding: 15px;margin-top: 20px;cursor: pointer">
+    <v-row style="padding: 15px;margin-top: 25px;cursor: pointer">
       <v-col cols xs="12" sm="12" md="12" lg="12" xl="12">
-        <v-list-item>
-          <v-list-item-avatar size="45" @click="showOpen">
-            <img class="hvr-grow-shadow" :src="user.picture" />
-          </v-list-item-avatar>
-        </v-list-item>
-        <v-list-item link two-line>
-          <v-list-item-content @click="showOpen">
-            <v-list-item-title class="title">{{ user.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item class="d-flex justify-center" v-on="on">
+              <v-list-item-avatar size="60" @click="showOpen">
+                <img class="hvr-grow-shadow" :src="user.picture" />
+              </v-list-item-avatar>
+              <v-list-item-content @click="showOpen">
+                <v-list-item-title>{{ user.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <v-card class="mx-auto pa-3" min-width="14vw" min-height="25vh">
+            <v-list-item three-line>
+              <v-list-item-content>
+                <div class="mb-4">信息概况</div>
+                <v-list-item-title class="mb-1">{{
+                  user.name
+                }}</v-list-item-title>
+                <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-avatar tile size="80" color="grey">
+                <img class="hvr-grow-shadow" :src="user.picture" />
+              </v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+        </v-tooltip>
       </v-col>
     </v-row>
     <v-list-item
@@ -66,19 +73,18 @@
               </v-list-item-title>
               <div v-else>
                 <v-list-item-title
-                  @click="$router.push({ path: '/user' + el.link })"
+                  @click="$router.push({ path: `/user${el.link}/${el.id}` })"
                 >
                   {{ el.name }}
                 </v-list-item-title>
               </div>
             </v-list-item-content>
           </template>
-
           <v-list-item
             link
             v-for="(child, j) in el.children"
             :key="j"
-            @click="$router.push({ path: '/user' + child.link })"
+            @click="$router.push({ path: `/user${child.link}/${child.id}` })"
           >
             <v-list-item-title>
               {{ child.name }}
@@ -138,7 +144,6 @@ export default {
   },
   created() {
     eventBus.$on("miniNav", message => {
-      console.log(message);
       this.mini = message;
     });
   }
@@ -158,7 +163,7 @@ a {
 
 .app-nav-header {
   &::after {
-    @include before-after(7px);
+    @include before-after(30px);
   }
 }
 .app-img {
@@ -186,7 +191,7 @@ a {
 
 .app-word {
   @include font-bold;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .p-team {

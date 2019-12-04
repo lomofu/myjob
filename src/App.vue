@@ -7,7 +7,7 @@
     <v-fab-transition>
       <v-btn
         v-show="btn"
-        color="pink"
+        color="red"
         dark
         fixed
         bottom

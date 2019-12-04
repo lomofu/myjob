@@ -47,14 +47,14 @@ const routes = [
         meta: {
           title: "团队成员"
         },
-        path: "employees",
+        path: "employees/:tid",
         component: () => import("../components/user/Employees.vue")
       },
       {
         meta: {
           title: "项目工程"
         },
-        path: "projects",
+        path: "projects/:pid",
         component: () => import("../components/user/Project.vue")
       }
     ]

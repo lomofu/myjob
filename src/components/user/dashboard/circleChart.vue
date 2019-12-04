@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-btn @click="changeType" text style="color: #1e73a8">切换图表类型</v-btn>
+    <v-subheader class="d-flex justify-end">
+      <v-btn @click="changeType" text color="#1e73a8"
+        >切换图表类型</v-btn
+      ></v-subheader
+    >
     <ve-chart :data="transferData" :settings="chartSettings"></ve-chart>
   </div>
 </template>
@@ -30,7 +34,7 @@ export default {
   computed: {
     transferData() {
       let charData = this.chartData;
-      let data = JSON.parse(JSON.stringify(this.$store.state.menu)).menu;
+      let data = this.$store.getters.getMenu;
       data.forEach(item => {
         charData.rows.push({
           团队: item.name,
@@ -40,9 +44,6 @@ export default {
 
       return charData;
     }
-  },
-  mounted() {
-    this.thisData = JSON.parse(JSON.stringify(this.$store.state.menu)).menu;
   }
 };
 </script>

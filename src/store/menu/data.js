@@ -1,11 +1,11 @@
 const data = [
   {
-    id: 1,
+    id: "t1",
     name: "ShangHai",
     link: null,
     children: [
       {
-        id: 2,
+        id: "p1",
         name: "项目",
         children: [
           { id: 3, name: "SSO", link: "/projects" },
@@ -13,7 +13,7 @@ const data = [
         ]
       },
       {
-        id: 5,
+        id: "t1",
         name: "团队成员",
         link: "/employees",
         member: ["1", "2", "3"]

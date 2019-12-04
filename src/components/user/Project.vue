@@ -1,10 +1,17 @@
-<template><div>
-    33333333
-</div> </template>
+<template>
+  <div>
+    <user-nav title="项目"></user-nav>
+    <calender> </calender>
+  </div>
+</template>
 
 <script>
 export default {
-  name: "Project"
+  name: "Project",
+  components: {
+    userNav: () => import("../public/user/userNav.vue"),
+    calender: () => import("./project/calendar.vue")
+  }
 };
 </script>
 

@@ -11,6 +11,7 @@
     "babel-polyfill": "^6.26.0",
     "common-schedule": "0.0.2",
     "core-js": "^3.3.2",
+    "dayjs": "^1.8.17",
     "echarts": "^4.5.0",
     "hover.css": "^2.3.2",
     "v-charts": "^1.19.0",

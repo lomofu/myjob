@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <user-nav :user="user" :menu="menu" ></user-nav>
+    <user-nav :user="user" :menu="menu"></user-nav>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -21,7 +21,7 @@ export default {
     user: {
       name: "MyName",
       picture: "https://cdn.vuetifyjs.com/images/john.jpg",
-      email:"xxx@email.com",
+      email: "xxx@email.com",
       isAdmin: true
     },
     menu: [
@@ -74,5 +74,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/user/user.scss";
+@include div;
+
+.user {
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+}
 </style>

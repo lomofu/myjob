@@ -59,7 +59,7 @@
 </template>
 <script>
 export default {
-  props:["type"],
+  props: ["type"],
   data: () => ({
     today: null,
     focus: null,

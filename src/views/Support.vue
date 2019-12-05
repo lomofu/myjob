@@ -102,11 +102,11 @@
                 <p>
                   <v-icon size="50" :color="item.color">{{ item.icon }}</v-icon>
                 </p>
-                <br />
-                <p>{{ item.supp }}</p>
+                <p class="ma-2">{{ item.supp }}</p>
                 <p>
                   <v-icon :color="item.color2">{{ item.icon2 }}</v-icon>
                 </p>
+                <br />
                 <br />
               </template>
             </v-col>
@@ -209,7 +209,7 @@ export default {
           supp: "Safari 10 +"
         },
         {
-          icon: " mdi-internet-explorer",
+          icon: " mdi-edge-legacy",
           color: "blue",
 
           icon2: "mdi-check-circle",

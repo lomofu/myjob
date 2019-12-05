@@ -3,6 +3,7 @@
     <v-app-bar-nav-icon @click="resizeNav"></v-app-bar-nav-icon>
     <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
+    <slot></slot>
   </v-app-bar>
 </template>
 

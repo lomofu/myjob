@@ -2,8 +2,16 @@
   <div>
     <div class="text-center d-flex justify-lg-space-between pa-3 ma-3">
       <v-subheader class="pr-title"> 项目详情</v-subheader>
-      <v-btn @click="all" text color="blue" v-show="showOpen">全部展开</v-btn>
-      <v-btn @click="none" text color="blue" v-show="!showOpen">全部关闭</v-btn>
+      <div  class="text-center pa-3" >
+        <v-btn @click="all" text color="blue" v-show="showOpen">全部展开</v-btn>
+        <v-btn
+          @click="none"
+          text
+          color="blue"
+          v-show="!showOpen || panel.length > 0"
+          >全部关闭</v-btn
+        >
+      </div>
     </div>
     <v-expansion-panels class="pa-6" v-model="panel" multiple popout focusable>
       <v-expansion-panel v-for="(item, i) in data" :key="i">

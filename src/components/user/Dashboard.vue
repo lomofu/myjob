@@ -1,6 +1,6 @@
 <template>
   <div class="animated fadeIn">
-    <user-nav title="个人看板" color ="indigo" ></user-nav>
+    <user-nav title="个人看板" color="indigo"></user-nav>
     <v-row justify="space-around">
       <v-col cols="12" xs="12" sm="5" md="5" lg="5" xl="5">
         <circleChart></circleChart>
@@ -38,9 +38,7 @@
               </p>
               <p class="text">项目数</p>
               <p class="count">
-                {{
-                  account.projectAccount === null ? "0" : account.projectAccount
-                }}
+                {{ account.projectAccount === null ? 0 : account.projectAccount }}
               </p>
             </v-card>
           </v-col>
@@ -59,7 +57,7 @@
               </p>
               <p class="text">团队数</p>
               <p class="count">
-                {{ account.teamsAccount === null ? "0" : account.teamsAccount }}
+                {{ account.teamsAccount === null ? 0 : account.teamsAccount }}
               </p>
             </v-card>
           </v-col>
@@ -80,9 +78,7 @@
               </p>
               <p class="text">成员数</p>
               <p class="count">
-                {{
-                  account.memberAccount === null ? "0" : account.memberAccount
-                }}
+                {{ account.memberAccount === null ? 0 : account.memberAccount }}
               </p>
             </v-card>
           </v-col>

@@ -43,15 +43,16 @@ export default {
       me.btn = scrollTop > 100;
     }
   },
-  created() {
+  mounted() {
     let me = this;
-    setTimeout(function() {
+    window.addEventListener("scroll", this.handleScroll);
+    this.timer = setTimeout(function() {
       me.show = !me.show;
       me.content = !me.content;
     }, 800);
   },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
+  beforeDestroy() {
+    clearTimeout(this.timer);
   }
 };
 </script>

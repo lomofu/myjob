@@ -49,7 +49,6 @@ export default {
           项目数: item.children[0].children.length
         });
       });
-
       return charData;
     }
   }

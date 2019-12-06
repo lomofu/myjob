@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="project">
-    <user-nav :title="getTitle">
+    <user-nav :title="title">
       <v-btn outlined class="mr-4" @click="setToday">
         <v-icon small>mdi-white-balance-sunny</v-icon>
         <span class="ml-1">今天</span>
@@ -71,8 +71,8 @@
         </v-card>
       </v-dialog>
     </user-nav>
-    <div class="d-flex justify-space-between">
-      <v-btn class="mt-2" @click="handleBack" text>
+    <div class="d-flex justify-space-between mt-3">
+      <v-btn class="mt-2 ml-1" @click="handleBack" text color="purple">
         <v-icon>mdi-chevron-left</v-icon>返回
       </v-btn>
       <v-btn-toggle
@@ -110,10 +110,18 @@
 </template>
 
 <script>
+import { eventBus } from "../../../main";
 export default {
   name: "Project",
+  components: {
+    userNav: () => import("../../public/user/userNav.vue"),
+    calender: () => import("../project/calendar.vue"),
+    schedule: () => import("../project/schedule.vue"),
+    pushBar: () => import("../project/pushBar.vue")
+  },
   data: () => ({
     projectInfo: null,
+    title: "",
     type: "month",
     typeToLabel: {
       month: "月份",
@@ -141,58 +149,53 @@ export default {
     handleUpdateType(data) {
       this.type = data;
     },
-    handlePush() {
-      if (this.selected.length < 0) {
-        return false;
-      } else {
+    timer() {
+      return new Promise((resolve, reject) => {
         setTimeout(() => {
-          this.dialog = true;
-          this.push = true;
-          this.$refs.pushBar.show.info = true;
-          this.selected.forEach(e => {
-            switch (e) {
-              case "email": {
-                setTimeout(() => {
-                  this.$refs.pushBar.show.success = true;
-                  this.push = false;
-                }, 3000);
-                break;
-              }
-              case "message": {
-                setTimeout(() => {
-                  this.$refs.pushBar.show.error = true;
-                  this.push = false;
-                }, 3000);
-                break;
-              }
-            }
-          });
-          this.dialog = !this.dialog;
-        }, 200);
+          let res = this.selected.filter(e => e === "email" || e === "message");
+          res.length > 0 && resolve(res);
+          res.length <= 0 && reject();
+        });
+      });
+    },
+    async handlePush() {
+      this.dialog = true;
+      this.push = true;
+      try {
+        let res = await this.timer();
+        this.$refs.pushBar.show.info = true;
+        let timer = setTimeout(() => {
+          if (res.length === 1 && res.filter(e => e === "email").length > 0) {
+            this.$refs.pushBar.show.success = true;
+          } else if (
+            res.length === 1 &&
+            res.filter(e => e === "message").length > 0
+          ) {
+            this.$refs.pushBar.show.error = true;
+          } else {
+            this.$refs.pushBar.show.success = true;
+          }
+          this.push = false;
+        }, 3000);
+      } catch (e) {
+        this.push = false;
+        this.dialog = false;
+        return false;
+      } finally {
+        this.dialog = !this.dialog;
       }
     },
     handleBack() {
       this.$emit("fuc");
     }
   },
-  components: {
-    userNav: () => import("../../public/user/userNav.vue"),
-    calender: () => import("../project/calendar.vue"),
-    schedule: () => import("../project/schedule.vue"),
-    pushBar: () => import("../project/pushBar.vue")
-  },
-  computed: {
-    getTitle() {
-      let projectId = this.projectInfo.name;
-      return `项目 | ${projectId}`;
-    }
-  },
   created() {
-    let { pid } = this.$route.params;
-    let project = this.$store.getters.getProject;
-    if (project !== null) {
-      this.projectInfo = project.find(e => e.id == pid);
-    }
+    eventBus.$on("getProjectTitle", message => {
+      this.title = `项目 | ${message}`;
+    });
+  },
+  beforeDestroy() {
+    eventBus.$off("getProjectTitle");
   }
 };
 </script>

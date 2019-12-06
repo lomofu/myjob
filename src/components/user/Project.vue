@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mr-5">
     <projectIndex v-if="showSchedule" @fuc="handleFuc"></projectIndex>
     <projectScheule v-if="!showSchedule" @fuc="handleFuc"></projectScheule>
   </div>

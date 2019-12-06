@@ -18,15 +18,7 @@
         class="pa-3"
       >
         <v-row>
-          <v-col
-            cols="12"
-            xs="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-            align="center"
-          >
+          <v-col class="col-12" align="center">
             <v-card
               class="ma-2 pa-3 project-box"
               min-height="8vh"
@@ -38,19 +30,13 @@
               </p>
               <p class="text">项目数</p>
               <p class="count">
-                {{ account.projectAccount === null ? 0 : account.projectAccount }}
+                {{
+                  account.projectAccount === null ? 0 : account.projectAccount
+                }}
               </p>
             </v-card>
           </v-col>
-          <v-col
-            cols="12"
-            xs="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-            align="center"
-          >
+          <v-col class="col-12" align="center">
             <v-card class="ma-2 pa-3 team-box" min-height="8vh" width="25vw">
               <p>
                 <v-icon size="45" color="white">mdi-graph</v-icon>
@@ -61,20 +47,12 @@
               </p>
             </v-card>
           </v-col>
-          <v-col
-            cols="12"
-            xs="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-            align="center"
-          >
+          <v-col class="col-12" align="center">
             <v-card class="ma-2 pa-3 member-box" min-height="8vh" width="25vw">
               <p>
-                <v-icon size="45" color="white"
-                  >mdi-account-group-outline</v-icon
-                >
+                <v-icon size="45" color="white">
+                  mdi-account-group-outline
+                </v-icon>
               </p>
               <p class="text">成员数</p>
               <p class="count">
@@ -118,14 +96,19 @@ export default {
     let acount = 0;
     let bcount = 0;
     this.thisData = this.$store.getters.getMenu;
+
     let data = this.thisData;
     this.account.projectAccount = data.length;
-    data.forEach(e => {
-      acount += e.children.length;
-      bcount += e.children[1].member.length;
-    });
+    data.length > 0 &&
+      data.forEach(e => {
+        acount += e.children.length;
+        bcount += e.children[1].member.length;
+      });
     this.account.teamsAccount = acount;
     this.account.memberAccount = bcount;
+  },
+  beforeDestroy() {
+    eventBus.$off("miniNav");
   }
 };
 </script>

@@ -32,7 +32,7 @@
   </v-navigation-drawer>
 </template>
 <script>
-  import { eventBus } from "../../../main";
+import { eventBus } from "../../../main";
 export default {
   name: "userinfo",
   props: ["user"],
@@ -48,6 +48,9 @@ export default {
     eventBus.$on("openUserInfo", message => {
       this.drawer = message;
     });
+  },
+  beforeDestroy() {
+    eventBus.$off("openUserInfo");
   }
 };
 </script>

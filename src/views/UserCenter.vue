@@ -21,6 +21,11 @@ export default {
     user: {},
     menu: []
   }),
+  computed: {
+    key() {
+      return this.$route.path + Math.random();
+    }
+  },
   mounted() {
     this.menu = this.$store.getters.getMenu;
     this.user = this.$store.getters.getUser;
@@ -35,5 +40,8 @@ export default {
   min-width: 100vw;
   min-height: 100vh;
   height: 100%;
+}
+.container {
+  padding: 1px;
 }
 </style>

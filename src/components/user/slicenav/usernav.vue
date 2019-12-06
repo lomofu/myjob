@@ -146,6 +146,9 @@ export default {
     eventBus.$on("miniNav", message => {
       this.mini = message;
     });
+  },
+  beforeDestroy() {
+    eventBus.$off("miniNav");
   }
 };
 </script>

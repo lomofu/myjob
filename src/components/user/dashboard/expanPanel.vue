@@ -2,7 +2,7 @@
   <div>
     <div class="text-center d-flex justify-lg-space-between pa-3 ma-3">
       <v-subheader class="pr-title"> 项目详情</v-subheader>
-      <div  class="text-center pa-3" >
+      <div class="text-center pa-3">
         <v-btn @click="all" text color="blue" v-show="showOpen">全部展开</v-btn>
         <v-btn
           @click="none"
@@ -56,11 +56,11 @@ export default {
   methods: {
     all() {
       this.panel = [...Array(this.items).keys()].map((k, i) => i);
-      this.showOpen = !this.showOpen;
+      if (this.showOpen) this.showOpen = !this.showOpen;
     },
     none() {
       this.panel = [];
-      this.showOpen = !this.showOpen;
+      if (!this.showOpen) this.showOpen = !this.showOpen;
     }
   },
   mounted() {

@@ -5,10 +5,10 @@
       <div class="price-box text-center">
         <v-row class="price-content">
           <v-col>
-            <p class="price-title animated fadeInDown">计划和价格</p>
+            <p class="price-title animated fadeInDown">{{ config.title }}</p>
             <v-row class="animated fadeInUp" justify="center">
               <div
-                v-for="(item, index) in card"
+                v-for="(item, index) in config.card"
                 :key="index"
                 align="center"
                 style="padding: 20px"
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { PRICE } from "../common/view/Constant";
 export default {
   name: "Price",
   components: {
@@ -40,39 +41,10 @@ export default {
     card: () => import("../components/price/priceCard.vue")
   },
   data: () => ({
-    card: [
-      {
-        icon: {
-          colors: "green",
-          data: "mdi-cloud-check"
-        },
-        title: "免费使用",
-        price: "Free",
-        content: [
-          "创建你的项目的时间表,单账户可管理最多5个",
-          "分享时间表给Team中的成员",
-          "单个Team最多可以有10人"
-        ],
-        button: "免 费 注 册",
-        className: "d-table-cell"
-      },
-      {
-        icon: {
-          color: "black",
-          data: "mdi-star-circle"
-        },
-        title: "Plus +",
-        price: "¥ 6.66/月",
-        content: [
-          "我们目前正在开发的一些更强大的功能",
-          "不限Team的数量",
-          "单个Team上线1000人"
-        ],
-        button: "Coming Soon",
-        className: "d-table-cell",
-        isDisabled: true
-      }
-    ]
+    config: {
+      title: PRICE.VIEW.TITLE,
+      card: PRICE.VIEW.CARD
+    }
   })
 };
 </script>

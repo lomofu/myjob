@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { SIGNUP } from "../common/view/Constant";
 export default {
   name: "SignUp",
   components: {
@@ -50,14 +51,7 @@ export default {
   },
   data: () => ({
     signup: true,
-    content: {
-      subtitle: "创建你的线上账号来分享你的时间安排给你的团队",
-      word1: "已经有账号了? ",
-      btn: {
-        icon: "mdi-arrow-left",
-        word: "返 回"
-      }
-    }
+    content: SIGNUP.VIEW
   }),
   methods: {
     handleClick(data) {

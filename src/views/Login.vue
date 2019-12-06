@@ -47,7 +47,6 @@
                 <img src="../../public/img/icon/icon-color.png" alt="icon" />
                 <div class="login-ben">Ben.</div>
               </router-link>
-
             </v-col>
           </v-row>
           <p class="text-center login-content-subtitle ">
@@ -73,19 +72,14 @@
 </template>
 
 <script>
+import { LOGIN } from "../common/view/Constant";
 export default {
   name: "login",
   components: {
     panel: () => import("../components/login/loginPanel.vue")
   },
   data: () => ({
-    content: {
-      btn: {
-        icon: "mdi-arrow-left",
-        word: "返 回"
-      },
-      subtitle: " 花费很少的时间分享日程安排"
-    }
+    content: LOGIN.VIEW
   })
 };
 </script>

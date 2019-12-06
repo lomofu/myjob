@@ -9,14 +9,14 @@
               :autoInsertCss="true"
               :backSpeed="20"
               :startDelay="300"
-              :strings="typecontent"
+              :strings="config.typecontent"
               :typeSpeed="40"
               @onComplete="handleComplete"
               class="typing-title"
             >
               <h1>
                 <v-icon color="white" size="55px" style="margin-right: 14px"
-                  >{{ icon }}
+                  >{{ config.icon }}
                 </v-icon>
                 <span class="typing"></span>
               </h1>
@@ -33,14 +33,14 @@
                       @input="$v.email.$touch()"
                       clear-icon="mdi-close"
                       clearable
-                      :height="btn.height"
-                      :placeholder="btn.placeholder"
-                      :prepend-inner-icon="btn.icon"
+                      :height="config.btn.height"
+                      :placeholder="config.btn.placeholder"
+                      :prepend-inner-icon="config.btn.icon"
                       required
                       solo
                       transition="scroll-y-reverse-transition"
                       v-model="email"
-                      v-show="showInput"
+                      v-show="config.showInput"
                     ></v-text-field>
                   </transition>
                 </v-col>
@@ -54,8 +54,8 @@
                   class="home-btn-word"
                   dark
                   height="50"
-                  v-show="showInput"
-                  >{{ btn.word }}
+                  v-show="config.showInput"
+                  >{{ config.btn.word }}
                 </v-btn>
               </v-col>
             </v-row>
@@ -80,10 +80,10 @@
               xs="12"
             >
               <p class="text-center home-row-title">
-                {{ content.p1[0] }}
+                {{ config.content.p1[0] }}
               </p>
               <p class="home-row-content">
-                {{ content.p1[1] }}
+                {{ config.content.p1[1] }}
               </p>
             </v-col>
             <v-col
@@ -121,10 +121,10 @@
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xs="12">
                 <p class="text-center home-row-title">
-                  {{ content.p2[0] }}
+                  {{ config.content.p2[0] }}
                 </p>
                 <p class="home-row-content">
-                  {{ content.p2[1] }}
+                  {{ config.content.p2[1] }}
                 </p>
               </v-col>
             </v-row>
@@ -140,9 +140,9 @@
             <v-row>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
                 <p class="text-center home-row-title">
-                  {{ content.p3[0] }}
+                  {{ config.content.p3[0] }}
                 </p>
-                <p class="home-row-content">{{ content.p3[1] }}</p>
+                <p class="home-row-content">{{ config.content.p3[1] }}</p>
               </v-col>
               <v-col
                 class="text-right"
@@ -183,9 +183,9 @@
               </v-col>
               <v-col cols="12" lg="6" md="6" sm="12" xl="6" xs="12">
                 <p class="text-center home-row-title">
-                  {{ content.p4[0] }}
+                  {{ config.content.p4[0] }}
                 </p>
-                <p class="home-row-content">{{ content.p4[1] }}</p>
+                <p class="home-row-content">{{ config.content.p4[1] }}</p>
                 <p class="text-center home-row-content-content3">
                   <img src="../../public/img/home/chrome.png" alt="web" />
                   &nbsp;
@@ -209,6 +209,7 @@
 import { validationMixin } from "vuelidate";
 import { email, required } from "vuelidate/lib/validators";
 import { WOW } from "wowjs";
+import { HOME } from "../common/view/Constant";
 
 export default {
   name: "home",
@@ -223,36 +224,19 @@ export default {
     email: { required, email }
   },
   data: () => ({
-    typecontent: ["欢迎来到 Ben  ", "花费很少的时间分享日程安排  "],
-    btn: {
-      icon: "mdi-at",
-      word: "免 费 注 册",
-      height: "70",
-      placeholder: "请输入你的邮箱"
+    config: {
+      typecontent: HOME.VIEW.TYPECONTENT,
+      btn: HOME.VIEW.BTN,
+      content: HOME.VIEW.CONTENT,
+      show: true,
+      showInput: false,
+      icon: "mdi-check-all"
     },
-    content: {
-      p1: [
-        "什么是Ben?",
-        "Ben 是个Sass多租户的项目管理平台, 你只需要快速注册自己的管理员账号就可以轻松安排Team人员之间的任务排班流程"
-      ],
-      p2: [
-        "为什么选择Ben?",
-        "Ben 可以在你发布任务,排班的同时一键精确推送给员工,这样极大的提升了工作安排效率"
-      ],
-      p3: [
-        "怎么使用？",
-        " Ben 的易用性会让这一切变得十分容易，只需要轻轻点击鼠标就可以实现项目管理和人员调度"
-      ],
-      p4: ["多平台支持", "Ben 支持多设备使用,我们目前支持包括浏览器,安卓手机"]
-    },
-    show: true,
-    showInput: false,
-    email: "",
-    icon: "mdi-check-all"
+    email: ""
   }),
   methods: {
     handleComplete() {
-      this.showInput = true;
+      this.config.showInput = true;
     },
     handleSubmit() {
       debugger;
@@ -267,8 +251,8 @@ export default {
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("请输入合法的邮箱地址!");
-      !this.$v.email.required && errors.push("邮箱地址不能为空!");
+      !this.$v.email.email && errors.push(HOME.TIPS.EMAIL_ILLEGAL);
+      !this.$v.email.required && errors.push(HOME.TIPS.EMAIL_IS_EMPTY);
       return errors;
     }
   },

@@ -4,7 +4,10 @@ const user = {
     ? JSON.parse(sessionStorage.getItem("userState"))
     : {
         user: {
-          username: ""
+          name: "MyName",
+          picture: "https://cdn.vuetifyjs.com/images/john.jpg",
+          email: "xxx@email.com",
+          isAdmin: true
         }
       },
   getters: {

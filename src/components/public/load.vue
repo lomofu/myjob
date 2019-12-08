@@ -22,7 +22,7 @@ export default {
   data: () => ({
     showColor: "amber"
   }),
-  mounted() {
+  created() {
     let me = this;
     let count = 0;
     setInterval(function() {

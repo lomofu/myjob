@@ -153,7 +153,7 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           let res = this.selected.filter(e => e === "email" || e === "message");
-          res.length > 0 && resolve(res);
+          res.length && resolve(res);
           res.length <= 0 && reject();
         });
       });
@@ -161,15 +161,16 @@ export default {
     async handlePush() {
       this.dialog = true;
       this.push = true;
+      let time;
       try {
         let res = await this.timer();
         this.$refs.pushBar.show.info = true;
-        let timer = setTimeout(() => {
+        time = setTimeout(() => {
           if (res.length === 1 && res.filter(e => e === "email").length > 0) {
             this.$refs.pushBar.show.success = true;
           } else if (
             res.length === 1 &&
-            res.filter(e => e === "message").length > 0
+            res.filter(e => e === "message").length
           ) {
             this.$refs.pushBar.show.error = true;
           } else {
@@ -182,6 +183,7 @@ export default {
         this.dialog = false;
         return false;
       } finally {
+        clearTimeout(time);
         this.dialog = !this.dialog;
       }
     },

@@ -1,6 +1,12 @@
 <template>
   <div class="animated fadeIn">
-    <user-nav title="个人看板" color="indigo"></user-nav>
+    <user-nav title="个人看板" color="indigo">
+      <v-btn text @click="handleNotice"
+        ><v-icon>mdi-bulletin-board</v-icon></v-btn
+      >
+      <notice style="position: absolute"></notice>
+    </user-nav>
+
     <v-row justify="space-around">
       <v-col cols="12" xs="12" sm="5" md="5" lg="5" xl="5">
         <circleChart></circleChart>
@@ -64,6 +70,8 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
+    <treeMap></treeMap>
+    <br />
     <expan-panel></expan-panel>
   </div>
 </template>
@@ -75,7 +83,9 @@ export default {
   components: {
     userNav: () => import("../public/user/userNav.vue"),
     circleChart: () => import("./dashboard/circleChart.vue"),
-    expanPanel: () => import("./dashboard/expanPanel.vue")
+    treeMap: () => import("./dashboard/treeMap.vue"),
+    expanPanel: () => import("./dashboard/expanPanel.vue"),
+    notice: () => import("./dashboard/notice.vue")
   },
   data: () => ({
     thisData: "",
@@ -84,12 +94,16 @@ export default {
       projectAccount: 0,
       teamsAccount: 0,
       memberAccount: 0
-    }
+    },
+    dialog: false
   }),
   methods: {
     resizeNav() {
       this.mini = !this.mini;
       eventBus.$emit("miniNav", this.mini);
+    },
+    handleNotice() {
+      eventBus.$emit("openDialog", true);
     }
   },
   mounted() {
@@ -98,17 +112,14 @@ export default {
     this.thisData = this.$store.getters.getMenu;
 
     let data = this.thisData;
-    this.account.projectAccount = data.length;
-    data.length > 0 &&
+    this.account.teamsAccount = data.length;
+    data.length &&
       data.forEach(e => {
-        acount += e.children.length;
+        acount += e.children[0].children.length;
         bcount += e.children[1].member.length;
       });
-    this.account.teamsAccount = acount;
+    this.account.projectAccount = acount;
     this.account.memberAccount = bcount;
-  },
-  beforeDestroy() {
-    eventBus.$off("miniNav");
   }
 };
 </script>

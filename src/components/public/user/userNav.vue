@@ -27,7 +27,7 @@ export default {
   mounted() {
     let _this = this;
     this.timer = setInterval(function() {
-      _this.date = dayjs().format("YYYY年MM月DD日 HH:mm:ss");
+      _this.date = dayjs().format("YYYY年MM月DD日 ddd HH:mm:ss");
     });
   },
   beforeDestroy: function() {

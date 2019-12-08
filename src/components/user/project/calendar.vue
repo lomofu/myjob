@@ -109,6 +109,12 @@ export default {
       return d > 3 && d < 21
         ? "th"
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
+    },
+    fetchData(to) {
+      let { pid } = to.params;
+      this.$refs.calendar.checkChange();
+      let array = this.$store.getters.getEvents;
+      this.events = array.find(e => e.id == pid).data;
     }
   },
   computed: {
@@ -146,9 +152,16 @@ export default {
       });
     }
   },
+  watch: {
+    $route(to) {
+      this.fetchData(to);
+    }
+  },
   mounted() {
     this.$refs.calendar.checkChange();
-    this.events = this.$store.getters.getEvents.data;
+    let array = this.$store.getters.getEvents;
+    if (array.length > 0)
+      this.events = array.find(e => e.id == this.$route.params.pid).data;
   }
 };
 </script>
@@ -156,7 +169,7 @@ export default {
 div {
   margin: 0;
   padding: 0;
-  font-size: 24px!important;
+  font-size: 24px !important;
 }
 .v-calendar {
   background-color: #fff8a636 !important;

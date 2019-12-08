@@ -6,7 +6,7 @@
     :mini-variant.sync="mini"
   >
     <v-row align="center" class="app-nav-header">
-      <v-col cols xs="12" sm="12" md="12" lg="12" xl="12" align="center">
+      <v-col class="col-12" align="center">
         <v-list-item class="justify-center ma-1">
           <p class="app-word " style="margin-top: 10px">
             Ben.
@@ -15,7 +15,7 @@
       </v-col>
     </v-row>
     <v-row style="padding: 15px;margin-top: 25px;cursor: pointer">
-      <v-col cols xs="12" sm="12" md="12" lg="12" xl="12">
+      <v-col class="col-12">
         <v-tooltip right>
           <template v-slot:activator="{ on }">
             <v-list-item class="d-flex justify-center" v-on="on">
@@ -94,10 +94,10 @@
       </v-list-group>
     </v-list>
     <v-row class="align-self-end" style="position: absolute;bottom: 5px">
-      <v-col cols="12" sm="12" md="12" lg="12" xl="12">
+      <v-col class="col-12">
         <v-card v-show="showMenu" @mouseleave="disableMeun">
-          <v-list style="padding: 5px;">
-            <v-list-item v-for="(e, k) in setting" :key="k" @click="">
+          <v-list class="pa-5">
+            <v-list-item v-for="(e, k) in setting" :key="k" @click="e.action">
               <v-list-item-title>
                 <v-icon>{{ e.icon }} </v-icon>
                 {{ e.text }}
@@ -126,8 +126,12 @@ export default {
     userinfo: true,
     showMenu: false,
     setting: [
-      { icon: "mdi-file-document-edit", text: "修改资料" },
-      { icon: "mdi-logout", text: "退出" }
+      {
+        icon: "mdi-file-document-edit",
+        text: "修改资料",
+        action: "handleEdit"
+      },
+      { icon: "mdi-logout", text: "退出", action: "handleLogout" }
     ],
     mini: false
   }),
@@ -140,6 +144,10 @@ export default {
       setTimeout(() => {
         me.showMenu = !me.showMenu;
       }, 300);
+    },
+    handleEdit() {},
+    handleLogout() {
+      this.$route.push({ path: "/" });
     }
   },
   created() {

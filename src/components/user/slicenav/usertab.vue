@@ -11,7 +11,7 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <template> 2</template>
+        <template> </template>
       </v-tab-item>
       <v-tab-item>
         <template> 3</template>
@@ -25,6 +25,7 @@
 
 <script>
 export default {
+  props: ["user"],
   data: () => ({
     tab: null,
     items: ["个人信息", "消息中心", "时间线"]

@@ -7,8 +7,10 @@
       </v-btn>
     </user-nav>
     <v-row>
-      <v-col class="col-6"><projectChart class="pa-3"></projectChart></v-col>
-      <v-col class="col-6"><projectCard class="pa-3"></projectCard></v-col>
+      <v-col class="col-12 col-sm-6"
+        ><projectChart class="pa-3"></projectChart
+      ></v-col>
+      <v-col class="col-12 col-sm-6"><projectCard class="pa-3"></projectCard></v-col>
     </v-row>
     <v-divider></v-divider>
     <v-row>3</v-row>
@@ -32,6 +34,11 @@ export default {
       debugger;
       this.$emit("fuc");
       eventBus.$emit("getProjectTitle", this.projectInfo.name);
+    },
+    fetchData(to) {
+      let { pid } = to.params;
+      let project = this.$store.getters.getProject;
+      if (project !== null) this.projectInfo = project.find(e => e.id == pid);
     }
   },
   computed: {
@@ -40,7 +47,12 @@ export default {
       return `项目 | ${projectName}`;
     }
   },
-  created() {
+  watch: {
+    $route(to) {
+      this.fetchData(to);
+    }
+  },
+  mounted() {
     let { pid } = this.$route.params;
     let project = this.$store.getters.getProject;
     if (project !== null) this.projectInfo = project.find(e => e.id == pid);

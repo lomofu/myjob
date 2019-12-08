@@ -1,15 +1,32 @@
 <template>
-  <div>
+  <div class="project-Chart">
     <div class="d-flex justify-end">
-      <v-btn c @click="changeType" text>切换图表类型</v-btn>
+      <v-btn
+        v-if="getChart.rows.length !== 0"
+        @click="changeType"
+        color="blue"
+        text
+      >
+        切换图表类型
+      </v-btn>
+    </div>
+    <div
+      class="data-empty d-flex justify-center align-center"
+      v-if="getChart.rows.length === 0"
+    >
+      没有数据 😂
     </div>
     <ve-chart
+      v-else
       judge-width
-      :data="chartData"
+      :data="getChart"
       :settings="chartSettings"
-      height ="450px"
-    ></ve-chart>
-    <div class="d-flex justify-center"><span>任务时长 / 任务总数</span></div>
+      height="450px"
+    >
+    </ve-chart>
+    <div class="d-flex justify-center align-center title">
+      <span>任务时长 / 任务总数</span>
+    </div>
   </div>
 </template>
 
@@ -20,15 +37,8 @@ export default {
     this.index = 0;
     return {
       chartData: {
-        columns: ["任务名", "时长"],
-        rows: [
-          { 任务名: "开发", 时长: 15 },
-          { 任务名: "测试", 时长: 2 },
-          { 任务名: "运维", 时长: 8 },
-          { 任务名: "设计", 时长: 4 },
-          { 任务名: "需求", 时长: 2 },
-          { 任务名: "上线", 时长: 1 }
-        ]
+        columns: ["任务名", "小时"],
+        rows: []
       },
       chartSettings: { type: this.typeArr[this.index] }
     };
@@ -40,14 +50,59 @@ export default {
         this.index = 0;
       }
       this.chartSettings = { type: this.typeArr[this.index] };
+    },
+    fetchData(to) {
+      let { pid } = to.params;
+      let project = this.$store.getters.getProject;
+      if (project !== null) this.projectInfo = project.find(e => e.id == pid);
+    }
+  },
+  computed: {
+    getChart() {
+      let chartData = this.chartData;
+      chartData.rows = [];
+
+      let array = this.$store.getters.getEvents.find(
+        e => e.id == this.$route.params.pid
+      );
+
+      if (typeof array === "undefined") return chartData;
+      else if (array.data.length) {
+        array = array.data;
+        array.forEach(e => {
+          let start = new Date(e.start).getTime();
+          let end = new Date(e.end).getTime();
+          let ms = Math.abs(end - start);
+          ms = ms / 1000 / 60 / 60;
+          chartData.rows.push({
+            任务名: e.name,
+            小时: ms
+          });
+        });
+      }
+      return chartData;
     }
   }
 };
 </script>
 <style scoped>
+.project-Chart {
+  height: 100%;
+}
+
 span {
   font-family: PingFangBold;
   font-weight: bold;
   font-size: 20px;
+}
+.data-empty {
+  position: relative;
+  height: 90%;
+  color: #888;
+  font-size: 18px;
+}
+.title {
+  position: relative;
+  height: 10%;
 }
 </style>

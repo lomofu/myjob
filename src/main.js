@@ -9,10 +9,13 @@ import Vuex from "vuex";
 import vuetify from "./plugins/vuetify";
 import Vuelidate from "vuelidate";
 import VCharts from "v-charts";
+import VueCropper from "vue-cropper";
 
 Vue.config.productionTip = false;
 Vue.use(VCharts);
 Vue.use(Vuex);
+Vue.use(Vuelidate);
+Vue.use(VueCropper);
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -30,6 +33,5 @@ new Vue({
   router,
   store,
   vuetify,
-  Vuelidate,
   render: h => h(App)
 }).$mount("#app");

@@ -1,16 +1,18 @@
 <template>
   <div>
     <v-subheader class="d-flex justify-end">
-      <v-btn @click="changeType" text color="#1e73a8"
+      <v-btn
+        @click="changeType"
+        text
+        color="#1e73a8"
+        v-show="transferData.rows.length !== 0"
         >切换图表类型</v-btn
       ></v-subheader
     >
-    <ve-chart
-      :data="transferData"
-      :settings="chartSettings"
-      :judge-width="true"
-      :data-empty="transferData === null"
-      ><div class="data-empty" v-show="transferData === null">没有数据😂</div>
+    <ve-chart :data="transferData" :settings="chartSettings" judge-width
+      ><div class="data-empty" v-show="transferData.rows.length === 0">
+        没有数据😂
+      </div>
     </ve-chart>
   </div>
 </template>
@@ -42,6 +44,7 @@ export default {
   computed: {
     transferData() {
       let charData = this.chartData;
+      charData.rows = [];
       let data = this.$store.getters.getMenu;
       data.forEach(item => {
         charData.rows.push({

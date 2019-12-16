@@ -5,11 +5,15 @@
     temporary
     right
     min-width="30vw"
-    width="40vw"
+    :width="width"
     mobile-break-point="1260"
   >
-    <p style="position:absolute;right: 5px;top:5px">
-      <v-icon size="30" class="hvr-grow">mdi-logout</v-icon>
+    <p style="position:absolute;left: 5px;top:5px">
+      <v-btn icon>
+        <v-icon size="30" class="hvr-grow" @click="clickSize">{{
+          width == "40vw" ? "mdi-chevron-left" : "mdi-chevron-right"
+        }}</v-icon>
+      </v-btn>
     </p>
     <div class="userinfo-box d-flex align-center justify-center">
       <div>
@@ -35,6 +39,7 @@
         <v-dialog v-model="dialog2" max-width="500px">
           <v-card class="pa-8">
             <vueCrapper :preSave="imageSave" v-if="preSave"></vueCrapper>
+            <br />
             <v-file-input
               class="mt-3"
               :rules="rules"
@@ -45,12 +50,10 @@
               @change="reviewFile"
               show-size
               small-chips
+              ref="imgPicture"
             />
             <v-card-actions class="mt-3">
-              <v-btn color="info" text @click="dialog2 = false">
-                上传头像
-              </v-btn>
-              <v-btn color="red" text @click="dialog2 = false">
+              <v-btn color="red" text @click="handleCloseDialog">
                 关闭窗口
               </v-btn>
             </v-card-actions>
@@ -77,11 +80,13 @@ export default {
   props: ["user"],
   components: {
     userTabs: () => import("./usertab.vue"),
-    vueCrapper: () => import("../../public/picture/vueCrapper.vue")
+    vueCrapper: () => import("../../public/picture/vueCropper.vue")
   },
   data() {
     return {
       drawer: null,
+      width: "40vw",
+      showSize: true,
       dialog2: false,
       rules: [value => !value || value.size < 2000000 || "头像大小需要小于2MB"],
       file: null,
@@ -90,6 +95,9 @@ export default {
     };
   },
   methods: {
+    clickSize() {
+      this.width == "40vw" ? (this.width = "80vw") : (this.width = "40vw");
+    },
     handleEditPicture() {
       this.dialog2 = true;
     },
@@ -105,8 +113,14 @@ export default {
           this.imageSave = res.result;
         };
       } else {
-        return false;
+        this.preSave = null;
+        this.imageSave = null;
       }
+    },
+    handleCloseDialog() {
+      this.dialog2 = false;
+      this.preSave = null;
+      this.imageSave = null;
     }
   },
   created() {
@@ -126,7 +140,8 @@ export default {
   &-box {
     @include color;
     height: 30vh;
-    width: 40vw;
+    min-width: 40vw;
+    max-width: 80vw;
     display: flex;
   }
 

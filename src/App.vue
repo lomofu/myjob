@@ -27,6 +27,11 @@ export default {
   components: {
     load: () => import("@/components/public/load.vue")
   },
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
   data: () => ({
     show: true,
     content: false,
@@ -41,6 +46,12 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
       me.btn = scrollTop > 100;
+    },
+    reload() {
+      this.content = false;
+      this.$nextTick(function() {
+        this.content = true;
+      });
     }
   },
   mounted() {

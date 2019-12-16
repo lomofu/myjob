@@ -70,7 +70,17 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <treeMap></treeMap>
+    <v-subheader
+      class="pa-3 ma-5"
+      style="font-weight: bold;font-size: 20px;font-family: PingFangBold"
+      >项目结构</v-subheader
+    >
+    <v-row>
+      <v-col class="col-12 d-flex justify-center">
+        <treeMap class="treeMap"></treeMap>
+      </v-col>
+    </v-row>
+
     <br />
     <expan-panel></expan-panel>
   </div>
@@ -171,5 +181,9 @@ p {
 .member-box {
   @include team;
   text-shadow: $text-shadow;
+}
+
+.treeMap {
+  width: 90%;
 }
 </style>

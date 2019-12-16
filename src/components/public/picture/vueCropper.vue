@@ -1,5 +1,9 @@
 <template>
   <div class="animated fadeInDown pa-3 ma-3">
+    <p class="text-center" style="font-size: smaller;color: grey">
+      *头像大小100x100
+    </p>
+    <br />
     <div class="d-flex justify-center mb-5">
       <div class="show-preview">
         <div :style="previews.div" class="preview">
@@ -9,17 +13,17 @@
     </div>
     <div style="width:100%;height:250px">
       <vueCropper
-        autoCrop
-        info
-        canScale
-        autoCropWidth="100"
-        autoCropHeight="100"
-        :fixedNumber="[1, 1]"
-        :outputSize="1"
-        fixedBox
         :img="preSave"
+        :autoCrop="options.autoCrop"
+        :info="options.info"
+        :canScale="options.canScale"
+        :autoCropWidth="options.autoCropWidth"
+        :autoCropHeight="options.autoCropHeight"
+        :fixedNumber="options.fixedNumber"
+        :outputSize="options.outputSize"
+        :fixedBox="options.fixedBox"
+        :centerBox="options.centerBox"
         ref="cropper"
-        centerBox
         @realTime="realTime"
       />
     </div>
@@ -32,15 +36,16 @@
       >
     </p>
     <p class="d-flex justify-space-around">
-      <v-btn class="mt-3" @click="getCropData" text color="info">确定</v-btn>
-      <v-btn
-        class="mt-3"
-        @click="$refs.cropper.startCrop()"
-        text
-        color="warning"
-        >修改</v-btn
+      <v-btn class="mt-3" @click="getCropData" text color="info"
+        >上传头像</v-btn
       >
     </p>
+    <v-snackbar color="green" v-model="snackbar" absolute top>
+      上传成功
+    </v-snackbar>
+    <v-snackbar color="red" v-model="snackbar" absolute top>
+      上传失败
+    </v-snackbar>
   </div>
 </template>
 <script>
@@ -50,14 +55,30 @@ export default {
   components: {
     VueCropper
   },
+  inject: ["reload"],
   data: () => ({
-    previews: {}
+    previews: {},
+    options: {
+      autoCrop: true,
+      info: true,
+      autoCropWidth: 100,
+      autoCropHeight: 100,
+      canScale: true,
+      fixedNumber: [1, 1],
+      outputSize: 0.8,
+      fixedBox: true,
+      centerBox: true
+    },
+    snackbar: false
   }),
   methods: {
     getCropData() {
-      this.$refs.cropper.clearCrop();
       this.$refs.cropper.getCropData(data => {
         console.log(data);
+        this.snackbar = true;
+        setTimeout(() => {
+          this.reload();
+        }, 2000);
       });
     },
     realTime(data) {

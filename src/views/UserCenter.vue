@@ -19,7 +19,8 @@ export default {
   },
   data: () => ({
     user: {},
-    menu: []
+    menu: [],
+    isRouterAlive: true
   }),
   computed: {
     key() {

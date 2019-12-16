@@ -1,11 +1,5 @@
 <template>
   <div>
-    <v-subheader
-      class="pa-3 ma-5"
-      style="font-weight: bold;font-size: 20px;font-family: PingFangBold"
-    >
-      项目结构</v-subheader
-    >
     <ve-tree
       :data="transferData"
       :settings="chartSettings"

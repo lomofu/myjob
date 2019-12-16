@@ -10,10 +10,12 @@
       <v-col class="col-12 col-sm-6"
         ><projectChart class="pa-3"></projectChart
       ></v-col>
-      <v-col class="col-12 col-sm-6"><projectCard class="pa-3"></projectCard></v-col>
+      <v-col class="col-12 col-sm-6"
+        ><projectCard class="pa-3"></projectCard
+      ></v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row>3</v-row>
+    <v-row>333333333333</v-row>
   </div>
 </template>
 
@@ -31,7 +33,6 @@ export default {
   }),
   methods: {
     handleClick() {
-      debugger;
       this.$emit("fuc");
       eventBus.$emit("getProjectTitle", this.projectInfo.name);
     },

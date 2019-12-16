@@ -1,30 +1,70 @@
 <template>
   <div class="animated fadeIn">
-    1111
-    <v-container>
-      <v-toolbar flat color="white" class="d-flex justify-center mb-3">
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
-      </v-toolbar>
-      <v-row>
-        <v-col class="col-12">
-          <v-sheet height="80">
-            <v-calendar
-              elevation="10"
-              ref="calendar"
-              v-model="focus"
-              color="primary"
-              type="week"
-              @change="updateRange"
-            ></v-calendar>
-          </v-sheet>
-        </v-col>
-      </v-row>
-      <v-row class="d-flex justify-space-around">
-        <v-card style="min-width:7vw;height: 150px;" v-for="i in 7" :key="i">
-          2222222222
-        </v-card>
-      </v-row>
-    </v-container>
+    <v-toolbar flat color="white" class="d-flex justify-center mb-3">
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
+    </v-toolbar>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-col class="col-10">
+        <v-calendar
+          ref="calendar"
+          v-model="focus"
+          type="week"
+          @change="updateRange"
+          v-show="false"
+        ></v-calendar>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-col class="col-11 d-flex justify-end mr-3">
+        <table class="">
+          <th>
+            <span :class="0 === index ? 'today' : null">
+              Sun {{ this.GetDateStr(startDate, 0) }}
+            </span>
+          </th>
+          <th>
+            <span :class="1 === index ? 'today' : null">
+              Mon {{ this.GetDateStr(startDate, 1) }}
+            </span>
+          </th>
+          <th>
+            <span :class="2 === index ? 'today' : null">
+              Tue {{ this.GetDateStr(startDate, 2) }}
+            </span>
+          </th>
+          <th>
+            <span :class="3 === index ? 'today' : null">
+              Wed {{ this.GetDateStr(startDate, 3) }}
+            </span>
+          </th>
+          <th>
+            <span :class="4 === index ? 'today' : null">
+              Thu {{ this.GetDateStr(startDate, 4) }}
+            </span>
+          </th>
+          <th>
+            <span :class="5 === index ? 'today' : null">
+              Fri {{ this.GetDateStr(startDate, 5) }}
+            </span>
+          </th>
+          <th>
+            <span :class="6 === index ? 'today' : null">
+              Sat {{ this.GetDateStr(startDate, 6) }}
+            </span>
+          </th>
+          <tr>
+            <td v-for="i in 7" :key="i">
+              <v-card>
+                start:<br />
+                end:
+              </v-card>
+            </td>
+          </tr>
+        </table>
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
@@ -34,7 +74,8 @@ export default {
     today: null,
     start: null,
     end: null,
-    focus: null
+    focus: null,
+    index: null
   }),
   computed: {
     title() {
@@ -52,18 +93,28 @@ export default {
 
       const startDay = start.day + this.nth(start.day);
       const endDay = end.day + this.nth(end.day);
-
       return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+    },
+    startDate() {
+      const { start, end } = this;
+      if (!start || !end) {
+        return "";
+      }
+      const startYear = start.year;
+      const startMonth = this.start.month;
+      const startDay = start.day;
+      return `${startYear}-${startMonth}-${startDay}`;
     },
     monthFormatter() {
       return this.$refs.calendar.getFormatter({
         timeZone: "UTC",
-        month: "long"
+        month: "short"
       });
     }
   },
   methods: {
     setToday() {
+      debugger;
       this.focus = this.today;
     },
     prev() {
@@ -81,7 +132,18 @@ export default {
       return d > 3 && d < 21
         ? "th"
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
+    },
+    GetDateStr(start, AddDayCount) {
+      const dd = new Date(start);
+      dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期
+      const m =
+        dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1; //获取当前月份的日期，不足10补0
+      const d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate(); //获取当前几号，不足10补0
+      return `${m}/${d}`;
     }
+  },
+  created() {
+    this.index = new Date().getDay();
   }
 };
 </script>
@@ -102,5 +164,24 @@ div {
   border-right: white !important;
   border-bottom: white !important;
   color: white;
+}
+td {
+  text-align: center;
+  padding: 10px;
+  background: #6a3093;
+  width: 20vw;
+  height: 8vw;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 10px 50px;
+}
+
+.today {
+  background: #005c97;
+  color: white;
+  border-radius: 100px;
+  padding: 10px;
 }
 </style>

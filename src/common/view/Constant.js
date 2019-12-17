@@ -41,7 +41,7 @@ export const PRICE = {
         title: "免费使用",
         price: "Free",
         content: [
-          "创建你的项目的时间表,单账户可管理最多5个",
+          "创建你的项目的时间表,单账户可管理最多5个Team",
           "分享时间表给Team中的成员",
           "单个Team最多可以有10人"
         ],
@@ -58,7 +58,7 @@ export const PRICE = {
         content: [
           "我们目前正在开发的一些更强大的功能",
           "不限Team的数量",
-          "单个Team上线1000人"
+          "单个Team上限1000人"
         ],
         button: "Coming Soon",
         className: "d-table-cell",

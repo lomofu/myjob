@@ -30,8 +30,8 @@ const data = [
         name: "项目",
         children: [
           { id: 8, name: "SSO", link: "/projects" },
-          { id: 9, name: "Docker", link: "/projects" },
-          { id: 9, name: "Docker", link: "/projects" }
+          { id: 9, name: "Docker1", link: "/projects" },
+          { id: 9, name: "Docker2", link: "/projects" }
         ]
       },
       {

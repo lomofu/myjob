@@ -12,6 +12,7 @@
     "common-schedule": "0.0.2",
     "core-js": "^3.3.2",
     "dayjs": "^1.8.17",
+    "dragula": "^3.7.2",
     "echarts": "^4.5.0",
     "hover.css": "^2.3.2",
     "v-charts": "^1.19.0",

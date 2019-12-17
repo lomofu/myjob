@@ -66,7 +66,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red" text @click.stop="dialog = !dialog">取消</v-btn>
-            <v-btn color="green" text @click.stop="handlePush">确定</v-btn>
+            <v-btn color="green" text @click="handlePush">确定</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -155,35 +155,34 @@ export default {
           let res = this.selected.filter(e => e === "email" || e === "message");
           res.length && resolve(res);
           res.length <= 0 && reject();
-        });
+        }, 1000);
       });
     },
     async handlePush() {
       this.dialog = true;
       this.push = true;
-      let time;
       try {
         let res = await this.timer();
         this.$refs.pushBar.show.info = true;
-        time = setTimeout(() => {
-          if (res.length === 1 && res.filter(e => e === "email").length > 0) {
+        if (res.length === 1 && res.filter(e => e === "email").length > 0) {
+          window.console.log("1");
+          setTimeout(() => {
             this.$refs.pushBar.show.success = true;
-          } else if (
-            res.length === 1 &&
-            res.filter(e => e === "message").length
-          ) {
-            this.$refs.pushBar.show.error = true;
-          } else {
-            this.$refs.pushBar.show.success = true;
-          }
-          this.push = false;
-        }, 3000);
+          });
+        } else if (
+          res.length === 1 &&
+          res.filter(e => e === "message").length
+        ) {
+          this.$refs.pushBar.show.error = true;
+        } else {
+          this.$refs.pushBar.show.success = true;
+        }
+        this.push = false;
       } catch (e) {
         this.push = false;
         this.dialog = false;
         return false;
       } finally {
-        clearTimeout(time);
         this.dialog = !this.dialog;
       }
     },

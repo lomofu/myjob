@@ -36,7 +36,7 @@
       >
     </p>
     <p class="d-flex justify-space-around">
-      <v-btn class="mt-3" @click="getCropData" text color="info"
+      <v-btn class="mt-3" @click="getCropData" color="info" :loading="loading"
         >上传头像</v-btn
       >
     </p>
@@ -69,12 +69,14 @@ export default {
       fixedBox: true,
       centerBox: true
     },
+    loading: false,
     snackbar: false
   }),
   methods: {
     getCropData() {
       this.$refs.cropper.getCropData(data => {
         console.log(data);
+        this.loading = !this.loading;
         this.snackbar = true;
         setTimeout(() => {
           this.reload();

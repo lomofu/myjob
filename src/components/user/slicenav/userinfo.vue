@@ -1,7 +1,7 @@
 <template xmlns:v-slot="">
   <v-navigation-drawer
     v-model="drawer"
-    absolute
+    fixed
     temporary
     right
     min-width="30vw"

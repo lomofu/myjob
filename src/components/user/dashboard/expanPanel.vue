@@ -18,7 +18,7 @@
         <v-expansion-panel-header>
           <v-icon class="ma-1" color="blue">mdi-view-dashboard-outline </v-icon>
           <div style="font-size: 17px;font-weight: bold">
-            {{ i + 1 }} : {{ item.name }}
+            {{ i + 1 }} : {{ item.team }} | {{ item.name }}
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>

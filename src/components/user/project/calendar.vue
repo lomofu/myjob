@@ -3,7 +3,7 @@
     <v-toolbar flat color="white">
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-toolbar>
-    <v-sheet height="580" class="pa-3 mr-3">
+    <v-sheet height="580" class="pa-3 mr-2">
       <v-calendar
         elevation="10"
         class="mr-5"

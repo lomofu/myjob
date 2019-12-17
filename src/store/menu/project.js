@@ -15,6 +15,7 @@ const project = [
     link: "/projects",
     description: "docker容器化学习",
     member: ["1", "2", "3"],
+    team: "ShangHai",
     picture: "https://cdn.vuetifyjs.com/images/cards/foster.jpg",
     createdTime: "2019-11-02"
   },

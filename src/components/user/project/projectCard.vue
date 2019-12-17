@@ -19,9 +19,13 @@
       </v-card-text>
       <v-card-text class="d-flex flex-column  justify-start">
         <v-list-item> 团队: {{ projectInfo.team }} </v-list-item>
-        <v-list-item>
+        <v-list-item
+          v-if="
+            projectInfo.member !== undefined && projectInfo.member.length !== 0
+          "
+        >
           总人数:
-          {{ projectInfo.member.length === 0 ? 0 : projectInfo.member.length }}
+          {{ totalMember }}
         </v-list-item>
         <v-list-item> 创建时间: {{ projectInfo.createdTime }} </v-list-item>
       </v-card-text>
@@ -48,6 +52,10 @@ export default {
         this.projectInfo.picture !== "" &&
         this.projectInfo.picture !== undefined
       );
+    },
+    totalMember() {
+      let amount = this.projectInfo.member.length;
+      return amount === 0 ? 0 : amount;
     }
   },
   watch: {

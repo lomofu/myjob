@@ -16,53 +16,24 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-spacer></v-spacer>
-      <v-col class="col-11 d-flex justify-end mr-3">
-        <table class="">
-          <th>
-            <span :class="0 === index ? 'today' : null">
-              Sun {{ this.GetDateStr(startDate, 0) }}
-            </span>
-          </th>
-          <th>
-            <span :class="1 === index ? 'today' : null">
-              Mon {{ this.GetDateStr(startDate, 1) }}
-            </span>
-          </th>
-          <th>
-            <span :class="2 === index ? 'today' : null">
-              Tue {{ this.GetDateStr(startDate, 2) }}
-            </span>
-          </th>
-          <th>
-            <span :class="3 === index ? 'today' : null">
-              Wed {{ this.GetDateStr(startDate, 3) }}
-            </span>
-          </th>
-          <th>
-            <span :class="4 === index ? 'today' : null">
-              Thu {{ this.GetDateStr(startDate, 4) }}
-            </span>
-          </th>
-          <th>
-            <span :class="5 === index ? 'today' : null">
-              Fri {{ this.GetDateStr(startDate, 5) }}
-            </span>
-          </th>
-          <th>
-            <span :class="6 === index ? 'today' : null">
-              Sat {{ this.GetDateStr(startDate, 6) }}
-            </span>
-          </th>
+      <v-col class="col-2 d-flex justify-start">
+        <table>
+          <th style="color: white">.</th>
           <tr>
-            <td v-for="i in 7" :key="i">
-              <v-card>
-                start:<br />
-                end:
-              </v-card>
+            <td>
+              <div class="d-flex justify-center align-center">
+                <v-avatar>
+                  <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg" />
+                </v-avatar>
+                <p class="ml-2">Jason Oner</p>
+              </div>
+              <p class="ml-5 mt-6">总计: {{ totalTime }}</p>
             </td>
           </tr>
         </table>
+      </v-col>
+      <v-col class="col-10 d-flex justify-end">
+        <calable :startDate="startDate"> </calable>
       </v-col>
     </v-row>
   </div>
@@ -70,12 +41,14 @@
 <script>
 export default {
   props: ["type"],
+  components: {
+    calable: () => import("./schedule/claTable.vue")
+  },
   data: () => ({
     today: null,
     start: null,
     end: null,
-    focus: null,
-    index: null
+    focus: null
   }),
   computed: {
     title() {
@@ -110,6 +83,9 @@ export default {
         timeZone: "UTC",
         month: "short"
       });
+    },
+    totalTime() {
+      return "0";
     }
   },
   methods: {
@@ -132,56 +108,24 @@ export default {
       return d > 3 && d < 21
         ? "th"
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
-    },
-    GetDateStr(start, AddDayCount) {
-      const dd = new Date(start);
-      dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期
-      const m =
-        dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1; //获取当前月份的日期，不足10补0
-      const d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate(); //获取当前几号，不足10补0
-      return `${m}/${d}`;
     }
-  },
-  created() {
-    this.index = new Date().getDay();
   }
 };
 </script>
-<style>
+
+<style scoped>
 div {
   margin: 0;
   padding: 0;
 }
-.v-calendar-daily__head {
-  margin-right: 45px !important;
-}
-.v-calendar-daily__intervals-head {
-  border-right: white !important;
-}
-.v-past,
-.v-present,
-.v-future {
-  border-right: white !important;
-  border-bottom: white !important;
-  color: white;
-}
-td {
-  text-align: center;
-  padding: 10px;
-  background: #6a3093;
-  width: 20vw;
-  height: 8vw;
-}
-
 table {
   border-collapse: separate;
-  border-spacing: 10px 50px;
+  border-spacing: 0 50px;
 }
-
-.today {
-  background: #005c97;
-  color: white;
-  border-radius: 100px;
+td {
+  width: 10vw;
+  height: 8vw;
   padding: 10px;
+  overflow: hidden;
 }
 </style>

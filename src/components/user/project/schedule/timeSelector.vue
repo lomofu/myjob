@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-menu
       v-model="menu"
@@ -26,6 +26,7 @@
 export default {
   name: "timeSelector",
   data: () => ({
+    menu: null,
     time: null
   })
 };

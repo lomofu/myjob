@@ -37,11 +37,11 @@
         </span>
       </th>
       <tr v-for="i in 2" :key="i">
-        <td v-for="i in 7" :key="i">
+        <td v-for="(i, index) in 7" :key="i">
           <v-card height="100%" width="100%" class="text-left" v-if="hasEvent">
             <div class="ml-3 mt-3">
               <p style="color: gray">start:</p>
-              <p>{{ GetDateStr(startDate, i-1) }}</p>
+              <p>{{ GetDateStr(startDate, index) }}</p>
             </div>
             <div class="ml-3 mt-2">
               <p style="color: gray">end:</p>
@@ -57,7 +57,7 @@
             class="text-left d-flex justify-center align-center"
             v-else
             v-ripple
-            @click="dialog = !dialog"
+            @click="handleAddEvent(index)"
             style="cursor: pointer"
           >
             <v-icon size="80">
@@ -74,9 +74,17 @@
           <span style="font-size: 25px;font-weight: bold">添加事件</span>
         </v-card-title>
         <form class="pa-5">
-          <v-text-field label="事件名称"></v-text-field>
           <div class="d-flex justify-space-around">
-            <calendarSelector></calendarSelector>
+            <v-text-field
+              clearable
+              clear-icon="mdi-close"
+              label="事件名称"
+            ></v-text-field>
+          </div>
+          <div class="d-flex justify-space-around">
+            <calendarSelector
+              :cardDate="GetDateStr(startDate, index, true)"
+            ></calendarSelector>
             <timeSelector></timeSelector>
           </div>
         </form>
@@ -85,10 +93,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false"
-            >Close</v-btn
-          >
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false">关闭</v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false">保存</v-btn>
         </v-card-actions>
       </v-card>
       111111111111
@@ -106,19 +112,24 @@ export default {
   },
   data: () => ({
     today: new Date(),
-    hasEvent: true,
+    hasEvent: false,
     dialog: false,
+    index: null,
     form: {
       picker: new Date().toISOString().substr(0, 10)
     }
   }),
   methods: {
-    GetDateStr(start, AddDayCount) {
-      const dd = new Date(start);
+    GetDateStr(AddDayCount, index) {
+      debugger
+      const start = this.$store.getters.getStart;
+      const dd = new Date(start.date)
       dd.setDate(dd.getDate() + AddDayCount);
+      const y = dd.getFullYear();
       const m =
         dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
       const d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+      if (index) return `${y}-${m}-${d}`;
       return `${m}/${d}`;
     },
     isToday(index) {
@@ -127,23 +138,26 @@ export default {
         this.GetDateStr(this.startDate, index)
       );
     },
-    handleAddEvent() {}
+    handleAddEvent(index) {
+      if (this.index) this.index = null;
+      this.dialog = !this.dialog;
+      this.index = index;
+    }
   }
 };
 </script>
-
 <style scoped>
 table {
   border-collapse: separate;
-  border-spacing: 15px 50px;
+  border-spacing: 18px 50px;
 }
 
 td {
   text-align: center;
-  min-width: 10vw;
-  min-height: 8vw;
+  min-width: 9vw;
+  min-height: 18vh;
   width: 10vw;
-  height: 8vw;
+  height: 18vh;
 }
 .todays {
   background: #2196f3;

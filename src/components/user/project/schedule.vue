@@ -90,7 +90,6 @@ export default {
   },
   methods: {
     setToday() {
-      debugger;
       this.focus = this.today;
     },
     prev() {
@@ -100,9 +99,12 @@ export default {
       this.$refs.calendar.next();
     },
     updateRange({ start, end }) {
+      debugger
       // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
       this.start = start;
       this.end = end;
+      this.$store.dispatch("ayncUpdateStart", start);
+      this.$store.dispatch("ayncUpdateEnd", end);
     },
     nth(d) {
       return d > 3 && d < 21
@@ -124,8 +126,8 @@ table {
 }
 td {
   width: 10vw;
-  height: 8vw;
+  height: 10vh;
   padding: 10px;
-  overflow: hidden;
+  min-height: 10vh;
 }
 </style>

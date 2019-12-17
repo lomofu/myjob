@@ -15,7 +15,10 @@
       ></v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row>333333333333</v-row>
+    <br />
+    <stack :datas="pages"></stack>
+    <br />
+    <br />
   </div>
 </template>
 
@@ -26,10 +29,21 @@ export default {
   components: {
     userNav: () => import("../../public/user/userNav.vue"),
     projectChart: () => import("./projectChart.vue"),
-    projectCard: () => import("./projectCard.vue")
+    projectCard: () => import("./projectCard.vue"),
+    stack: () => import("../../public/user/stack.vue")
   },
   data: () => ({
-    projectInfo: ""
+    projectInfo: "",
+    pages: [
+      {
+        html:
+          '<img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png" alt="01">'
+      },
+      {
+        html:
+          '<img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png" alt="01">'
+      }
+    ]
   }),
   methods: {
     handleClick() {

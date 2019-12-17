@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-menu
       v-model="menu"
@@ -10,8 +10,16 @@
     >
       <template v-slot:activator="{ on }">
         <v-text-field
+          label="开始日期"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-on="on"
+          disabled
+          :value="start"
+        ></v-text-field>
+        <v-text-field
           v-model="date"
-          label="请选择开始日期"
+          label="结束日期"
           prepend-icon="mdi-calendar"
           readonly
           v-on="on"
@@ -23,10 +31,18 @@
 </template>
 <script>
 export default {
+  props: ["cardDate"],
   data: () => ({
+    start: null,
     date: new Date().toISOString().substr(0, 10),
     menu: false
-  })
+  }),
+  mounted() {
+    this.start = this.cardDate;
+  }
 };
 </script>
 <style scoped></style>
+
+
+

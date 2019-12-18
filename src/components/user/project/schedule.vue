@@ -33,7 +33,7 @@
         </table>
       </v-col>
       <v-col class="col-10 d-flex justify-end">
-        <calable :startDate="startDate"> </calable>
+        <calable :startDate="startDate"></calable>
       </v-col>
     </v-row>
   </div>

@@ -13,7 +13,6 @@
           label="开始日期"
           prepend-icon="mdi-calendar"
           readonly
-          v-on="on"
           disabled
           :value="start"
         ></v-text-field>
@@ -28,12 +27,13 @@
       <v-date-picker
         v-model="end"
         @input="menu = false"
-        :min="end"
+        :min="start"
       ></v-date-picker>
     </v-menu>
   </div>
 </template>
 <script>
+import { eventBus } from "../../../../main";
 export default {
   props: ["index"],
   data: () => ({
@@ -57,11 +57,25 @@ export default {
     index() {
       this.start = this.GetDateStr();
       this.end = this.start;
+    },
+    end() {
+      let end = new Date(this.end);
+      let start = new Date(this.start);
+      if (end.getTime() - start.getTime() > 0) {
+        eventBus.$emit("limit", false);
+      } else {
+        eventBus.$emit("limit", true);
+      }
+      eventBus.$emit("dateHasChange");
     }
   },
   mounted() {
     this.start = this.GetDateStr();
     this.end = this.start;
+  },
+  beforeDestroy() {
+    eventBus.$off("limit");
+    eventBus.$off("limit");
   }
 };
 </script>

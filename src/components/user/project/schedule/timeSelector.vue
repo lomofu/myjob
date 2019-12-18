@@ -16,30 +16,87 @@
           v-on="on"
         ></v-text-field>
         <v-text-field
-          v-model="time"
+          v-model="end"
           label="请选择结束时间"
           prepend-icon="mdi-clock-outline"
           scrollable
           v-on="on"
         ></v-text-field>
       </template>
-      <v-time-picker
-        v-model="time"
-        @input="menu = false"
-        scrollable
-      ></v-time-picker>
+      <v-card class="pa-3 d-flex justify-space-around">
+        <div>
+          <p>开始:</p>
+          <v-time-picker
+            v-model="start"
+            @input="menu = true"
+            format="24hr"
+            scrollable
+            :max="max"
+            clear-icon="mdi-close"
+            clearable
+          ></v-time-picker>
+        </div>
+        <div>
+          <p>结束:</p>
+          <v-time-picker
+            class="ml-10"
+            v-model="end"
+            @input="menu = true"
+            format="24hr"
+            :min="min"
+            scrollable
+            clear-icon="mdi-close"
+            clearable
+          ></v-time-picker>
+        </div>
+      </v-card>
     </v-menu>
   </div>
 </template>
 
 <script>
+import { eventBus } from "../../../../main";
 export default {
   name: "timeSelector",
   data: () => ({
     menu: null,
     start: null,
-    time: null
-  })
+    end: null,
+    min: null,
+    max: null,
+    limit: true
+  }),
+  created() {
+    eventBus.$on("limit", message => {
+      if (message) {
+        this.min = this.start;
+        this.max = this.end;
+      } else {
+        this.min = null;
+        this.max = null;
+        this.limit = false;
+      }
+    });
+    eventBus.$on("dateHasChange", () => {
+      this.start = null;
+      this.end = null;
+    });
+  },
+  watch: {
+    start() {
+      this.end = this.start;
+      if (this.limit) {
+        this.min = this.start;
+        this.max = this.end;
+      }
+    },
+    end() {
+      if (this.limit) {
+        this.min = this.start;
+        this.max = this.end;
+      }
+    }
+  }
 };
 </script>
 

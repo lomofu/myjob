@@ -68,42 +68,95 @@
       </tr>
     </table>
 
-    <v-dialog v-model="dialog" max-width="600px">
-      <v-card>
-        <v-card-title>
-          <span style="font-size: 25px;font-weight: bold">添加事件</span>
-        </v-card-title>
-        <form class="pa-5">
-          <div class="d-flex justify-space-around">
-            <v-text-field
+    <v-dialog
+      v-model="dialog"
+      max-width="700px"
+      class="d-flex justify-space-around"
+      color="white"
+    >
+      <v-row style="background: white;">
+        <v-col class="col-10">
+          <v-card-title>
+            <span style="font-size: 25px;font-weight: bold">添加事件</span>
+          </v-card-title>
+          <v-card-text>
+            <small class="red--text">* 表示必填</small>
+          </v-card-text>
+          <v-form class="pa-3" max-width="25vw" ref="event">
+            <div class="d-flex justify-space-around">
+              <v-text-field
+                clearable
+                clear-icon="mdi-close"
+                label="* 事件名称"
+                outlined
+                required
+                :error-messages="nameErrors"
+                v-model="event.name"
+                @input="$v.event.name.$touch()"
+                @blur="$v.event.name.$touch()"
+              ></v-text-field>
+            </div>
+            <div class="d-flex justify-space-around">
+              <calendarSelector :index="clickindex"></calendarSelector>
+              <timeSelector></timeSelector>
+            </div>
+            <v-divider class="mt-8 mb-5"></v-divider>
+            <v-label color="grey">颜色</v-label>
+            <v-color-picker
+              class="mt-1"
+              v-model="event.color"
+              hide-canvas
+              hide-inputs
+              hide-mode-switch
+              mode="rgba"
+              dot-size="1"
+            ></v-color-picker>
+            <br />
+            <v-textarea
+              label="请输入你对此事件的描述"
+              auto-grow
+              outlined
+              counter="100"
               clearable
-              clear-icon="mdi-close"
-              label="事件名称"
-            ></v-text-field>
-          </div>
-          <div class="d-flex justify-space-around">
-            <calendarSelector :index="clickindex"></calendarSelector>
-            <timeSelector></timeSelector>
-          </div>
-        </form>
-        <v-card-text>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
+              required
+              :error-messages="detailsErrors"
+              clearable-icon="mdi-close"
+              v-model="event.details"
+              @input="$v.event.details.$touch()"
+              @blur="$v.event.details.$touch()"
+            ></v-textarea>
+          </v-form>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false"
+              >关闭</v-btn
+            >
+            <v-btn color="red darken-1" text @click="reset">复原</v-btn>
+
+            <v-btn color="blue darken-1" text @click="handleSubmitEvent"
+              >保存</v-btn
+            >
+          </v-card-actions>
+        </v-col>
+        <v-col class="col-2 ">
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">关闭</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">保存</v-btn>
-        </v-card-actions>
-      </v-card>
-      111111111111
+        </v-col>
+      </v-row>
     </v-dialog>
   </div>
 </template>
 
 <script>
+import { required, maxLength } from "vuelidate/lib/validators";
 export default {
   name: "claTable",
   props: ["startDate"],
+  validations: {
+    event: {
+      name: { required, maxLength: maxLength(50) },
+      details: { maxLength: maxLength(100) }
+    }
+  },
   components: {
     calendarSelector: () => import("./calenderSelector.vue"),
     timeSelector: () => import("./timeSelector.vue")
@@ -113,8 +166,12 @@ export default {
     hasEvent: false,
     dialog: false,
     clickindex: null,
-    form: {
-      picker: new Date().toISOString().substr(0, 10)
+    event: {
+      name: null,
+      details: null,
+      start: null,
+      end: null,
+      color: null
     }
   }),
   methods: {
@@ -146,11 +203,49 @@ export default {
       if (this.clickindex) this.clickindex = null;
       this.dialog = !this.dialog;
       this.clickindex = index;
+    },
+    handleSubmitEvent() {
+      this.$v.event.$touch();
+      debugger;
+      if (
+        !this.$v.event.name.maxLength ||
+        !this.$v.event.details.maxLength ||
+        !this.$v.event.name.required
+      ) {
+        return false;
+      } else {
+        this.$refs.event.reset();
+        this.$v.$reset();
+        this.dialog = false;
+      }
+    },
+    reset() {
+      this.$refs.event.reset();
+      this.$v.$reset();
+    }
+  },
+  computed: {
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.event.name.$dirty) return errors;
+      !this.$v.event.name.maxLength && errors.push("事件名字不能超过50字");
+      !this.$v.event.name.required && errors.push("事件名字不能为空");
+      return errors;
+    },
+    detailsErrors() {
+      const errors = [];
+      if (!this.$v.event.details.$dirty) return errors;
+      !this.$v.event.details.maxLength &&
+        errors.push("事件描述最多只能含有100字");
+      return errors;
     }
   }
 };
 </script>
 <style scoped>
+div {
+  margin: 0;
+}
 table {
   border-collapse: separate;
   border-spacing: 18px 50px;
@@ -168,5 +263,14 @@ td {
   color: white;
   border-radius: 100px;
   padding: 10px;
+}
+.v-color-picker {
+  -webkit-box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.col-2 {
+  background: #a1ffce;
+  background: -webkit-linear-gradient(to right, #faffd1, #a1ffce);
+  background: linear-gradient(to right, #faffd1, #a1ffce);
 }
 </style>

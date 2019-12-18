@@ -154,36 +154,41 @@ export default {
         setTimeout(() => {
           let res = this.selected.filter(e => e === "email" || e === "message");
           res.length && resolve(res);
-          res.length <= 0 && reject();
+          res.length <= 0 && reject(res);
         }, 1000);
       });
     },
     async handlePush() {
-      this.dialog = true;
-      this.push = true;
+      this.dialog = false;
       try {
         let res = await this.timer();
         this.$refs.pushBar.show.info = true;
         if (res.length === 1 && res.filter(e => e === "email").length > 0) {
-          window.console.log("1");
+          this.push = true;
           setTimeout(() => {
             this.$refs.pushBar.show.success = true;
-          });
+          }, 3000);
         } else if (
           res.length === 1 &&
           res.filter(e => e === "message").length
         ) {
-          this.$refs.pushBar.show.error = true;
+          this.dialog = false;
+          this.push = true;
+          setTimeout(() => {
+            this.$refs.pushBar.show.error = true;
+          }, 3000);
         } else {
-          this.$refs.pushBar.show.success = true;
+          this.dialog = false;
+          this.push = true;
+          setTimeout(() => {
+            this.$refs.pushBar.show.success = true;
+          }, 3000);
         }
         this.push = false;
       } catch (e) {
         this.push = false;
-        this.dialog = false;
+        this.dialog = true;
         return false;
-      } finally {
-        this.dialog = !this.dialog;
       }
     },
     handleBack() {

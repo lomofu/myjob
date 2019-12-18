@@ -43,6 +43,12 @@ export default {
   perspective: 1200px;
   perspective-origin: 50% -60% !important;
   -webkit-perspective: 1000px;
-  -webkit-perspective-origin: 50% -60% !important;
+  -webkit-perspective-origin: 140% -30% !important;
+}
+.stack-item {
+  border-radius: 4px;
+}
+li {
+  box-shadow: #00000063 7px 0px 15px 5px;
 }
 </style>

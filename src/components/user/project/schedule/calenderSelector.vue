@@ -18,31 +18,51 @@
           :value="start"
         ></v-text-field>
         <v-text-field
-          v-model="date"
+          :how-current="new Date()"
+          v-model="end"
           label="结束日期"
           prepend-icon="mdi-calendar"
-          readonly
           v-on="on"
         ></v-text-field>
       </template>
-      <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+      <v-date-picker
+        v-model="end"
+        @input="menu = false"
+        :min="end"
+      ></v-date-picker>
     </v-menu>
   </div>
 </template>
 <script>
 export default {
-  props: ["cardDate"],
+  props: ["index"],
   data: () => ({
     start: null,
-    date: new Date().toISOString().substr(0, 10),
+    end: null,
     menu: false
   }),
+  methods: {
+    GetDateStr() {
+      const start = this.$store.getters.getStart;
+      const dd = new Date(start.date);
+      dd.setDate(dd.getDate() + this.index);
+      const y = dd.getFullYear();
+      const m =
+        dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+      const d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+      return `${y}-${m}-${d}`;
+    }
+  },
+  watch: {
+    index() {
+      this.start = this.GetDateStr();
+      this.end = this.start;
+    }
+  },
   mounted() {
-    this.start = this.cardDate;
+    this.start = this.GetDateStr();
+    this.end = this.start;
   }
 };
 </script>
 <style scoped></style>
-
-
-

@@ -16,7 +16,12 @@
     </v-row>
     <v-divider></v-divider>
     <br />
-    <stack :datas="pages"></stack>
+    <div
+      class="d-flex justify-center"
+      style="position: absolute;z-index: 1;width: 85vw"
+    >
+      <stack :datas="pages"></stack>
+    </div>
     <br />
     <br />
   </div>
@@ -40,8 +45,10 @@ export default {
           '<img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png" alt="01">'
       },
       {
-        html:
-          '<img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png" alt="01">'
+        html: '<img src="https://picsum.photos/id/11/500/300" alt="01">'
+      },
+      {
+        html: '<img src="https://picsum.photos/510/300?random" alt="01">'
       }
     ]
   }),

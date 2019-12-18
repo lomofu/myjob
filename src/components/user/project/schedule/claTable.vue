@@ -3,37 +3,37 @@
     <table>
       <th>
         <span :class="isToday(0) ? 'todays' : null">
-          Sun {{ GetDateStr(startDate, 0) }}
+          Sun {{ GetDateStr(0) }}
         </span>
       </th>
       <th>
         <span :class="isToday(1) ? 'todays' : null">
-          Mon {{ GetDateStr(startDate, 1) }}
+          Mon {{ GetDateStr(1) }}
         </span>
       </th>
       <th>
         <span :class="isToday(2) ? 'todays' : null">
-          Tue {{ GetDateStr(startDate, 2) }}
+          Tue {{ GetDateStr(2) }}
         </span>
       </th>
       <th>
         <span :class="isToday(3) ? 'todays' : null">
-          Wed {{ GetDateStr(startDate, 3) }}
+          Wed {{ GetDateStr(3) }}
         </span>
       </th>
       <th>
         <span :class="isToday(4) ? 'todays' : null">
-          Thu {{ GetDateStr(startDate, 4) }}
+          Thu {{ GetDateStr(4) }}
         </span>
       </th>
       <th>
         <span :class="isToday(5) ? 'todays' : null">
-          Fri {{ GetDateStr(startDate, 5) }}
+          Fri {{ GetDateStr(5) }}
         </span>
       </th>
       <th>
         <span :class="isToday(6) ? 'todays' : null">
-          Sat {{ GetDateStr(startDate, 6) }}
+          Sat {{ GetDateStr(6) }}
         </span>
       </th>
       <tr v-for="i in 2" :key="i">
@@ -41,7 +41,7 @@
           <v-card height="100%" width="100%" class="text-left" v-if="hasEvent">
             <div class="ml-3 mt-3">
               <p style="color: gray">start:</p>
-              <p>{{ GetDateStr(startDate, index) }}</p>
+              <p>{{ GetDateStr(index, index) }}</p>
             </div>
             <div class="ml-3 mt-2">
               <p style="color: gray">end:</p>
@@ -82,9 +82,7 @@
             ></v-text-field>
           </div>
           <div class="d-flex justify-space-around">
-            <calendarSelector
-              :cardDate="GetDateStr(startDate, index, true)"
-            ></calendarSelector>
+            <calendarSelector :index="clickindex"></calendarSelector>
             <timeSelector></timeSelector>
           </div>
         </form>
@@ -114,16 +112,22 @@ export default {
     today: new Date(),
     hasEvent: false,
     dialog: false,
-    index: null,
+    clickindex: null,
     form: {
       picker: new Date().toISOString().substr(0, 10)
     }
   }),
   methods: {
-    GetDateStr(AddDayCount, index) {
-      debugger
-      const start = this.$store.getters.getStart;
-      const dd = new Date(start.date)
+    GetDateStr(AddDayCount, index, startDate) {
+      let start;
+      let dd;
+      if (startDate) {
+        start = startDate;
+        dd = new Date(start);
+      } else {
+        start = this.$store.getters.getStart;
+        dd = new Date(start.date);
+      }
       dd.setDate(dd.getDate() + AddDayCount);
       const y = dd.getFullYear();
       const m =
@@ -134,14 +138,14 @@ export default {
     },
     isToday(index) {
       return (
-        this.GetDateStr(this.today, 0) ===
-        this.GetDateStr(this.startDate, index)
+        this.GetDateStr(0, false, this.today) ===
+        this.GetDateStr(index, false, this.startDate)
       );
     },
     handleAddEvent(index) {
-      if (this.index) this.index = null;
+      if (this.clickindex) this.clickindex = null;
       this.dialog = !this.dialog;
-      this.index = index;
+      this.clickindex = index;
     }
   }
 };

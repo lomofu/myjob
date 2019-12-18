@@ -10,14 +10,24 @@
     >
       <template v-slot:activator="{ on }">
         <v-text-field
-          v-model="time"
-          label="请选择时间"
+          v-model="start"
+          label="请选择开始时间"
           prepend-icon="mdi-clock-outline"
-          readonly
+          v-on="on"
+        ></v-text-field>
+        <v-text-field
+          v-model="time"
+          label="请选择结束时间"
+          prepend-icon="mdi-clock-outline"
+          scrollable
           v-on="on"
         ></v-text-field>
       </template>
-      <v-time-picker v-model="time" @input="menu = false"></v-time-picker>
+      <v-time-picker
+        v-model="time"
+        @input="menu = false"
+        scrollable
+      ></v-time-picker>
     </v-menu>
   </div>
 </template>
@@ -27,6 +37,7 @@ export default {
   name: "timeSelector",
   data: () => ({
     menu: null,
+    start: null,
     time: null
   })
 };

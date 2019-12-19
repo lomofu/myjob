@@ -73,6 +73,7 @@
       max-width="700px"
       class="d-flex justify-space-around"
       color="white"
+      persistent
     >
       <v-row style="background: white;">
         <v-col class="col-10">
@@ -97,8 +98,11 @@
               ></v-text-field>
             </div>
             <div class="d-flex justify-space-around">
-              <calendarSelector :index="clickindex"></calendarSelector>
-              <timeSelector></timeSelector>
+              <calendarSelector
+                :index="clickindex"
+                ref="calendarselec"
+              ></calendarSelector>
+              <timeSelector ref="timeselec"></timeSelector>
             </div>
             <v-divider class="mt-8 mb-5"></v-divider>
             <v-label color="grey">颜色</v-label>
@@ -128,7 +132,13 @@
           </v-form>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false"
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="
+                dialog = false;
+                reset;
+              "
               >关闭</v-btn
             >
             <v-btn color="red darken-1" text @click="reset">复原</v-btn>
@@ -205,8 +215,11 @@ export default {
       this.clickindex = index;
     },
     handleSubmitEvent() {
+      this.$refs.calendarselec.end;
+      this.$refs.calendarselec.start;
+      this.$refs.timeselec.start;
+      this.$refs.timeselec.end;
       this.$v.event.$touch();
-      debugger;
       if (
         !this.$v.event.name.maxLength ||
         !this.$v.event.details.maxLength ||
@@ -214,14 +227,19 @@ export default {
       ) {
         return false;
       } else {
-        this.$refs.event.reset();
-        this.$v.$reset();
+        this.reset();
         this.dialog = false;
       }
     },
     reset() {
-      this.$refs.event.reset();
       this.$v.$reset();
+      this.$refs.calendarselec.end = this.$refs.calendarselec.start;
+      this.$refs.timeselec.start = null;
+      this.$refs.timeselec.end = null;
+      this.event.name = null;
+      this.event.details = null;
+      this.event.end = null;
+      this.event.color = null;
     }
   },
   computed: {

@@ -59,14 +59,16 @@ export default {
       this.end = this.start;
     },
     end() {
-      let end = new Date(this.end);
-      let start = new Date(this.start);
+      let endString = this.end;
+      let startString = this.start;
+      let end = new Date(endString);
+      let start = new Date(startString);
       if (end.getTime() - start.getTime() > 0) {
         eventBus.$emit("limit", false);
       } else {
         eventBus.$emit("limit", true);
       }
-      eventBus.$emit("dateHasChange");
+      eventBus.$emit("dateHasChange", startString, endString);
     }
   },
   mounted() {

@@ -96,7 +96,7 @@ export const SUPPORT = {
     ],
     content3: [
       "联系我们",
-      "如果有特殊疑问,请发送邮件到example@example.com邮箱,我们会尽快与您取得联系"
+      "如果有特殊疑问,请发送邮件到ben_k8s@163.com邮箱,我们会尽快与您取得联系"
     ],
     supp_list: [
       {

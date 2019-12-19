@@ -11,13 +11,13 @@
       <template v-slot:activator="{ on }">
         <v-text-field
           v-model="start"
-          label="请选择开始时间"
+          :label="start === null ? '请选择结束时间' : '*请选择结束时间'"
           prepend-icon="mdi-clock-outline"
           v-on="on"
         ></v-text-field>
         <v-text-field
           v-model="end"
-          label="请选择结束时间"
+          :label="start === null ? '请选择结束时间' : '*请选择结束时间'"
           prepend-icon="mdi-clock-outline"
           scrollable
           v-on="on"
@@ -34,6 +34,7 @@
             :max="max"
             clear-icon="mdi-close"
             clearable
+            color="green"
           ></v-time-picker>
         </div>
         <div>
@@ -69,22 +70,26 @@ export default {
   created() {
     eventBus.$on("limit", message => {
       if (message) {
-        this.min = this.start;
-        this.max = this.end;
+        this.limit = true;
       } else {
-        this.min = null;
-        this.max = null;
+        this.min = undefined;
+        this.max = undefined;
         this.limit = false;
       }
     });
-    eventBus.$on("dateHasChange", () => {
-      this.start = null;
+    eventBus.$on("dateHasChange", (start, end) => {
+      debugger;
+      let endTime = end + " " + this.end;
+      let startTime = start + " " + this.start;
+      if (new Date(endTime).getTime() - new Date(startTime).getTime() > 0) {
+        return;
+      }
       this.end = null;
     });
   },
   watch: {
     start() {
-      this.end = this.start;
+      this.end = null;
       if (this.limit) {
         this.min = this.start;
         this.max = this.end;

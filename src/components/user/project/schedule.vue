@@ -99,7 +99,6 @@ export default {
       this.$refs.calendar.next();
     },
     updateRange({ start, end }) {
-      debugger
       // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
       this.start = start;
       this.end = end;

@@ -11,13 +11,13 @@
       <template v-slot:activator="{ on }">
         <v-text-field
           v-model="start"
-          :label="start === null ? '请选择结束时间' : '*请选择结束时间'"
+          :label="start === null ? '请选择结束时间' : '* 请选择结束时间'"
           prepend-icon="mdi-clock-outline"
           v-on="on"
         ></v-text-field>
         <v-text-field
           v-model="end"
-          :label="start === null ? '请选择结束时间' : '*请选择结束时间'"
+          :label="start === null ? '请选择结束时间' : '* 请选择结束时间'"
           prepend-icon="mdi-clock-outline"
           scrollable
           v-on="on"
@@ -85,14 +85,16 @@ export default {
         this.limit = false;
       }
     });
-    eventBus.$on("dateHasChange", (start, end) => {
+    eventBus.$on("dateHasChange", (start, end, isNeedValidate) => {
       debugger;
-      let endTime = end + " " + this.end;
-      let startTime = start + " " + this.start;
-      if (new Date(endTime).getTime() - new Date(startTime).getTime() > 0) {
-        return;
+      if (isNeedValidate) {
+        let endTime = end + " " + this.end;
+        let startTime = start + " " + this.start;
+        if (new Date(endTime).getTime() - new Date(startTime).getTime() > 0) {
+          return;
+        }
+        this.end = null;
       }
-      this.end = null;
     });
   },
   watch: {

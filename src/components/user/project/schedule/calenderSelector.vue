@@ -35,7 +35,7 @@
 <script>
 import { eventBus } from "../../../../main";
 export default {
-  props: ["index"],
+  props: ["index", "isNeedValidate"],
   data: () => ({
     start: null,
     end: null,
@@ -59,16 +59,22 @@ export default {
       this.end = this.start;
     },
     end() {
-      let endString = this.end;
-      let startString = this.start;
-      let end = new Date(endString);
-      let start = new Date(startString);
-      if (end.getTime() - start.getTime() > 0) {
-        eventBus.$emit("limit", false);
-      } else {
-        eventBus.$emit("limit", true);
+      debugger;
+      if (this.end) {
+        let endString = this.end;
+        let startString = this.start;
+        let isNeedValidate = this.isNeedValidate;
+        if (isNeedValidate) {
+          let end = new Date(endString);
+          let start = new Date(startString);
+          if (end.getTime() - start.getTime() > 0) {
+            eventBus.$emit("limit", false);
+          } else {
+            eventBus.$emit("limit", true);
+          }
+        }
+        eventBus.$emit("dateHasChange", startString, endString, isNeedValidate);
       }
-      eventBus.$emit("dateHasChange", startString, endString);
     }
   },
   mounted() {

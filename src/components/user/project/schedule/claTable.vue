@@ -39,20 +39,25 @@
       <tr v-for="i in 2" :key="i">
         <td v-for="(i, index) in 7" :key="i">
           <v-card
+            v-ripple
             height="100%"
             width="100%"
             class="text-left"
             v-if="isHaveEvent(GetDateStr(true, index))"
+            style="cursor: pointer"
             @click="
-              handleEditLookInfo(renderEvent(GetDateStr(true, index, index)))
+              handleEditLookInfo(
+                index,
+                renderEvent(GetDateStr(true, index, index))
+              )
             "
           >
             <div class="ml-3 mt-3">
-              <p style="color: gray">start:</p>
+              <p style="color: gray">开始时间:</p>
               <p>{{ renderEvent(GetDateStr(true, index, index)).start }}</p>
             </div>
             <div class="ml-3 mt-2">
-              <p style="color: gray">end:</p>
+              <p style="color: gray">结束时间:</p>
               <p>{{ renderEvent(GetDateStr(true, index, index)).end }}</p>
             </div>
             <v-sheet
@@ -61,9 +66,9 @@
             >
               <p
                 class="text-center pa-3"
-                style="color: white;width: 175px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"
+                style="color: white;width: 9vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"
               >
-                {{ renderEvent(GetDateStr(true, index, index)).details }}
+                {{ renderEvent(GetDateStr(true, index, index)).name }}
               </p>
             </v-sheet>
           </v-card>
@@ -106,6 +111,7 @@
                 clear-icon="mdi-close"
                 label="* 事件名称"
                 outlined
+                :counter="event.name === null ? false : 20"
                 required
                 :error-messages="nameErrors"
                 v-model="event.name"
@@ -116,6 +122,7 @@
             <div class="d-flex justify-space-around">
               <calendarSelector
                 :index="clickindex"
+                :isNeedValidate="isNeedValidate"
                 ref="calendarselec"
               ></calendarSelector>
               <timeSelector ref="timeselec"></timeSelector>
@@ -137,7 +144,7 @@
               label="请输入你对此事件的描述"
               auto-grow
               outlined
-              counter="100"
+              :counter="event.details === null ? false : 100"
               clearable
               required
               :error-messages="detailsErrors"
@@ -170,12 +177,13 @@
 <script>
 import { required, maxLength } from "vuelidate/lib/validators";
 import dayjs from "dayjs";
+
 export default {
   name: "claTable",
   props: ["startDate"],
   validations: {
     event: {
-      name: { required, maxLength: maxLength(50) },
+      name: { required, maxLength: maxLength(20) },
       details: { maxLength: maxLength(100) }
     }
   },
@@ -190,6 +198,7 @@ export default {
     clickindex: null,
     claevents: [],
     tempevents: [],
+    isNeedValidate: true,
     event: {
       name: null,
       details: null,
@@ -224,20 +233,27 @@ export default {
       );
     },
     handleAddEvent(index) {
+      this.isNeedValidate = true;
       if (this.clickindex) this.clickindex = null;
       this.dialog = !this.dialog;
       this.clickindex = index;
     },
-    handleEditLookInfo(val) {
+    handleEditLookInfo(index, val) {
       debugger;
       let event = this.event;
       let { name, start, end, details, color } = val;
+      this.isNeedValidate = false;
       let startDate = new Date(start);
       let endDate = new Date(end);
       event.name = name;
       event.end = end;
       event.details = details;
       event.color = color;
+      this.clickindex = index;
+      if (this.$refs.calendarselec) {
+        this.$refs.calendarselec.start = dayjs(startDate).format("YYYY-MM-DD");
+        this.$refs.calendarselec.end = dayjs(endDate).format("YYYY-MM-DD");
+      }
       this.dialog = !this.dialog;
     },
     handleSubmitEvent() {
@@ -319,13 +335,19 @@ export default {
     handleCloseDialog() {
       this.dialog = !this.dialog;
       this.reset();
+    },
+    fetchData(to) {
+      const { pid } = to.params;
+      this.claevents = this.$store.getters.getEvents.find(
+        e => e.id == pid
+      ).data;
     }
   },
   computed: {
     nameErrors() {
       const errors = [];
       if (!this.$v.event.name.$dirty) return errors;
-      !this.$v.event.name.maxLength && errors.push("事件名字不能超过50字");
+      !this.$v.event.name.maxLength && errors.push("事件名字不能超过20字");
       !this.$v.event.name.required && errors.push("事件名字不能为空");
       return errors;
     },
@@ -337,9 +359,15 @@ export default {
       return errors;
     }
   },
+  watch: {
+    $route(to) {
+      debugger;
+      this.fetchData(to);
+    }
+  },
   created() {
     const { pid } = this.$route.params;
-    this.claevents = this.$store.getters.getEvents.find(e => (e.id = pid)).data;
+    this.claevents = this.$store.getters.getEvents.find(e => e.id == pid).data;
   }
 };
 </script>
@@ -354,7 +382,8 @@ table {
 
 td {
   text-align: center;
-  min-width: 9vw;
+  max-width: 9vw;
+  min-width: 8vw;
   min-height: 18vh;
   width: 10vw;
   height: 18vh;

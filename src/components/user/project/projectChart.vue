@@ -52,7 +52,7 @@ export default {
       this.chartSettings = { type: this.typeArr[this.index] };
     },
     fetchData(to) {
-      let { pid } = to.params;
+      const { pid } = to.params;
       let project = this.$store.getters.getProject;
       if (project !== null) this.projectInfo = project.find(e => e.id == pid);
     }

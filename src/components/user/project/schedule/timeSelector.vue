@@ -36,9 +36,12 @@
             clearable
             color="green"
           ></v-time-picker>
+          <p class="text-center mt-5">
+            <v-btn color="red" dark @click="start = null">重置开始时间</v-btn>
+          </p>
         </div>
         <div>
-          <p>结束:</p>
+          <p class="ml-10">结束:</p>
           <v-time-picker
             class="ml-10"
             v-model="end"
@@ -49,6 +52,11 @@
             clear-icon="mdi-close"
             clearable
           ></v-time-picker>
+          <p class="text-center  mt-5">
+            <v-btn color="red ml-5" dark @click="end = null"
+              >重置结束时间</v-btn
+            >
+          </p>
         </div>
       </v-card>
     </v-menu>
@@ -101,8 +109,10 @@ export default {
         this.max = this.end;
       }
     }
+  },
+  beforeDestroy() {
+    eventBus.$off("limit");
+    eventBus.$off("dateHasChange");
   }
 };
 </script>
-
-<style scoped></style>

@@ -56,17 +56,15 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? "" : endMonth;
+      const startMonth = this.start.month;
+      const endMonth = this.end.month;
 
       const startYear = start.year;
       const endYear = end.year;
-      const suffixYear = startYear === endYear ? "" : endYear;
 
-      const startDay = start.day + this.nth(start.day);
-      const endDay = end.day + this.nth(end.day);
-      return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+      const startDay = start.day;
+      const endDay = end.day;
+      return `${startYear}年${startMonth}月${startDay}日 - ${endYear}年${endMonth}月${endDay}日 `;
     },
     startDate() {
       const { start, end } = this;

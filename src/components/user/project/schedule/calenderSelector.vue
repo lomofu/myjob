@@ -77,8 +77,7 @@ export default {
   },
   beforeDestroy() {
     eventBus.$off("limit");
-    eventBus.$off("limit");
+    eventBus.$off("dateHasChange");
   }
 };
 </script>
-<style scoped></style>

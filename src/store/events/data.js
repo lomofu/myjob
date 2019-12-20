@@ -11,7 +11,7 @@ export const data = [
       },
       {
         name: "测试",
-        details: "Spending time on how we do not have enough time",
+        details: "Spending",
         start: "2019-08-05 09:00",
         end: "2019-09-07 09:30",
         color: "indigo"
@@ -20,8 +20,8 @@ export const data = [
         name: "运维",
         details:
           "This starts in the middle of an event and spans over multiple events",
-        start: "2018-12-31",
-        end: "2019-01-04",
+        start: "2019-12-31",
+        end: "2020-01-04",
         color: "deep-purple"
       },
       {

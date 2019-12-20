@@ -1,8 +1,8 @@
 <template>
   <div class="animated fadeIn">
-    <v-toolbar flat color="white">
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
-    </v-toolbar>
+    <v-toolbar-title class="text-center mb-5 mr-12">{{
+      title
+    }}</v-toolbar-title>
     <v-sheet height="580" class="pa-3 mr-2">
       <v-calendar
         elevation="10"
@@ -105,11 +105,6 @@ export default {
       this.start = start;
       this.end = end;
     },
-    nth(d) {
-      return d > 3 && d < 21
-        ? "th"
-        : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
-    },
     fetchData(to) {
       let { pid } = to.params;
       this.$refs.calendar.checkChange();
@@ -124,32 +119,24 @@ export default {
         return "";
       }
 
-      const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? "" : endMonth;
+      const startMonth = this.start.month;
+      const endMonth = this.end.month;
 
       const startYear = start.year;
       const endYear = end.year;
-      const suffixYear = startYear === endYear ? "" : endYear;
 
-      const startDay = start.day + this.nth(start.day);
-      const endDay = end.day + this.nth(end.day);
+      const startDay = start.day;
+      const endDay = end.day;
 
       switch (this.type) {
         case "month":
-          return `${startMonth} ${startYear}`;
+          return `${startYear}年 ${startMonth}月 `;
         case "week":
-          return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+          return `${startYear}年${startMonth}月${startDay}日  -  ${endYear}年${endMonth}月${endDay}日`;
         case "day":
-          return `${startMonth} ${startDay} ${startYear}`;
+          return `${startYear}年 ${startMonth}月${startDay}日 `;
       }
       return "";
-    },
-    monthFormatter() {
-      return this.$refs.calendar.getFormatter({
-        timeZone: "UTC",
-        month: "long"
-      });
     }
   },
   watch: {

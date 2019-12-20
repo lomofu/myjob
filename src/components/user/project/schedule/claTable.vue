@@ -3,52 +3,68 @@
     <table>
       <th>
         <span :class="isToday(0) ? 'todays' : null">
-          Sun {{ GetDateStr(0) }}
+          Sun {{ GetDateStr(false, 0) }}
         </span>
       </th>
       <th>
         <span :class="isToday(1) ? 'todays' : null">
-          Mon {{ GetDateStr(1) }}
+          Mon {{ GetDateStr(false, 1) }}
         </span>
       </th>
       <th>
         <span :class="isToday(2) ? 'todays' : null">
-          Tue {{ GetDateStr(2) }}
+          Tue {{ GetDateStr(false, 2) }}
         </span>
       </th>
       <th>
         <span :class="isToday(3) ? 'todays' : null">
-          Wed {{ GetDateStr(3) }}
+          Wed {{ GetDateStr(false, 3) }}
         </span>
       </th>
       <th>
         <span :class="isToday(4) ? 'todays' : null">
-          Thu {{ GetDateStr(4) }}
+          Thu {{ GetDateStr(false, 4) }}
         </span>
       </th>
       <th>
         <span :class="isToday(5) ? 'todays' : null">
-          Fri {{ GetDateStr(5) }}
+          Fri {{ GetDateStr(false, 5) }}
         </span>
       </th>
       <th>
         <span :class="isToday(6) ? 'todays' : null">
-          Sat {{ GetDateStr(6) }}
+          Sat {{ GetDateStr(false, 6) }}
         </span>
       </th>
       <tr v-for="i in 2" :key="i">
         <td v-for="(i, index) in 7" :key="i">
-          <v-card height="100%" width="100%" class="text-left" v-if="hasEvent">
+          <v-card
+            height="100%"
+            width="100%"
+            class="text-left"
+            v-if="isHaveEvent(GetDateStr(true, index))"
+            @click="
+              handleEditLookInfo(renderEvent(GetDateStr(true, index, index)))
+            "
+          >
             <div class="ml-3 mt-3">
               <p style="color: gray">start:</p>
-              <p>{{ GetDateStr(index, index) }}</p>
+              <p>{{ renderEvent(GetDateStr(true, index, index)).start }}</p>
             </div>
             <div class="ml-3 mt-2">
               <p style="color: gray">end:</p>
-              <p>end:</p>
+              <p>{{ renderEvent(GetDateStr(true, index, index)).end }}</p>
             </div>
-            <v-sheet color="orange lighten-2" class="mt-4">
-              <p class="text-center pa-3" style="color: white">1111</p>
+            <v-sheet
+              :color="renderEvent(GetDateStr(true, index, index)).color"
+              class="mt-4"
+            >
+              <p
+                class="text-center pa-3"
+                style="color: white;width: 175px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"
+              >
+                {{ renderEvent(GetDateStr(true, index, index)).details }}
+              </p>
             </v-sheet>
           </v-card>
           <v-card
@@ -108,6 +124,7 @@
             <v-label color="grey">颜色</v-label>
             <v-color-picker
               class="mt-1"
+              hex
               v-model="event.color"
               hide-canvas
               hide-inputs
@@ -132,13 +149,7 @@
           </v-form>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="blue darken-1"
-              text
-              @click="
-                dialog = false;
-                reset;
-              "
+            <v-btn color="blue darken-1" text @click="handleCloseDialog"
               >关闭</v-btn
             >
             <v-btn color="red darken-1" text @click="reset">复原</v-btn>
@@ -158,6 +169,7 @@
 
 <script>
 import { required, maxLength } from "vuelidate/lib/validators";
+import dayjs from "dayjs";
 export default {
   name: "claTable",
   props: ["startDate"],
@@ -176,6 +188,8 @@ export default {
     hasEvent: false,
     dialog: false,
     clickindex: null,
+    claevents: [],
+    tempevents: [],
     event: {
       name: null,
       details: null,
@@ -185,7 +199,7 @@ export default {
     }
   }),
   methods: {
-    GetDateStr(AddDayCount, index, startDate) {
+    GetDateStr(flag, AddDayCount, index, startDate) {
       let start;
       let dd;
       if (startDate) {
@@ -200,13 +214,13 @@ export default {
       const m =
         dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
       const d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
-      if (index) return `${y}-${m}-${d}`;
+      if (flag) return `${y}-${m}-${d}`;
       return `${m}/${d}`;
     },
     isToday(index) {
       return (
-        this.GetDateStr(0, false, this.today) ===
-        this.GetDateStr(index, false, this.startDate)
+        this.GetDateStr(true, 0, false, this.today) ===
+        this.GetDateStr(true, index, false, this.startDate)
       );
     },
     handleAddEvent(index) {
@@ -214,11 +228,29 @@ export default {
       this.dialog = !this.dialog;
       this.clickindex = index;
     },
+    handleEditLookInfo(val) {
+      debugger;
+      let event = this.event;
+      let { name, start, end, details, color } = val;
+      let startDate = new Date(start);
+      let endDate = new Date(end);
+      event.name = name;
+      event.end = end;
+      event.details = details;
+      event.color = color;
+      this.dialog = !this.dialog;
+    },
     handleSubmitEvent() {
-      this.$refs.calendarselec.end;
-      this.$refs.calendarselec.start;
-      this.$refs.timeselec.start;
-      this.$refs.timeselec.end;
+      let start =
+        this.$refs.timeselec.start === null
+          ? this.$refs.calendarselec.start
+          : this.$refs.calendarselec.start + " " + this.$refs.timeselec.start;
+
+      let end =
+        this.$refs.timeselec.end === null
+          ? this.$refs.calendarselec.end
+          : this.$refs.calendarselec.end + " " + this.$refs.timeselec.end;
+
       this.$v.event.$touch();
       if (
         !this.$v.event.name.maxLength ||
@@ -227,6 +259,14 @@ export default {
       ) {
         return false;
       } else {
+        let { name, details, color } = this.event;
+        this.tempevents.push({
+          name: name,
+          details: details,
+          start: start,
+          end: end,
+          color: color.hex
+        });
         this.reset();
         this.dialog = false;
       }
@@ -240,6 +280,45 @@ export default {
       this.event.details = null;
       this.event.end = null;
       this.event.color = null;
+    },
+    isHaveEvent(now) {
+      let temp = this.claevents;
+      if (temp) {
+        temp = temp
+          .map(e => {
+            let start = new Date(e.start);
+            let end = new Date(e.end);
+            start.setHours(0, 0, 0, 0);
+            end.setHours(23, 59, 59, 59);
+            let time = {
+              start: start,
+              end: end
+            };
+            return time;
+          })
+          .filter(e => new Date(now) >= e.start && new Date(now) <= e.end);
+
+        return temp.length !== 0;
+      } else {
+        return false;
+      }
+    },
+    renderEvent(now) {
+      let res = [];
+      this.claevents.forEach(e => {
+        let start = new Date(e.start);
+        let end = new Date(e.end);
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 59);
+        if (new Date(now) >= start && new Date(now) <= end) {
+          res.push(e);
+        }
+      });
+      return res[0];
+    },
+    handleCloseDialog() {
+      this.dialog = !this.dialog;
+      this.reset();
     }
   },
   computed: {
@@ -257,6 +336,10 @@ export default {
         errors.push("事件描述最多只能含有100字");
       return errors;
     }
+  },
+  created() {
+    const { pid } = this.$route.params;
+    this.claevents = this.$store.getters.getEvents.find(e => (e.id = pid)).data;
   }
 };
 </script>
